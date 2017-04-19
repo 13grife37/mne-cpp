@@ -56,3 +56,5 @@ SUBDIRS += \
 }
 
 CONFIG += ordered
+
+LIBS += -lQtGui -lQtCore -lpthread -lX11 -lGL

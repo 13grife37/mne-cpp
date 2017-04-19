@@ -118,3 +118,9 @@ MNE_BINARY_DIR = $$MNE_BINARY_DIR
 isEmpty( MNE_BINARY_DIR ) {
     MNE_BINARY_DIR = $${PWD}/bin
 }
+
+HEADERS += \
+    $$PWD/helloworld.h
+
+SOURCES += \
+    $$PWD/helloworld.cpp

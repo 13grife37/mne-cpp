@@ -1,0 +1,56 @@
+SWP MNE-CPP
+Planung und Aufgaben
+
+Vorgehensmodell
+	- SCRUM
+	- Sprints über 2 Wochen
+	- Projektplan (TODO)
+	- Meilensteine:	- SCDC fertig
+			- Projecting fertig
+			- Interpolation fertig
+			- Integration ins MNE-CPP GUI fertig
+
+			"fertig" beinhaltet jeweils Unterschritte (z.B. "funktioniert" / "schnell genug")
+
+Pflichtenheft (TODO)
+
+
+
+Verwendete Technologien / Entwicklungswerkzeuge
+
+	- Sprachen: C++
+	- API's: Qt, Eigen, OpenGL
+	- Tools:	- Versionierung: git
+			- IDE: QtCreator
+			- Bugtracking: Jira
+			- Dokumentierung: Doxygen
+			- FileSharing: Confluence
+			- Diagramme: Visual Paradigm
+
+Festlegung der internen Organisation
+	- Rollenverteilung: Lorenz + Thomas: Product Owner, SCRUM-Master: Simon, Entwicklungsteam: Alle von uns
+	- Kommunikationswege:	- Telegram
+				- Mail
+				- Jira
+
+	- Gruppentreffen:	- wöchentliches Treffen mit Betreuer
+				- Teamtreffen mit zwei bis drei Tagen Abstand
+				- siehe doodles
+	
+Übersicht über allgemeine Entwurfsaufgaben
+	- Entwurfsentscheidungen (TODO)
+	- Grobkonzept und grundlegende Softwarearchitektur
+		- hauptsächlich sequentiell (einen Algo nach dem anderen)
+		- Einbau in Klassen GeometryInfo / Interpolation
+		- Aber: wird in existierendes Framework eingepflegt
+		- => groben Aufbau von MNE-CPP erklären
+		- Schnittstellen: rel. einfach (Parameterübergabe der einzelnen Algos)
+		- UML-Modell: Klassendiagramm:Frage wie groß -> gesamtes MNE-CPP Orjekt oder nur unser Kram ?
+
+Vorgehensspezifische Aufgaben
+	- Richtlinien: Coding Convention, "good practices", siehe Beschreibung im Wiki zu SCRUM
+	- Realisierung erster Prototyp (TODO)
+	- Aufgabenliste für Implementierungsphase
+
+
+

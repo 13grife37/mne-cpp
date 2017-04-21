@@ -8,7 +8,7 @@ QT += widgets
 
 CONFIG   += console
 
-TARGET = ex_disp
+TARGET = ex_sensor_read
 
 CONFIG(debug, debug|release) {
     TARGET = $$join(TARGET,,,d)

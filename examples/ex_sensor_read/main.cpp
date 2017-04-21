@@ -20,7 +20,7 @@ using namespace UTILSLIB;
 
 int main(int argc, char *argv[])
 {
-    cout << "hello world" << endl;
+    std::cout << "hello world" << std::endl;
 
     QApplication a(argc, argv);
 

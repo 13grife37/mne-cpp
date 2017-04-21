@@ -54,7 +54,9 @@ SUBDIRS += \
     ex_read_fwd \
     ex_read_raw \
     ex_read_write_raw \
-    ex_sensor_read
+    ex_sensor_read \
+    ex_disp_3D_copy \
+
 
 !contains(MNECPP_CONFIG, minimalVersion) {
     qtHaveModule(charts) {
@@ -66,6 +68,7 @@ SUBDIRS += \
             ex_connectivity \
             ex_disp \
             ex_disp_3D \
+            ex_disp_3D_copy \
             ex_fs_surface \
             ex_histogram \
             ex_inverse_pwl_rap_music \

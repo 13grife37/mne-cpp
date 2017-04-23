@@ -1,0 +1,16 @@
+Prototyp-Protokoll
+
+21.04.17:
+Erledigt:
+	- Ordner für Projekt erstellt, Hello World in der Konsole.
+	- Build-Probleme beseitigt.
+TODOS:
+	Simon:
+	-Welche Files kommen als Input rein ?
+		- Meshdaten ?
+		- Inputfiles ?
+		- So lange "aufbereiten" bis tatsächlich mal double-Vektor abgreifbar ist.
+	Lars:
+	-Wie geht 3D ?
+		- Beispiel abschauen ?
+		- Fenster mit irgendwas.

@@ -1,0 +1,46 @@
+\documentclass[border = 0.2cm]{standalone}		
+\usepackage[utf8]{inputenc}					
+\usepackage[ngerman]{babel}					
+\usepackage[T1]{fontenc}					
+\usepackage{amsmath,amsfonts,amssymb}	
+\usepackage[normalem]{ulem}	
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\geometry{top=25mm, left=25.5mm, right=25mm, bottom=40mm,
+headsep=10mm, footskip=12mm}
+\usepackage{tikz}	
+\usetikzlibrary{arrows, automata, backgrounds, chains, patterns, shapes,decorations.pathmorphing, fadings, shadings, snakes}
+
+\begin{document}
+
+
+\begin{tikzpicture}
+[modbu/.style={rectangle, minimum width = 3cm, minimum height = 1 cm, draw=blue},
+ modba/.style={rectangle,minimum width = 3cm, minimum height = 1 cm, draw=black},
+ svc/.style={cloud, cloud puffs=17, cloud puff arc = 120, aspect=4,minimum width = 5cm, minimum height = 2 cm,  draw=black}, thick, node distance=3.5cm, line width = 1.8pt]
+	\node[modbu](DPDK) {{\LARGE \bf{DPDK}}};
+	\node[modbu, right= of DPDK](NA) {{\LARGE \bf{Network Abstraction}}};
+	\node[modbu, right= of NA](FW) {{\LARGE \bf{Forwarding}}};
+	\node[modbu, below = of FW](C) {{\LARGE \bf{Crypto}}};
+	\node[modba, above= of FW](CPH) {{\LARGE \bf{Control Packet Hub}}};
+	\node[svc, left= of CPH,text=black](SVC) {{\LARGE \bf{Services}}};
+
+	\path[->]
+		(NA) edge[bend left=4,color=blue] node[below, color=black] {{\Large send}} (DPDK)
+		(DPDK) edge[bend left=4,color=blue] node[above, color=black] {{\Large push packet}} (NA)
+		(NA) edge[bend left=4,color=blue] node[above, color=black] {{\Large packet received}}(FW)
+		(FW) edge[bend left=4,color=blue] node[below, color=black] {{\Large send}} (NA)
+		(FW) edge[color=blue] node[right, color=black] {{\parbox{2cm}{{\Large encrypt/\\decrypt}}}} (C)
+		(C) edge[color=blue] (FW)
+		(FW) edge node[right] {{\parbox{2cm}{{\Large control\\packets}}}} (CPH)
+		(SVC) edge (CPH)
+		(CPH) edge (SVC)
+		(CPH) edge node[right, color=black] {{\Large send}} (NA);
+		
+
+\end{tikzpicture}
+
+
+\end{document}

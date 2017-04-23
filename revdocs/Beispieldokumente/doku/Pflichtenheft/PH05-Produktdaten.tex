@@ -1,0 +1,14 @@
+\section{Produktdaten}
+
+Die Punkte \textbf{D0XX} stellen die benötigten Datensätze dar. 
+Diese Datensätze liegen im Normalfall zweimal vor, einmal auf der Zielinstanz (zur Verschlüsselung) und einmal auf der Senderinstanz (zur Entschlüsselung).
+\begin{description}
+  \item[D010]\textit{Schlüssel:} Der Schlüssel mit dem die Pakete verschlüsselt werden.
+  \item[D020]\textit{Sequenznummern:} Versandte Pakete werden durch einen definierten Zähler nummeriert.
+  Dieser ist zu Beginn des Initalisierungsvektors, welcher aus dem zugeteilten \gloss{IV-Space} generiert wird, definiert. 
+  Somit kann gewährleistet werden, dass die Instanzen unterschiedliche Intialisierungsvektoren verwenden.
+  Nummerierung der gesendeten Pakete durch einen definierten Zähler zu Beginn der Initialisierungsvektoren im zugeteilten \gloss{IV-Space}.
+  \item[D030]\textit{Forwarding-Tabellen:} Die Forwarding-Tabelle einer Instanz enthält die IP- und MAC-Adressen aller Rechner, welche sich in dem \gloss{roten Netz} befinden, für die diese Instanz zuständig ist. 
+  Außerdem sind auch die IP-Adressbereiche, der \gloss{roten Netze}, für welche die anderen Instanzen verantwortlich sind, Teil der Tabelle.
+  
+\end{description}

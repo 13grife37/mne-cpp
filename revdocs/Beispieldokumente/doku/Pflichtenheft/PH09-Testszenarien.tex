@@ -1,0 +1,70 @@
+\section{Testszenarien und Testfälle}
+
+
+Die hier aufgeführten Testfälle funktionaler Eigenschaften können überwiegend mittels Komponententests durchgeführt werden. Diese Tests werden über das {\color{glossb}DPDK} und in C++ über das Framework {\color{glossb}cxxtests} erstellt und müssen auf den Rechnern der Entwickler ausgeführt werden. Anschließend wird das Gesamtsystem getestet.
+
+
+\subsection{ Funktionaler Eigenschaften}
+
+	\begin{description}
+		\item[T110] \textit{Funktion der Schnittstellen:} Das Testen der Schnittstellenfunktionalität zwischen {\color{glossb}DPDK} und der {\color{glossb}Network Abstraction-Komponente} wird manuell durchgeführt.
+		
+		
+		\item[T120] \textit{Schnelle Verarbeitung:} Eine erzeugte {\color{glossb}Dispatch-Komponente} wird bezüglich dessen Zeitperformance auf korrektes Multi-Threading überprüft.
+		
+		
+		\item[T130] {\color{glossb}Unit-Tests} zu dem {\color{glossb}CPH}-Element werden mittels Hilfsobjekten, die den Schlüsselaustausch testzwecks ersetzen sollen ermöglicht. Diese sind als {\color{glossb}Mocks} realisiert.
+		
+		\item[T140] \textit{Transportweg:} Das Forwarding wird durch automatisiert erzeugte unterschiedliche Pakete auf richtige Weiterleitung getestet (\textbf{F410}-\textbf{F440}).
+		
+		
+		\item[T150] \textit{Schlüsselaustausch:} Hier sollte die korrekte Übertragung und Verknüpfung der beiden Schlüssel, sowie die Bedingungen der Perfect Forward Secrecy (\textbf{C1450}) gewährleistet sein.
+		
+		
+		\item[T160] \textit{Verschlüsselung:} Im {\color{glossb}AES}-Teil werden zuerst die einzelnen Klassen untereinander und anschließend die vollständige Codierung/Decodierung (\textbf{F310}-\textbf{F320}) der Pakete auf Konsistenz getestet. 
+	\end{description}
+
+
+
+\subsection{Testfälle nicht-funktionaler Eigenschaften}
+
+
+Tests zu den nichtfunktionalen Eigenschaften werden in einer virtualisierten und einer realen Testumgebung durchgeführt.
+
+
+\subsubsection{Emulierte Testumgebung}
+
+	\begin{itemize}
+		\item Ausführbar auf einzelnem Rechner 
+		\item \textit{Multi-User-Test:} Simulation von Gruppenkommunikation mit vielen Benutzern (siehe \textbf{C1170})
+		\item Erzeugter Traffic muss die unter {\color{glossb}Robustheit} \textbf{L040} aufgeführten Eigenschaften aufweisen.
+	\end{itemize}
+
+
+\subsubsection{Reale Testumgebung}
+
+	\begin{itemize}
+		\item Durchführung auf mehreren Rechnern
+		\item Kommunikation im lokalen Netz des Labors
+	\end{itemize}
+
+\subsubsection{Robustheit}
+
+Zum Testen der {\color{glossb}Robustheit} (siehe \textbf{L050}) wird ein Stresstest in Kombination mit einem Chrashtest durchgeführt.
+Hierfür muss während des Schlüsselaustausches eine Ausnahmesituation hoher Verlustraten und hoher Paketverzögerung hergestellt werden. 
+Trotz auftreten einer solchen Situation, darf dann keine Überlastung auftreten.
+
+
+\subsubsection{Sicherheit}
+
+Um das System auf potentielle Sicherheitslücken zu testen, müssen konkrete Angriffsszenarien wie das Überlasten des Systems und die Zugabe von manipulierten Paketen von außen simuliert werden (siehe \textbf{L010}).
+
+
+\subsubsection{Speichereffizienz}
+
+Während der anderen Tests ist zu beobachten, ob der benötigte Speicher im gewünschtem Rahmen bleibt (siehe \textbf{L060}).
+
+
+\subsubsection{Recheneffizienz}
+
+Die Recheneffizienz wird bei unterschiedlicher Auslastung durch analysieren der Ruhe und Arbeitszeiten einer Momentaufnahme kontrolliert (siehe \textbf{L070}).

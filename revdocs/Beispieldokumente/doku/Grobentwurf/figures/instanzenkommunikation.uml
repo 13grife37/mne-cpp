@@ -1,0 +1,12 @@
+@startuml
+participant Instance1
+participant Instance2
+
+Instance1 -> Instance2 : keyExchange
+Instance2 -> Instance1 : keyExchange
+... ...
+Instance1 -> Instance2 : data
+Instance1 -> Instance2 : data
+Instance1 -> Instance2 : data
+
+@enduml

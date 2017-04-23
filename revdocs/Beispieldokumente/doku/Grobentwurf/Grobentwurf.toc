@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {1}Grundstruktur des Verteilten Systems}{3}{section.1}
+\contentsline {section}{\numberline {2}Module und Zust\IeC {\"a}ndigkeiten}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Untergliederung in Module}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Anordnung der Module in Schichten}{6}{subsection.2.2}
+\contentsline {section}{\numberline {3}Verarbeitung verschiedener Pakete}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Zusammenarbeit zweier Instanzen}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Allgemeiner Ablauf beim Empfangen vom Paketen im roten Netz}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Verarbeitung von IP-Paketen aus dem Roten Netz}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Verarbeitung von ARP-Paketen aus dem Roten Netz}{10}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Empfangen von Steuerpaketen im schwarzen Netz}{10}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Empfangen von Datenpaketen im schwarzen Netz}{10}{subsection.3.6}
+\contentsline {section}{\numberline {4}Grundlegende Entwurfsentscheidungen}{12}{section.4}
+\contentsline {subsection}{\numberline {4.1}Verwendete Muster}{12}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Aufteilung in schnelle und langsame Pfade}{12}{subsection.4.2}

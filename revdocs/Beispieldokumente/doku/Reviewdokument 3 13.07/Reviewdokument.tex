@@ -1,0 +1,38 @@
+\documentclass[a4paper, 11pt, ngerman, fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{ngerman}
+\usepackage{coordsys,logsys,color}
+\usepackage{german,fancyhdr}
+\usepackage{hyperref}
+\usepackage{texdraw}				
+\usepackage[T1]{fontenc}					
+\usepackage{amsmath,amsfonts,amssymb}	
+\usepackage[normalem]{ulem}	
+\usepackage{listings}
+\usepackage{graphicx}
+
+
+\hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, urlcolor=darkblue, citecolor=darkblue}
+
+\lhead{\sc{Reviewdokument PECTO}}
+
+\pagestyle{fancy}
+
+\input{_Reviewdokument.tex}
+
+\begin{document}
+\title{Reviewdokument: PECTO}
+\vspace{3 in}
+\maketitle
+\clearpage
+\tableofcontents 
+\clearpage
+\include{Einleitung} \clearpage
+\include{Entwurf} \clearpage	
+\include{Testergebnisse} \clearpage
+\include{Bugreview} \clearpage
+\include{BewertungProjekt}\clearpage
+\include{Glossar} \clearpage
+
+\end{document}

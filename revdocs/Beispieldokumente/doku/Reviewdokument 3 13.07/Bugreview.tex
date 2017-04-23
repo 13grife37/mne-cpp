@@ -1,0 +1,29 @@
+\section{Bugreview}
+Im folgenden werden die schwerwiegendsten Probleme beschrieben, welche während der Erstellung dieser Software aufgetreten sind. 
+Außerdem wird dargestellt wie diese gelöst werden konnten.
+
+\subsection{Receive Side Scaling (RSS) im schwarzen Netz}
+In diesem Abschnitt wird das Receive Side Scaling beschrieben.
+Dabei handelt es sich um die verwendete Technologie, um Pakete zwischen verschiedenen Warteschlangen zu verteilen.
+
+\begin{description}
+	
+	\item[Receive Side Scaling] 
+	Receive Side Scaling ist eine Technologie, bei der die Netzwerkkarte empfangene Pakete auf verschiedene Warteschlangen verteilt.
+	Diese wird von PECTO benutzt, um das Load Balancing zwischen verschiedenen Threads umzusetzen.
+	
+	\item[Problembeschreibung]
+	RSS nutzt verschiedene Informationen aus höheren Schichten, z.B. IP-Adressen, um die Pakete sinnvoll an verschiedende Warteschlangen zu verteilen. 
+	Wenn jedoch ein PECTO-Paket aus dem schwarzen Netz empfangen wird, kann auf diese Informationen zwangsläufig noch nicht zugegriffen werden.
+	Damit kann auch kein Balancing stattfinden.
+	
+	\item[Workaround]
+	Einige teurere Netzwerkkarten können RSS auch anhand des gesamten Paketes ausführen, jedoch ist dies keine Lösungsmöglichkeit, welche für die Realisierung dieses Systems in Frage kommt.
+	Ein anderer Workaround ist das Setzen von benutzerdefinierten Filtern, sogenannten Flex Filters, auf dem Netzwerkinterface, die verschiedene Pakete explizit den verschiedenen Queues zuordnen.
+	
+	\item[Problemlösung]
+	Es wurde ein Feld zum manuellen Round-Robin-Loadbalancing in die PECTO-Header eingefügt. 
+	Mithilfe meherer Flex-Filter werden die Pakete dann automatisiert von der Netzwerkkarte auf mehrere Threads verteilt.
+	Somit wird kein RSS mehr verwendet, sondern eine gleichweritge Alternative.
+	 
+\end{description}

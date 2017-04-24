@@ -1,0 +1,113 @@
+\section{Requirements} 
+
+	The product receives EEG/MEG sensor data and constructs a real-time 3D visualization of the brains current activity.
+	Users can choose between further options, changing the output immediately to their personal preferences. 
+
+\subsection{Mandatory criteria}
+
+	The following functions have to be implemented correctly and must fulfill given requirements.
+		
+\subsubsection{Surface constrained distance calculation (Geodesic problem on meshes)} \label{scdc}
+	%Abkürzung SCDC einführen
+	Because the brain has an uneven surface, a function for calculating the distance between two separate points is needed.
+	
+	As the euclidian distance would not respect the structure of the surface, a different approach for determining the exact 	distances has to be implemented.  
+	The function receives input data in form of a preprocessed triangulated surface mesh and calculates the distance between 	the vertices.			
+
+	\begin{aims}
+	
+		\item[C111] Based on that data, the function calculates a matrix that holds values describing the distances between 						all vertices using double precision. 
+		\item[C112] The function must be able to process up to 200,000 vertices.
+		\item[C113] The user can limit the calculation to a subset of vertices.
+	
+	\end{aims}
+
+\subsubsection{Point to plane mapping}
+
+	Since the sensors do not directly touch the head, therefore float slightly above it, an accurate projection is needed to 
+	exactly localize their positions regarding the brain. 
+	
+	Hence a function must be implemented to solve this problem. 
+	The function receives a set of sensor locations in 3D-Space and maps them onto the underlying surface mesh. Thus every 			sensor gets assigned to a vertex of the mesh. 
+
+	\begin{aims}
+	
+		\item[C121] The function must be able to handle data from MEG-sensors which have a known orientation.
+		\item[C122] The function must be able to handle data from EEG-sensors which are non-orientated.
+	
+	\end{aims}
+
+\subsubsection{Interpolation algorithm} 
+
+	The algorithm receives a mesh and a subset of vertices %von den letzteren auch die sensorwerte
+	%Sensorwerte repraesentieren Gehirnaktivitaeten
+	
+	\begin{aims}
+	
+		\item[C131] Based on the said subset the algorithm must calculate the values for every vertex of the mesh.
+		\item[C132] For this, the algorithm creates a matrix storing weights for the later interpolation.
+					The interpolation process can be summarized by the following equation: 
+					
+					$y_{full} = W \cdot y_{sub}$
+					, where $W$ is the mentioned matrix and $y_{sub}$ is the current dataset for the known sensors, i.e. 							vertices.
+		\item[C133] The calculation of the weight matrix must be based on the result of the SCDC (\ref{scdc}).
+	
+		%SCDC referenzieren
+	
+		%+Bad channels beachten
+	
+	\end{aims}
+
+\subsubsection{Integration in Disp3D}
+	In order to ensure usability within the given framework MNE-CPP, the final visualization must be integrated into the 			preexisting GUI, namely Disp3D.
+	
+	\begin{aims}
+		
+		\item[C141] A new function must be added to the Disp3D tree model. Internally this function must create a new 								handler.%Lorenz fragen, weil satz im Lastenheft nicht von dieser Welt.
+	\end{aims}
+	
+\subsection{Non-Functional Requirements}
+	
+	%Klassen-/Methodennamen, Windows/Linux Unterstützung	
+	
+	\begin{aims}
+
+		\item[C211]	
+	
+	\end{aims}
+	
+\subsection{Optional criteria}
+	
+	%Einfuehrung einige Features wuenschenswert...
+	
+\subsubsection{SCDC}
+	
+	\begin{aims}
+		
+		\item[C311] The computation time should not exceed 1 second.
+			
+	\end{aims}
+	
+\subsubsection{Interpolation}
+
+	\begin{aims}
+	
+		\item[C321] One interpolation cycle should take less than 17ms.
+		\item[C322] Multiple methods for calculating the weight matrix can be implemented. The user can select one.
+	
+	\end{aims}
+	
+	
+\subsection{Differentiating criteria}
+	
+	\begin{aims}
+		
+		\item[C411] The program receives preprocessed data and does get in touch with hardware sensors.
+		\item[C412] The program does not %bereitet nur daten fuer die visualisierung auf, inhaltlich wird erstmal nichts 							interpreitert
+	
+	\end{aims}
+	
+
+
+
+	

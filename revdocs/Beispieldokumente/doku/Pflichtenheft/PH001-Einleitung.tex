@@ -1,0 +1,23 @@
+\section{Einleitung}
+
+In den letzten Jahrzehnten nahm die Vernetzung von Computersystemen so sehr zu, dass sie mittlerweile zur Selbstverständlichkeit geworden ist.
+Dieser Trend setzt sich auch heute noch fort und es werden immer größere Datenmengen versendet.
+Insbesondere scheint die Verwendung einer zentralen elektronischen Datenverarbeitung essentiell für ein erfolgreiches Arbeiten in jeder Organisation zu sein. 
+
+Da die Digitalisierung steigt, wächst jedoch auch die Abhängigkeit von den zugrundeliegenden Technologien. 
+Bezogen auf Netzwerke bedeutet dies, dass neben der Verfügbarkeit besonderer Fokus auf die Vertraulichkeit und Authentizität gelegt werden muss.  
+Durch die stetige Weiterentwicklung der Hardware wird die Verfügbarkeit immer besser beherrschbar. 
+Auf der anderen Seite wird es immer schwieriger, Vertraulichkeit und Authentizität mithilfe eines Kryptosystems zu gewährleisten, wenn Daten zunehmend schneller übertragen werden sollen. 
+Neben der reinen Bandbreite dürfen dabei auch Latenz und Jitter nicht signifikant beeinträchtigt werden.
+
+Nur wenn ein Kryptosystem dies gewährleistet, wird es auch akzeptiert und schließlich eingesetzt. Bisher wird dazu jedoch teure oder inflexible Spezialhardware benötigt.
+
+Durch die native Unterstützung von Verschlüsselung mithilfe des AES-Verfahrens auf modernen Prozessoren und neuer Schnittstellen zum direkten Zugriff auf Netzwerkkarten, wie sie das DPDK (Data Plane Developement Kit) bietet, haben sich neue Wege zur Entwicklung von Kryptosystemen geöffnet.
+
+\textbf{PECTO} (Paket EnCryption on layer TwO) ist ein Framework, dass es ermöglicht, verschiedene zu schützende, rote Netze sicher zu verbinden. 
+Da hier nichtkonforme Netzwerke mit unterschiedlichen Kommunikationsprotokollen arbeiten, agiert es als ein Gateway, welches die Kommunikation zwischen roten Netzen über ein unsicheres, schwarzes Netz ermöglicht. 
+Dabei werden die Pakete, welche zwischen roten Netzen versandt werden, verschlüsselt über ein schwarzes Netz übertragen.
+Im Gegensatz zu schon verbreiteten VPN-Lösungen erfolgt die Verschlüsselung jedoch auf Layer-2 des ISO/OSI-Schichtenmodells, behandelt also Ethernet-Frames statt IP-Pakete.
+
+PECTO kann zur Absicherung von lokalen Netzwerken verwendet werden, ohne Spezialhardware nutzen zu müssen.
+Es wird nur ein normaler x64-kompatibler Computer benötigt, auf dem ein Linux-basierendes Betriebssystem ausgeführt wird.

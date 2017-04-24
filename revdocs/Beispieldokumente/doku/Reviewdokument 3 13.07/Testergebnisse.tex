@@ -1,0 +1,79 @@
+\section{Testergebnisse}
+Um die Funktionalität und Korrektheit unserer Software zu überprüfen, wurden einige Unit Tests und manuelle Tests durchgeführt. 
+
+
+\subsection{Überprüfung des korrekten Verhaltens wichtiger Komponenten}
+Die Unit Tests aller getesteten Kompontenen verlaufen erfolgreich. 
+Für die verschiednenen Module wurden folgende Eigenschaften geprüft:
+
+\begin{description}
+\item[PESpinlock]
+	Der gegenseitige Ausschluss wird getestet, indem zwei Threads gleichzeitig die gleiche Variable hochzählen.
+	
+\item[PEMemoryBuffer]
+	Das Anfügen und Löschen von Daten am Anfang und Ende wird getestet. 
+	Zudem wird überprüft, ob Puffer nach ihrer Verwendung wieder korrekt freigegeben werden.
+	
+\item[PEForwardingTable]
+	Die korrekte Übersetzung von IP-Addressen in MAC-Addressen der zuständigen Instanz wird überprüft.
+	
+\item[PECryptoAlgorithm]
+	Die verschiedenen Verschlüsselungsmethoden werden auf ihre Performance und Funktionalität getestet. 
+\end{description}
+
+Weitere Komponenten wurden nicht durch Unit Tests überprüft, weil dazu umfangreiche Fakes und Mocks nötig wären.
+
+\subsection{Nachweis funktionaler und nichtfunktionaler Eigenschaften durch manuelle Tests}
+Verschiedene manuelle Tests wurden genutzt, um die funktionalen und nichtfunktionalen Eigenschaften nachzuweisen.
+Die Tests fanden in einer realen und einer virtualisierten Umgebung statt.
+
+Grundsätzlich wurden zwei Arten von Tests vorgenommen: Lasttests und Funktionstests.
+Die Lasttests fanden stets in der nichtvirtualisierten Umgebung statt, um aussagekräfigte Ergebnisse zu liefern. Funktionstests wurden in beiden Testumgebungen ausgeführt.
+
+Folgende Funktionstests wurden ausgeführt:
+
+\begin{description}
+\item[Ping-Test]
+	Beim Ping-Test wurden Pakete von verschiedenen roten Teilnetzen aus in jeweils andere Teilnetze versendet. 
+	Dadurch konnte die Funktionalität von ARP- und IP-Weiterleitung getestet werden. 
+	Das Gesamtnetz hat dabei die Netzadresse 10.0.0.0/16, während die einzelnen roten Teilnetze die Form 10.0.$x$.0/24 besaßen.
+	In jedem Teilnetz gab es genau einen Teilnehmer, welcher die IP-Adresse 10.0.$x$.1 verwendete.
+	
+	Die Anzahl der Teilnetze betrug in der realen Testumgebung zwei ($x \in \{1, 2\}$) und in der virtualisierten Umgebung drei ($x \in \{1, 2, 3\}$).
+
+\item[TCP-Übertragungstest]
+	Mithilfe des Linux-Tools \texttt{iperf} konnte die Funktionalität von TCP-Verbindungen und die Übertragung von großen Paketen getestet werden.
+	Dabei konnten auch Probleme entdeckt werden, welche Folge einer zu klein gewählten MTU waren.
+	
+	Die Netze wurden wie beim Ping-Test gewählt.
+\end{description}
+
+Neben den Funktionstests wurden in der realen Umgebeung auch Performancetests ausgeführt.
+Hierbei gab es zwei Arten von Tests. 
+Einerseits wurde ein Netz, wie es schon beim Ping-Test beschrieben ist, verwendet, andererseits wurden noch einfachere Netze genutzt, um die Performance der Kryptokompontenten im Gesamtsysten zu testen.
+Das reine Performancetestnetzwerk besteht aus zwei Clients mit den IP's 1.1.1.1 und 2.2.2.2.
+Beide senden und empfangen mithilfe eines PECTO-basierenden Tools kleine IP-Pakete.
+So kann die Performance des Systems bei der Verarbeitung von 64 Byte großen Paketen untersucht werden.
+
+Die einzelnen Tests lieferten Folgende Ergebnisse:
+
+\begin{description}
+\item[Lasttest mit kleinen Paketen]
+	Das Generator-Tool produziert 1,43 Mio. Pakete pro Sekunde, wovon wieder 1,01 Mio. Pakete auf der Gegenseite empfangen werden. 
+	Die entstehenden rund 30\% Verlust kommen dadurch zustande, dass der Generator die Gigabit-Leitung voll auslastet, die verschlüsselten Pakete jedoch größer sind und damit die vorhandene Bandbreite überstiegen wird.
+
+\item[Latenzbestimmung]
+	Der Aufbau für die Latenzbestimmung entspricht dem Ping-Test im realen Netz.
+	Es werden etwa 1000 Ping-Pakete pro Sekunde versendet und die Round-Trip-Time gemessen. 
+	Durch eine Verlgeichsmessung ohne zwischengeschaltene PECTO-Instanzen kann die Latenz der Ver- und Entschlüsselung abgeschätzt werden.
+	
+	Die Auswertung dieses Tests ergab, dass die Latenz für eine Verschlüsselung und anschließende Entschlüsselung kleiner Pakete etwa 65-70\si{\micro\second} beträgt.
+	Diese Verzögerungen können jedoch nur eingehalten werden, wenn das System nicht ausgelastet ist.
+
+\item[Durchsatzbestimmung für TCP-Verbindungen]
+	Die Durchsatzbestimmung erfolgte mit demselben Versuchsaufbau wie der TCP-Übertragungstest in der realen Umgebung. 
+	Es ergab sich ein Durchsatz von 913 MBit, wobei der limitierende Faktor wiederum die fehlende Bandbreite im schwarzen Netz war.
+	
+\end{description}
+
+  

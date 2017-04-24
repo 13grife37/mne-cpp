@@ -1,0 +1,137 @@
+\section{Zielbestimmungen}
+
+An das zu entwickelnde Framework PECTO werden diverse Anforderungen gestellt.
+Diese sind zunächst nach ihrer Wichtigkeit in Muss- und Wunschkriterien unterteilt. 
+
+Zur Beschreibung der Anforderungen werden folgende Begriffe verwendet:
+\begin{description}
+	
+	\item[Instanz] Unter einer Instanz versteht man ein aktives Element des Systems, welches den PECTO-Code auführt.
+	Jede Instanz dient als Schnittstelle zwischen einem \gloss{roten} und dem \gloss{schwarzen Netz}.
+	
+	\item[Gruppe] Eine Menge mehrerer, verschiedener Instanzen, welche die gleiche rote Netzgruppe schützen, wird als Gruppe bezeichnet.
+	Dabei besteht eine Netzgruppe logisch aus einem \gloss{roten Netz}, welches aber physisch durch ein \gloss{schwarzes Netz} in mehrere \gloss{rote Netze} geteilt wird. 
+		
+	\item[System] Der Begriff System wird als Synonym zum Namen des Projektes, PECTO, verwendet.
+
+\end{description}
+
+\subsection{Musskriterien}
+Die Musskriterien bestimmen, welche Anforderungen an PECTO gestellt werden müssen, damit das System seine Funktion erfüllen kann.
+
+\subsubsection{Verbindungsaufbau}
+Um einen Verbindungsaufbau zwischen zwei Instanzen zu initiieren, müssen die folgenden Kriterien erfüllt sein.
+	\begin{description}
+	  \item[C1110] \textit{Authentisierung}: Zwei Instanzen einer Gruppe müssen einander identifizieren, indem sie sicherstellen, dass die jeweils andere Instanz dasselbe Kennwort zum Schutz der roten Netzgruppe kennt.
+
+	  \item[C1120] \textit{Schlüsselaustausch für Unicast}: Zwei Instanzen einer Gruppe handeln einen Schlüssel aus, der zum Chiffrieren und Dechiffrieren der Pakete genutzt wird, welche zwischen den beiden Instanzen ausgetauscht werden. 
+	  Dabei müssen folgende Sicherheitsanforderungen erfüllt sein: Authentizität(\textbf{C1420}), Vertraulichkeit (\textbf{C1430}), Perfect Forward Secrecy(\textbf{C1450}).
+	  
+	  \item[C1130] \textit{Schlüsselaustausch für Broad- und Multicast}: Alle Instanzen erhalten einen Gruppenschlüssel, welcher zuvor erstellt und verteilt wurde. 
+	  Dieser Gruppenschlüssel wird zum Chiffrieren und Dechiffrieren derjenigen Pakete genutzt, die an alle Instanzen der Gruppe weitergeleitet werden.
+	  Dabei müssen folgende Sicherheitsanforderungen erfüllt sein: Authentizität(\textbf{C1420}), Vertraulichkeit (\textbf{C1430}), Perfect Forward Secrecy(\textbf{C1450}).
+	  	  
+	 \item[C1140] \textit{{\color{glossb}Logging}}: Fehler beim Schlüsselaustausch müssen protokolliert werden, da diese auf einen Angriff auf das System hindeuten können.
+	  
+	\end{description}
+
+
+\subsubsection{Forwarding bestimmter Pakettypen aus dem roten Netz}
+Die folgenden Kriterien bestimmen, wie die Weiterleitung der Pakete aus einem \gloss{roten Netz} erfolgen soll. 
+Dabei wird eine Unterscheidung bezüglich des Pakettyps vorgenommen.
+	\begin{description}
+	   \item[C1210] \textit{IPv4-Pakete (Unicast)}: Jede Instanz erhält durch eine Konfigurationsdatei Informationen darüber, wohin Pakete weitergeleitet werden müssen.
+	   Für Unicast-Pakete wird anhand der IPv4-Destination-Address die Instanz gefunden, an die das Paket weitergeleitet werden muss. 
+	   Es wird anschließend verschlüsselt und an genau diese Instanz übertragen.
+	  
+	   \item[C1220] \textit{IPv4-Pakete (Multi- und Broadcast)}: Multi- und Broadcast-Pakete werden chiffriert an alle Instanzen einer Gruppe verteilt. 
+	   Die Verschlüsselung erfolgt hierbei mit dem Gruppenschlüssel so, dass dasselbe Paket nicht mehrfach verschlüsselt werden muss.
+	  
+	   \item[C1230] \textit{\gloss{ARP}-Pakete}: \gloss{ARP}-Pakete werden wie IPv4-Broadcast-Pakete (\textbf{C1220}) behandelt. 
+	  
+	   \item[C1240] \textit{Andere Protokolle}: Pakete, die nicht durch eine andere \textbf{C12**}-Regel behandelt werden, sind zu verwerfen. Insbesondere werden auch IPv6-Pakete verworfen.
+	\end{description}
+
+\subsubsection{Zugriffskontrolle}
+Wie die Zugriffskontrolle zwischen den Netzen geregelt ist, bestimmen die folgenden Kriterien.
+	\begin{description}
+	   \item[C1310] \textit{Verschlüsselung}: Eine Instanz des Systems muss Pakete aus einem geschützten, \gloss{roten Netz} entgegennehmen, diese verschlüsseln und über ein ungeschütztes, \gloss{schwarzes Netz} an eine weitere Instanz weiterleiten. 
+	   Der Header des Paketes soll erkenntlich machen, ob ein Paket von einer Instanz dieses Systems verschlüsselt wurde.	     
+	  	  
+	   \item[C1320] \textit{Entschlüsselung}: Wenn eine Instanz Pakete aus einem ungesicherten \gloss{schwarzen Netz} entgegennimmt und festgestellt werden kann, dass diese von einer anderen Instanz dieses Systems erzeugt wurden, muss es diese Pakete entschlüsseln. 
+	   Konnte das Paket erfolgreich entschlüsselt werden, wird es in dem Netzwerk, in dem sich der Empfänger befindet, weitergeleitet.
+	  
+	   \item[C1330] \textit{Verarbeitung von Paketen aus dem \gloss{schwarzen Netz}}: Wenn ein Paket aus dem \gloss{schwarzen Netz} eine Instanz erreicht, wird überprüft, ob die im Paket-Header vorhandene Kennzeichnung mit der übereinstimmt, welche das System zur Verschlüsselung von Paketen nutzt.
+	   Trifft dies nicht zu, verwirft die Instanz das erhaltene Paket.
+	  	
+	   \item[C1340] \textit{Kontrollierter Zugriff}: Das System isoliert die geschützte Netzgruppe vollständig, d.h. es dürfen keine Pakete zwischen Geräten im \gloss{schwarzen} und \gloss{roten Netz} ausgetauscht werden.
+	  	  
+	\end{description}
+
+
+\subsubsection{Sicherheitsanforderungen}
+	\begin{description}
+	  \item[C1410] \textit{Integrität}: Instanzen stellen sicher, dass von einer anderen Instanz erzeugte Daten nicht modifiziert wurden. 
+	  Durch Prüfsummen kann die Integrität der Daten festgestellt werden.  
+	  
+	  \item[C1420] \textit{Authentizität}: Durch ein Kennwort, dass den einzelnen Instanzen einer Gruppe bekannt ist, wird die Vertrauenswürdigkeit der anderen Instanzen derselben Gruppe überprüft.
+	  
+	  \item[C1430] \textit{Vertraulichkeit}: Instanzen stellen durch Verschlüsselung sicher, dass unautorisierte Dritte keinen Zugriff auf übertragene Nachrichten oder Informationen haben.
+	  
+	  \item[C1440] \textit{Verfügbarkeit}: Das System soll unempfindlich gegenüber Angriffen sein, welche darauf abzielen, die Stabilität und Lauffähigkeit des Systems zu beeinträchtigen. 
+	  
+	  \item[C1450] \textit{Perfect Forward Secrecy}: Die Kompromittierung eines Schlüssels, welcher zu einem früheren Zeitpunkt zur Aushandlung des eigentlichen Sitzungsschlüssels verwendet wurde, soll keinen Einfluss auf die Sicherheit der ausgetauschten Daten haben.
+	  
+	  \item[C1460] \textit{Infrastructure-Hiding}: Nach außen hin soll nicht erkennbar sein, welche und wie viele Einheiten innerhalb \gloss{roter Netze} miteinander kommunizieren.
+	  Es ist nach außen nur sichtbar, welche Instanzen miteinander kommunizieren, nicht aber welche Einheit aus dem Rechnernetz von Instanz A mit welcher Einheit aus dem Rechnernetz von Instanz B. 
+	\end{description}
+
+\subsubsection{Nicht-funktionale Anforderungen an das System}
+	\begin{description}
+	
+	  \item[C1510] \textit{\gloss{Robustheit}}: Der Austausch von Metadaten, insbesondere auch der Schlüsselaustausch, soll robust gegenüber Paketverlusten sein.	
+	  	  
+	  \item[C1520] \textit{Transparenz}: Der Einsatz des Systems darf keinerlei Änderungen der Konfigurationen der Netzwerkgeräte im \gloss{roten Netz} nötig machen.
+	
+	  \item[C1530] \textit{Skalierbarkeit}: Das System muss bis zu einer Anzahl von 100 Teilnetzen skalierbar sein, an die jeweils etwa 30 Endgeräte angeschlossen sind, ohne dass merkliche Performanceeinbußen auftreten.
+	  
+	  \item[C1540] \textit{Konfigurierbarkeit}: Die Instanzen des Systems müssen per Textdatei konfigurierbar sein.
+	  
+	  \item[C1550] \textit{Protokoll-Overhead}: Der Protokoll-Overhead soll eine Gesamtgröße von 50 Byte nicht überschreiten.
+	\end{description}
+
+
+\subsubsection{Kriterien an die Testumgebung}
+	\begin{description}
+	  \item[C1610] \textit{\gloss{Unit Tests}}: Alle Klassen, die nicht direkt vom \gloss{DPDK} abhängig sind, müssen \gloss{Unit-Tests} aufweisen.
+	  
+	  \item[C1620] \textit{Offline-Tests}: Die Verarbeitung von Paketen muss ohne Netzwerkartenanbindung auf ihre funktionalen und nicht-funktionalen Eigenschaften getestet werden können. 
+	  
+	  \item[C1630] \textit{Lasttests}: Die Gesamtperformance des Systems muss in einer realen Umgebung getestet werden.
+	\end{description}
+
+
+\subsection{Wunschkriterien}
+Sofern die Musskriterien an das System erfüllt werden, ist es wünschenswert, folgende Kriterien umzusetzen.
+	\begin{description}
+	  \item[C2110] \textit{Automatischer Netzaufbau}: Eine Instanz des Systems kann in dem \gloss{schwarzen Netz} automatisch nach anderen Instanzen suchen, welche die gleiche Netzgruppenkennung haben. 
+	  
+	  \item[C2120] \textit{Rekeying}: Der Schlüssel zur Sicherung der Verbindungen zwischen einzelnen Instanzen kann regelmäßig erneuert werden. 
+	  
+	  \item[C2130] \textit{Statistiken}: Die Instanzen können Statistiken über die Auslastung, Paketeigenschaften und Fehlern führen.
+	\end{description}
+ 
+
+\subsection{Abgrenzungskriterien}
+Die folgenden Kriterien grenzen die Funktionalitäten des Systems ab.
+	\begin{description}
+	  \item[C3110] Das System bietet den Schutz von Paketen auf Layer-2 des ISO/OSI Schichtenmodells.
+	  Es erscheint daher nach außen wie ein \gloss{Layer-2-Switch}, der nur bestimmte Pakettypen weiterleitet. 
+	  
+	  \item[C3120] Zwischen zwei Instanzen darf kein Layer-3-Routing stattfinden.
+	  Damit kann das System nur in Ethernet-Netzen eingesetzt werden und insbesondere keine Kommunikation schützen, die durch das Internet geleitet werden muss.
+	   
+	  \item[C3130] Die Hardware, auf der das System ausgeführt wird, muss eine \gloss{DPDK}-kompatible Netzwerkkarte und einen x64-kompatiblen Prozessor aufweisen, welcher \gloss{AES-NI} unterstützt.
+	  Zudem muss ein Linux-basierendes Betriebssystem installiert sein.
+	\end{description}
+

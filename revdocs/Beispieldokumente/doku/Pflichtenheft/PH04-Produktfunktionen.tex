@@ -1,0 +1,39 @@
+\section{Produktfunktionen}
+
+\subsection{Benutzerfunktionen}
+	\begin{description}
+		\item[F110] Der Benutzer kann das Produkt per Konfigurationsdatei einrichten.	
+		\item[F120] In einem Logfile kann sich der Benutzer über außergewöhnliche Ereignisse informieren. 
+		Darunter fallen insbesondere fehlerhafte Handshakes, die einen Angriff auf das Sicherheitssystem darstellen könnten.
+		\item[F130] \textit{Statistikfunktion:} Das Programm speichert in regelmäßigen Abständen Informationen über die Auslastung des Systems. 
+		Diese werden in einem textbasierten Logfile abgelegt.
+	\end{description}	
+
+\subsection{Konfigurationsfunktionen}
+	\begin{description}
+		\item[F210] \textit{Benennung von Netzen:} Das System wird mit einem, innerhalb des \gloss{schwarzen Netzes} eindeutigen, Namen und einem zugehörigen Kennwort konfiguriert.
+		\item[F220] \textit{Eingabe von Routing-Informationen:} Den Instanzen können verschiedene IP-Adressbereiche zugewiesen werden.
+	\end{description}
+
+\subsection{Verschlüsselungsfunktionen}
+	\begin{description}
+		\item[F310] \textit{Pakete verschlüsseln:} Wenn eine Instanz ein Paket aus dem zu schützenden roten Netz empfängt, verschlüsselt es dieses. Anschließend wird es an diejenige Instanz weitergeleitet, welche für das Netz, in dem sich der Zielrechner befindet, verantwortlich ist.
+		\item[F320]	\textit{Pakete entschlüsseln:} Wenn eine Instanz ein Paket aus dem \gloss{schwarzen Netz} empfängt, welches von einer anderen Instanz dieses Systems versandt wurde, wird durch die MAC-Adresse des Absenders geprüft, ob dieser berechtigt ist an die betreffende Zieladresse zu senden. Bei entsprechender Berechtigung versucht die Instanz das Paket zu entschlüsseln und leitet es im \gloss{roten Netz} weiter.
+		Wird das Paket durch die im Header vorhandene Kennzeichnung als ein nicht vom System verschlüsseltes Objekt identifiziert, wird es verworfen.
+	\end{description}
+
+\subsection{Forwardingfunktionen}
+	\begin{description}
+		\item[F410] \textit{IPv4-Unicast-Pakete:} Ein IPv4-Unicast-Paket wird entsprechend der Liste der Routinginformationen (nach \textbf{F220}) weitergeleitet. 
+		Gibt es keine solche IP-Adresse, wird das Paket verworfen.
+		\item[F420] \textit{IPv4-Multi-/Broadcast-Pakete:} IPv4-Multicast und IPv4-Broadcast-Pakete werden auf Ethernet-Ebene an alle Instanzen weitergeleitet.
+		\item[F430] \textit{\gloss{ARP:}} \gloss{ARP}-Pakete werden auf Ethernet-Ebene an alle Instanzen weitergeleitet.
+		\item[F440] \textit{Andere und unbekannte Pakettypen:} Alle anderen Pakettypen werden verworfen.
+	\end{description}
+
+
+
+
+
+
+

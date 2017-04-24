@@ -1,0 +1,16 @@
+@startuml
+entity DPDK
+actor Network_Abstraction
+entity Dispatch
+entity Control_Packet_Hub
+database Key_Management
+entity Forwarding
+Network_Abstraction --> DPDK: pull packet
+DPDK -> Network_Abstraction: packet
+Network_Abstraction -> Dispatch: packet
+Dispatch -> Control_Packet_Hub: keyPacket
+Control_Packet_Hub ->> Key_Management: process keyPacket
+Key_Management -> Forwarding: keyAckPacket
+Forwarding -> Network_Abstraction: keyAckPacket
+Network_Abstraction -> DPDK: keyAckPacket
+@enduml

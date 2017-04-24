@@ -1,0 +1,38 @@
+\section{Ziele im beim Entwurf PECTOs}
+An das zu entwickelnde Framework PECTO stellten wir verschiedene Anforderungen, insbesondere auch an die Performance und Sicherheit. 
+Diese finden sich auch an unterschiedlichen Stellen in den Entwurfsentscheidungen wieder.  
+Dabei konkurriert der Sicherheitsgedanke, welcher nach möglichst einfachem Code strebt, stets mit dem Wunsch nach hoher Performance.
+Um einen guten Ausgleich zu finden, werden alle Komponenten zunächst auf gute Verständlichkeit des Codes optimiert.
+Sollten sich beim Profiling Probleme zeigen, werden diese Stellen gezielt überarbeitet.
+
+\subsection*{Verwendete Muster}
+Zur Realisierung von PECTO werden folgende Entwurfsmuster verwendet:
+
+\begin{description}
+	\item[Inversion of Control (IoC)] 
+	Um das Schichtenmodell umsetzen zu können und zyklische Abhängigkeiten zu vermeiden, wird Inversion of Control eingesetzt. 
+	Die tiefere Schicht stellt dafür jeweils Interfaces bereit, die von den höheren Schichten implementiert werden. 
+	Der sich dadurch ergebende Overhead ist in der Regel zu vernachlässigen.
+	Insbesondere überwiegen die Vorteile durch eine bessere Entkoppelung.
+	Wenn sich Performance-Probleme ergeben, kann davon abgewichen werden.
+	
+	\item[Strategy Pattern]
+	An verschiedenen Stellen im Entwurf können verschiedene Algorithmen verwendet werden. 
+	Damit dies konfgurierbar ist, wird das Strategy Pattern verwendet.
+	Ein Beispiel hierfür ist die Wahl des Verschlüsselungsalgorithmus, der zu Debuggingzwecken und für Erweiterbarkeit verschiedenartig gewählt werden kann.
+	Zur Auswahl stehen zum Beispiel AES-GCM, eine unsichere XOR-Verschlüsselung oder gar keine Verschlüsselung. 
+	
+	\item[Exceptions]
+	Zur Vereinfachung des Codes werden Exceptions eingesetzt.
+	Diese sind immer dann auszugeben, wenn ein unerwartetes Ereignis eingetreten ist.
+	Da der Einsatz von Exceptions einen erheblichen Overhead zur Folge haben kann, wenn zu viele von ihnen geworfen werden, müssen für besonders performance-kritische Funktionen immer zwei Schnittstellen zur Verfügung stehen.
+	Die erste dieser Schnittstellen löst die Exceptions aus, während die zweite über Rückgabewerte entscheidet ob die Funktion erfolgreich ausgeführt wurde.
+	
+	\item[Code Contracts]
+	Jede Methode, die zu einer öffentlichen Schnittstelle gehört, validiert ihre Parameter und Ausgaben.
+	Unerwartete Eingaben, beispielsweise Nullzeiger, müssen erkannt werden und zu einer Exception führen.
+	Ebenfalls sollen alle Ausgaben einer einfachen Plausibilitätsprüfung unterzogen werden. 
+	Auch hier liegt besonderes Augenmerk auf Nullzeigern.
+	So wird sichergestellt, dass keine unerwarteten Rückgabewerte zu Fehlern an anderer Stelle führen können.
+	Ausnahmen bilden einige performancekritische Funktionen, die in auch eine Variante bereitstellen, die keine Prüfung durchführt.
+\end{description}

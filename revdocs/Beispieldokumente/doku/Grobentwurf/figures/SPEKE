@@ -1,0 +1,32 @@
+@startuml
+activate A 
+A -> A: generate appropriately large \n and randomly selected safe prime p \n and a hash function H()
+
+activate B
+B -> B: generate appropriately large \n and randomly selected safe prime p \n and a hash function H()
+
+A-> B: shared password x
+B->A: shared password x ACK
+
+A->A: constructs g=H(x)²mod p
+
+B->B: constructs g=H(x)²mod p
+
+A->A: chooses secret random integer a
+
+A->B: sends g^a mod p
+
+B->B: chooses secret random integer b
+
+B->A: sends g^b mod p
+
+A->A: abort if received value \n is not in range of [2,p-2]
+
+B->B: abort if received value \n is not in range of [2,p-2]
+
+A->A: K=(g^b mod p)^a mod p
+
+B->B: K=(g^a mod p)^b mod p
+deactivate A
+@enduml
+

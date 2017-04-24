@@ -1,0 +1,17 @@
+\section{Produkteinsatz}
+Zur Beantwortung der Frage, was das System unter welchen Rahmenbedingungen leisten soll, werden Anwendungsbereich, Zielgruppe und Betriebsbedingungen spezifisch betrachtet.
+\subsection{Anwendungsbereich}
+Die Anwendung wird dort zum Einsatz kommen, wo der Transfer von Daten eine wichtige Voraussetzung für das Arbeiten an teilweise stark verstreuten Standorten darstellt.
+Dabei spielt insbesondere die effiziente, verschlüsselte und sichere Übertragung, welche für riesige Datenmassen mit den herkömmlichen Methoden nur schwer umzusetzen ist, eine große Rolle.
+Mit dem System wird versucht, die Verschlüsselung von Ethernet-Rahmen nahezu in Echtzeit zu ermöglichen.
+
+\subsection{Zielgruppe}
+Im Allgemeinen ist die gebotene Funktionalität für alle interessant, die große Massen an Daten, zwischen nicht direkt verbundenen Netzwerken über ein nicht vertrauenswürdiges Netz verschlüsselt übertragen wollen. 
+Insbesondere kann dies für diverse Unternehmen, Behörden oder auch NGOs (Non-Governmental Organisations) nützlich sein, die organisationsintern große Datenmassen besonders schnell und sicher transferieren müssen.
+
+
+\subsection{Betriebsbedingungen}
+Um die Verschlüsselung von Ethernet-Rahmen in nahezu Echtzeit umzusetzen, kommt das \gloss{DPDK} zum Einsatz. 
+Dieses ermöglicht Pakete direkt in den Hauptspeicher des Rechners zu übertragen, ohne Interruptlast zu erzeugen.
+Für die Umsetzung des Verschlüsselungsverfahrens verwendet das System \gloss{AES}, wobei die Verschlüsselung durch Zuhilfenahme von \gloss{AES-NI} beschleunigt wird.
+Bei langfristiger Nutzung des Systems wird versucht hohe Stabilität zu gewährleisten, damit eine wartungsfreie Laufzeit ermöglicht wird.

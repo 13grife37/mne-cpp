@@ -1,0 +1,39 @@
+\contentsline {section}{\numberline {1}Einleitung}{2}{section.1}
+\contentsline {section}{\numberline {2}Zielbestimmungen}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Musskriterien}{5}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Verbindungsaufbau}{5}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Forwarding bestimmter Pakettypen aus dem roten Netz}{6}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Zugriffskontrolle}{6}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}Sicherheitsanforderungen}{6}{subsubsection.2.1.4}
+\contentsline {subsubsection}{\numberline {2.1.5}Nicht-funktionale Anforderungen an das System}{7}{subsubsection.2.1.5}
+\contentsline {subsubsection}{\numberline {2.1.6}Kriterien an die Testumgebung}{7}{subsubsection.2.1.6}
+\contentsline {subsection}{\numberline {2.2}Wunschkriterien}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Abgrenzungskriterien}{8}{subsection.2.3}
+\contentsline {section}{\numberline {3}Produkteinsatz}{9}{section.3}
+\contentsline {subsection}{\numberline {3.1}Anwendungsbereich}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Zielgruppe}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Betriebsbedingungen}{9}{subsection.3.3}
+\contentsline {section}{\numberline {4}Produktumgebung}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}Szenario}{10}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Software}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Hardware}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Netzwerktopologie}{11}{subsection.4.4}
+\contentsline {section}{\numberline {5}Produktfunktionen}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Benutzerfunktionen}{12}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Konfigurationsfunktionen}{12}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Verschl\IeC {\"u}sselungsfunktionen}{12}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Forwardingfunktionen}{12}{subsection.5.4}
+\contentsline {section}{\numberline {6}Produktdaten}{13}{section.6}
+\contentsline {section}{\numberline {7}Produktleistungen}{14}{section.7}
+\contentsline {section}{\numberline {8}Benutzungsoberfl\IeC {\"a}che}{15}{section.8}
+\contentsline {section}{\numberline {9}Qualit\IeC {\"a}tszielbestimmungen}{15}{section.9}
+\contentsline {section}{\numberline {10}Testszenarien und Testf\IeC {\"a}lle}{16}{section.10}
+\contentsline {subsection}{\numberline {10.1} Funktionaler Eigenschaften}{16}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Testf\IeC {\"a}lle nicht-funktionaler Eigenschaften}{16}{subsection.10.2}
+\contentsline {subsubsection}{\numberline {10.2.1}Emulierte Testumgebung}{16}{subsubsection.10.2.1}
+\contentsline {subsubsection}{\numberline {10.2.2}Reale Testumgebung}{16}{subsubsection.10.2.2}
+\contentsline {subsubsection}{\numberline {10.2.3}Robustheit}{17}{subsubsection.10.2.3}
+\contentsline {subsubsection}{\numberline {10.2.4}Sicherheit}{17}{subsubsection.10.2.4}
+\contentsline {subsubsection}{\numberline {10.2.5}Speichereffizienz}{17}{subsubsection.10.2.5}
+\contentsline {subsubsection}{\numberline {10.2.6}Recheneffizienz}{17}{subsubsection.10.2.6}
+\contentsline {section}{\numberline {11}Glossar}{18}{section.11}

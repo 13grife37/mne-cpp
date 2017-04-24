@@ -1,0 +1,78 @@
+\renewcommand{\familydefault}{cmss}
+
+\definecolor{fgcgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{darkblue}{rgb}{0,0, 0.4}
+\newcommand{\titlefont}[1]{\textcolor{black}{\fontseries{bx}\fontshape{n}\fontsize{30}{0pt} \selectfont #1}}
+\newcommand{\titlepagef}[1]{\textcolor{black}{\fontseries{bx}\fontshape{n}\fontsize{14}{0pt} \selectfont #1}}
+
+\newcommand{\gloss}[1]{\textcolor{glossb}{\fontsize{11}{0pt}\selectfont #1}}
+
+
+
+\addtolength{\oddsidemargin}{-1.0cm}
+\addtolength{\evensidemargin}{-1.0cm}
+\addtolength{\headwidth}{2.0cm}
+\addtolength{\textwidth}{2.0cm}
+
+\setlength{\parindent}{0cm}
+
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\labelitemii}{$\diamond$}
+
+\newcommand{\spaceline}[1][8pt]{\vskip #1}
+\newcommand{\attrname}[1]{\textcolor{fgcgray}{\scriptsize #1}}
+
+\newcommand{\comment}[1]{\spaceline[5pt] \textcolor{fgcgray}{\scriptsize #1} \spaceline[15pt]}
+
+\makeatletter
+
+\newcommand*{\project}[1]{\gdef\@project{#1}}
+
+
+\def\@maketitle{
+  %\begin{titlepage}
+   
+  \begin{center}
+      \titlepagef{Softwareprojekt 2016}
+      \spaceline
+  \end{center}
+  
+  \begin{center}
+      \parbox{\textwidth}{
+        \spaceline
+        \centering{\titlefont{\@title}}
+        \par
+        \spaceline
+      }
+  \end{center}
+  
+  \begin{center}
+    \titlepagef{Rapid Layer-2 Encryption Framework}
+    \spaceline[2em]
+  \end{center}
+  
+  \begin{center}
+  \begin{tabbing}
+  Yannic Faulwetter \qquad \=
+  Michael Fuchs \qquad \=
+  Milan Haverkock \qquad \=
+  Felix Seidel \\
+  Daniel Scheliga
+  \>Tobias Schubert
+  \>Jörn Weisensee  
+  \>Nils Winkelbach
+  \end{tabbing}
+  \end{center}
+ 
+  
+  \spaceline[3em] {
+    \begin{flushright}
+    \begin{tabular}[t]{rl}
+      \attrname{letzte Änderung:} & \@date
+    \end{tabular}
+    \end{flushright}
+    \par
+  }
+  \spaceline[5.5em]
+  %\end{titlepage}
+}

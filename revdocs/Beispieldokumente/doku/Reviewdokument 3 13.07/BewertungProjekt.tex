@@ -1,0 +1,56 @@
+\section{Bewertung des Projektes}
+In Hinblick auf die Bewertung des Projektes wird im folgenden insbesondere Erfolg und Vorgehen kritisch betrachtet.
+
+\subsection{Kritische Bewertung des Projekterfolgs}
+Im Verlauf dieses Softwareprojektes konnten die einzelnen Schritte, der Entstehung einer Softwarekomponente praktisch abgearbeitet und miterlebt werden.
+Insbesondere stellte die Erarbeitung der verschiedenen Dokumente eine Herausforderung dar.
+Nachdem die Einarbeitung und eine Arbeitseinteilung für die einzelnen Dokumentationsbereiche erfolgt waren, wurde sich gut in den Prozess der Erstellung solcher Dokumente eingefunden.
+
+Die einzelnen Ziele, welche vom Team erstellt und angestrebt wurden, konnten immer gut und termingetreu abgearbeitet werden.
+Sämtliche Anforderungen welche nach reichlichen Überlegungen innerhalb des Pflichtenheftes vereinbart wurden, konnten mit Abschluss des Projektes umgesetzt werden. Insbesondere wurden auch alle Wunschkriterien erfolgreich implementiert. 
+Dies gelang nicht jedoch ohne weitere Schwierigkeiten. 
+Die Einarbeitung in das zugrunde liegende DPDK-Framework erwies sich unerwartet deutlich komplexer, als zu Beginn der Projektplanung angenommen wurde. 
+Da nur bestimmte Komponenten aus dem Framework benötigt wurden mussten diese zunächst identifiziert werden und erst anschließend konnte mit der Einarbeitung in die jeweiligen Teilgebiete begonnen werden.
+
+Wegen der hohen Funktionalität, welche das DPDK mit sich bringt und dessen teilweise sehr schwer verständlichen Dokumentation, konnte die Einarbeitung wegen Zeitmangels nur parallel zur eigentlichen Entwicklung der eigenen Software geschehen. 
+Durch derartige Verzögerungen musste die Planung der Entwicklung so strukturiert werden, dass die Cryptokomponente lediglich zum Ende der zweiten Iteration implementiert und getestet werden konnte.
+
+Des Weiteren stellten die Strukturierung der Schnittstellen und das Testen der Skalierbarkeit neue Herausforderungen dar.
+Hierbei spielte die Entscheidung über die Verwendung der Datentypen zur Speicherung von Tabelleneinträgen und anderen Objekten eine tragende Rolle. 
+Zum Beispiel sollten anfangs Einträge für das Forwarding mit einer Map in jedem Thread festgehalten werden. 
+Dies wurde aus flexibilitätsgründen wieder verworfen, da eine Tabelle für alle Threads zur Verfügung stehen muss.
+Die Umgestaltung der Wahl von Datenstrukturen und ihrer Realisierung wurde somit im Laufe des Projektes mehrfach abgewandelt um die Optimierung bzw. Einfachheit der Implementierung zukünftiger Elemente zu gewährleisten.
+
+Größere Bugs welche den Prozess der Arbeit eingedämmt haben, manifestierten sich aufgrund eines guten Gesamtüberblicks über die Software nur in Form des Receive-Side-Scalings. 
+Nach intensiven Überlegungen und Kommunikation innerhalb des Teams, als auch mit dem Betreuer, konnte schließlich ein gleichwertiger Lösungsansatz entwickelt und umgesetzt werden.
+
+Das Testen der Software wurde zunächst für einzelnen Komponenten durchgeführt.
+Im weiteren Verlauf des Projektes konnten die verschiedenen Teile jedoch immer mehr zusammengefügt werden und die entstandenen komplexeren Teilsysteme konnten getestet werden. 
+Mit frühen Tests an den einzelnen Komponenten, konnte im Fehlerfall schnell und präzise reagiert und entstandene Probleme bereits im Ursprung ausgemerzt werden.
+Bei Tests mit mehreren Komponenten konnte das Zusammenspiel des gesamten Teilsystems getestet und hierbei auf Fehler in den Schnittstellen und der Kommunikation geachtet werden.
+
+Im gesamten Verlauf des Projektes konnten durch die Arbeit im Team verschiedene und komplexe Probleme gelöst werden, welche viele neue Perspektiven aufgezeigt haben.
+Jedes der Teammitglieder konnte sich diverse neue Fähigkeiten angeeignen, die voraussichtlich auch im weiteren Verlauf des Studiums, als auch der zukünftigen Arbeitspraxis, von Bedeutung sind. 
+Mit dem Ende der Projektzeit konnte schließlich der gesamte Entwicklungsprozess einer Software erlebt werden, welche PECTO als Endprodukt mit sich bringt.
+
+\subsection{Kritische Bewertung des Vorgehens}
+Im Anfangsstadium des Softwareprojektes, stellte sich zunächst die Frage welches Vorgehen das Team für die Entwicklung der Softwarekomponente anstreben sollte.
+Dabei stellte sich heraus, dass das agile Vorgehensmodell aufgrund seiner Struktur am besten geeignet war um eine Cryptosystem zu implementieren, da stetige Anpassungen und Weiterentwicklungen eine hohe Priorität in der Auswahl unseres Vorgehens bildeten.
+Um zunächst eine Teamstruktur aufzustellen, wurden Verantwortlichkeitsbereiche festgelegt und aufgeteilt.
+Dies erleichterte ungemein die folgenden Arbeitsaufteilungen.
+
+Als einzige Hürden erwiesen sich die unterschiedlichen Programmierniveaus und die verschiedenen Vorlesungszeiten der einzelnen Teammitglieder, wodurch die Planung der Treffen der Programmiergruppen beeinflusst wurde.
+Diese Programmierteams bestanden vorwiegend aus Zweier- bzw. Dreierteams um möglichst effektiv Pair-Programming zu betreiben. 
+Bei der Teambildung wurde im Laufe der Projektes verstärkt versucht darauf zu achten, dass die verschiedenen Stärken und Schwächen der individuellen Mitglieder durch den jeweils anderen kompensiert werden konnten.
+Trotzdem konnten einzelne Teams schneller mit der eigentlichen Implementierung beginnen, während andere mehr Zeit für die Einarbeitung in die Programmiersprache, das Framework oder andere Verständnisprobleme benötigten. 
+Daher war insbesondere gegen Ende des Projektes die Unterstützung der Kleingruppen untereinander unabdingbar, um die vereinbarten Meilensteine der jewailigen Iteration zu komplettieren.
+
+Aufgrund der individuellen Treffen innerhalb der Gruppe, fand die Kommunikation größtenteils während der Gruppenmeetings und persönlich statt.
+Die digitalen Kommunikationsmöglichkeiten auf die sich innerhalb der Gruppe geeinigt wurde, wurden dann primär zur Aktualisierung des derzeitigen Entwicklungsstandes und dem Austausch der fertig gestellten Dokumente genutzt.
+
+Währed der ersten Iteration wurde mit dem Entwurf der Software und der Implementierung einiger grundlegenden Kernfunktionalitäten begonnen. 
+So musste anschließend nur noch eine Verfeinerung der vorhandenen Grobstruktur stattfinden und das Team konnte sich mehr auf die Erweiterung weiterer essentieller Programmteile konzentrieren. 
+Das System  wurde also Stück für Stück iterativ mit zusätzlicher Funktionalität ausgestatet.
+Vorteil hierbei war unter anderem, dass pro Iteration nur der Teil, welcher hinzukommen sollte, genauer geplant und umgesetzt werden musste. 
+Diese Art der Umsetzung wäre in den alternativen Vorgehensmodellen kaum oder nur sehr schwer realisierbar gewesen.
+Die Wahl des agilen Vorgehensmodells für dieses Projekt wurde auch durch den positiven Ausgang und Ablauf des Projektes bestätigt.

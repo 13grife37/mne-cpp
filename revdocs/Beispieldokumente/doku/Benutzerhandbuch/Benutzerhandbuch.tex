@@ -1,0 +1,140 @@
+\documentclass[a4paper, 11pt, ngerman, fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{ngerman}
+\usepackage{coordsys,logsys,color}
+\usepackage{german,fancyhdr}
+\usepackage{hyperref}
+\usepackage{texdraw}				
+\usepackage[T1]{fontenc}					
+\usepackage{amsmath,amsfonts,amssymb}	
+\usepackage[normalem]{ulem}	
+\usepackage{listings}
+\usepackage{graphicx}
+
+
+
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{glossb}{rgb}{0,0,0.38}
+\hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, urlcolor=darkblue, citecolor=darkblue}
+
+\pagestyle{fancy}
+
+\input{_Benutzerhandbuch}
+
+\begin{document}
+\lhead{\sc{Benutzerhandbuch PECTO}}
+\title{Benutzerhandbuch, Installationsanweisungen: PECTO}
+\vspace{3 in}
+\maketitle
+\clearpage
+
+\section*{Benutzerhandbuch}
+Da es sich bei PECTO ausschließlich um ein Framework handelt, und es insbesondere keine Graphische Benutzeroberfläche implementiert, wird in diesem Benutzerhandbuch beschrieben wie sich die Inbetriebnahme gestaltet.
+Dazu wird dargestellt, wie das System konfiguriert werden soll um die gewünschten Funktionen zu erfüllen.
+
+\section{Installation}
+Im Folgenden wird beschrieben, wie man die Softwarekomponente, einschließlich ihrer Voraussetzungen in Betrieb nimmt.
+\subsection{Voraussetzungen}
+Voraussetzung für die Inbetriebnahme von PECTO ist ein Linux Betriebssystem und die Installation einer Reihe von Paketen.
+Diese wird durch folgende Eingabe in der Kommandozeile ausgeführt:
+\begin{lstlisting}
+apt-get install cmake make scons screen subversion git patch
+apt-get install bzip2 zip libc6-dev g++ gdb libpcap-dev lsof 
+apt-get install libpcre3-dev python-pip php5-cli php5-curl 
+apt-get install ruby curl
+
+pip install ply
+\end{lstlisting}
+
+\subsection{Inbetriebnahme PECTOs}
+Um PECTO in Betrieb zu nehmen muss ein SVN checkout durchgeführt werden.\newline
+\parbox{\textwidth}{'\texttt{svn co} \textit{\textcolor{blue}{https://telsv3.prakinf.tu-ilmenau.de/svn/Projekte/softwareProjektL2Crypto'}}}
+
+Damit wird im aktuellen Arbeitsverzeichnis ein Ordner namens \textit{softwareProjektL2Crypto} angelegt, in den das PECTO-Framework kopiert wird.
+Um die letztendlich ausführbare Datei zu erhalten wird innerhalb des Arbeitsverzeichnisses 'trunk' in der Kommandozeile '\texttt{scons}' aufgerufen. Die gewünschte Datei 'encsvc' ist dann im Ordner 'trunk/binaries/bin' zu finden.
+
+\clearpage
+\section{Datentypen}
+In diesem Abschnitt wird beschrieben, welche Datentypen in der Konfigurationsdatei verwendet werden und wie diese zu notieren sind.
+\begin{description}
+	\item[int] Integerwerte werden mit einem '$=$' hinter die zu konfigurierende Komponente geschrieben.
+				'\textit{zuKonfigurierendeKomponente} $=$ \textit{Integerwert}'
+	\item[string] Strings werden mit vorangehendem Doppelpunkt in Anführungszeichen hinter die zu konfigurierende Komponente geschrieben. '\textit{zuKonfigurierendeKomponente} $:$ "'\textit{String}"''
+	\item[double] Doubles werden mit einem '$=$' hinter die zu konfigurierende Komponente geschrieben.
+					'\textit{zuKonfigurierendeKomponente} $=$ \textit{double}'
+	\item[IP-Adresse] IP-Adressen werden in Anführungszeichen mit der üblichen Notation geschrieben. '"'\textit{xxx.xxx.xxx.xxx}"''
+	\item[Netzwerk-Adresse] Netzwerk-Adressen werden in Anführungszeichen mit der üblichen Notation geschrieben. '"'\textit{xxx.xxx.xxx.xxx/mask}"''
+	\item[Liste] Listen werden mit vorangehendem Doppelpunkt, mit eckigen Klammern, hinter die zu konfigurierende Komponente geschrieben. Die Einträge innerhalb der Listen mit Kommata getrennt. In dieser Konfigurationsdatei werden nur Listen von Integerwerten, IP-Adressen und Netzwerk-Adressen verwendet. \\'[\textit{Integerwert},..., \textit{Integerwert}]'\\ '[\textit{IP-Adresse},..., \textit{IP-Adresse}]'\\ '[\textit{Netzwerk-Adresse},..., \textit{Netzwerk-Adresse}]' 
+\end{description}
+
+\section{Einrichtung der Konfigurationsdatei}
+Die Konfigurationsdatei befindet sich im Ordner 'config'.
+In der vorgegeben 'default.cfg' können nun Anpassungen getroffen werden.
+Im folgenden werden die Parameter beschrieben, mit denen das PECTO System konfiguriert werden kann.
+Optionen, welche mit '\#' auskommentiert wurden, müssen nicht weiter spezifiziert werden.
+
+\subsection{NetworkInterface}
+	
+\begin{description}
+	\item [TX (int)] Initialisiert die Größer der TX-Queues. Kürzere Queues führen zu höherem Paketverlust bei bursty Traffic. Längere Queues erlauben höhere Delays.
+	\item [RX (int)] Initialisiert die Größe der RX-Queues. Kürzere Queues führen zu höherem Paketverlust bei bursty Traffic. Längere Queues erlauben höhere Delays. Wenn mehrere 'listener' aktiv sind sorgt ein Algorithmus dafür, dass dem schnellsten 'listener' pro Burst mehr Pakete übergeben werden. Die anderen hingegen erhalten dann weniger. Die Folgenden Konfigurationsmöglichkeiten geben die Grenzen für den 'Load Balancer' an. Um load balancing zu deaktivieren, müssen alle Optionen auf den selben Wert gesetzt werden.
+	\begin{description}
+		\item [MaxBurst (int)] Maximale Anzahl an Paketen die bei einem einzelnen Burst übergeben werden können. 
+		\item [AvgBurst (int)] Durchschnittliche Anzahl an Paketen die bei einem einzelnen Burst übergeben werden können. 
+		\item [MinBurst (int)] Minimale Anzahl an Paketen die bei einem einzelnen Burst übergeben werden können.
+	\end{description}
+	\item [MTU (int)] Initialisiert die MTU für empfangene Pakete. Zu beachten ist, dass wenn die MTU erhöht wird, sollte auch die 'MemoryPool.BufferSize' erhöht werden, da es sonst zu Paketverlusten kommen kann. 
+\end{description}	
+
+\subsection{MemoryPool}
+
+\begin{description}
+	\item [BuffersPerInterface (int)] Der Memory Pool alloziiert Speicher, abhängig von der Anzahl der vorhandenen Network Interfaces.
+	\item [MinimumBuffercount (int)] Initialisiert den minimal zu alloziierenden Speicher.
+	\item [BufferCacheSize (int)] Initialisiert die Anzahl an Puffern, welche in einem 'per-core pool' gecached werden. Dies ermöglicht schnelleren Zugriff.
+	\item [BufferPrivateData (int)] Initialisiert die Anzahl an Bytes in jedem Puffer, welcher für zusätzliche Metadaten reserviert wird.
+	\item [BufferSize (int)] Initialisiert die Gesamtgröße für jeden 'Memory Buffer'.
+\end{description}
+
+\subsection{CryptoAlgorithm}
+Initialisiert den Crypto-Algorithmus, welcher zum ver- bzw. entschlüsseln genutzt werden soll \textbf{(string)}. Zur Auswahl stehen:
+\begin{description}
+	\item [AES] nutzt AES-GCM (starke Verschlüsselung)
+	\item [XOR] nutzt XOR um Schlüssel, IV und Daten zu kombinieren (sehr schwache Verschlüsselung)
+	\item [<\textit{leer}>] nutze keine Paketverschlüsselung
+\end{description} 
+
+\subsection{NetworkName}
+Initialisiert den Names des Netzwerkes \textbf{(string)}. Dies ist nötig um andere Instanzen zu finden.
+
+\subsection{NetworkSecret}
+Initialisiert ein Netzwerkgeheimnis, welches bei allen Instanzen bekannt sein muss, um der Netzgruppe beitreten zu können.
+Es hat keine bestimmte Länge, aber die Mindestlänge sollte 32 Zeichen betragen. \textbf{(string)}
+
+\subsection{LocalSubnets}
+Bestimmt die lokalen Subnetze, welche zum roten Netzwerk gehören. \textbf{(Liste von Netzwerk-Adressen)}
+
+\subsection{BroadcastAdresses}
+Bestimmt die Broadcast-IP-Adressen. Pakete welche an diese Adresse gesendet werden, werden als Broadcast-Pakete behandelt und somit an alle Instanzen des Netzes weitergeleitet. \textbf{(Liste von IP-Adressen)}
+
+\subsection{RekeyInterval}
+Initialisiert die Zeit (in Sekunden), nach welcher periodisch ein erneuter Schlüsselaustausch stattfinden soll. \textbf{(double)}
+	
+\subsection{NetworkInterfaces}
+\begin{description}
+	\item [Black (int)] Initialisiert den Port, welcher als Verbindung zum schwarzen Netz genutzt werden soll.
+	\item [Red (int)] Initialisiert den Port, welcher als Verbindung zum roten Netz genutzt werden soll.
+\end{description}
+
+\subsection{Handlers}
+\begin{description}
+	\item [BlackThreads (Liste von int's)] Initialisiert die Liste der Kerne, welche zum verschlüsseln genutzt werden sollen.
+	\item [RedThreads (Liste von int's)] Initialisiert die Liste der Kerne, welche zum entschlüsseln genutzt werden sollen.
+\end{description}
+
+\subsection{LoggingInterval}
+Initialisiert die Zeit (in Sekunden) zwischen Log-Einträgen. \textbf{(double)}
+
+
+\end{document}

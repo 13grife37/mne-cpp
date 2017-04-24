@@ -165,6 +165,9 @@ int main(int argc, char *argv[])
     AnnotationSet tAnnotSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(annotOption), parser.value(subjectPathOption));
 
     QFile t_fileFwd(parser.value(fwdOption));
+
+    ///python doc: the forward solution, i.e., the magnetic fields and electric potentials at
+    ///  the measurement sensors and electrodes due to dipole sources located on the cortex, can be calculated
     MNEForwardSolution t_Fwd(t_fileFwd);
     MNEForwardSolution t_clusteredFwd;
 
@@ -204,15 +207,22 @@ int main(int argc, char *argv[])
         if(t_Fwd.isEmpty())
             return 1;
 
+        ///python doc:
+        /// The MNE software employs an estimate of the noise-covariance matrix to weight the
+        /// channels correctly in the calculations. The noise-covariance matrix provides information
+        ///  about field and potential patterns representing uninteresting noise sources of either human or environmental origin.
         FiffCov noise_cov(t_fileCov);
 
         // regularize noise covariance
+        /// evoked.info:   The measurement info (used to get channel types and bad channels)
         noise_cov = noise_cov.regularize(evoked.info, 0.05, 0.05, 0.1, true);
 
         //
         // Cluster forward solution;
         //
         if(bDoClustering) {
+            ///Cluster the forward solution and return it
+            ///The clustering is done by using the provided annotations(labled groups)
             t_clusteredFwd = t_Fwd.cluster_forward_solution(tAnnotSet, 40);
         } else {
             t_clusteredFwd = t_Fwd;

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.24)  24 APR 2017 15:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.24)  24 APR 2017 16:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -789,22 +789,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 20.
  (./func-spec.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 20.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 20.
-
-
-Package rerunfilecheck Warning: File `func-spec.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `func-spec.out':
-(rerunfilecheck)             Before: 415D7D05DDE30275653C3BB8A0CA9EB2;534
-(rerunfilecheck)             After:  BB0BA33A87F167FB44EFB9A452C14E45;534.
+Package rerunfilecheck Info: File `func-spec.out' has not changed.
+(rerunfilecheck)             Checksum: 0108D0B89781088BBF33B1F3AE3C4ECC;810.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 20.
  ) 
 Here is how much of TeX's memory you used:
- 8733 strings out of 494901
- 119997 string characters out of 6178617
- 216937 words of memory out of 5000000
- 11878 multiletter control sequences out of 15000+600000
+ 8741 strings out of 494901
+ 120137 string characters out of 6178617
+ 216940 words of memory out of 5000000
+ 11882 multiletter control sequences out of 15000+600000
  14594 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  31i,11n,43p,255b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -817,10 +810,10 @@ ecsi1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on func-spec.pdf (4 pages, 79589 bytes).
+Output written on func-spec.pdf (4 pages, 83940 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 279 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 17 named destinations out of 1000 (max. 500000)
+ 89 words of extra memory for PDF output out of 10000 (max. 10000000)
 

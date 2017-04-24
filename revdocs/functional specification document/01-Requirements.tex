@@ -9,9 +9,9 @@ The function receives input data, preprocessed by the software environment, stru
 %Erklaeren, dass scdc-feature als funktion umgesetzt werden soll
 
 \begin{description}
-	\item[C11] Based on that data, the function calculates a matrix that holds values describing the distances between all vertices using double precision. 
-	\item[C12] The function must be able to process up to 200,000 vertices.
-	\item[C13] The user can limit the calculation to a subset of vertices.
+	\item[C111] Based on that data, the function calculates a matrix that holds values describing the distances between all vertices using double precision. 
+	\item[C112] The function must be able to process up to 200,000 vertices.
+	\item[C113] The user can limit the calculation to a subset of vertices.
 \end{description}
 
 \subsubsection{Point to plane mapping}
@@ -39,7 +39,10 @@ The algorithm receives a mesh and a subset of vertices %von den letzteren auch d
 	, where $W$ is the mentioned matrix and $y_{sub}$ is the current dataset for the known sensors, i.e. vertices.
 	
 	\item[C33] The calculation of the weight matrix must be based on the result of the SCDC.
+	
 	%SCDC referenzieren
+	
+	%+Bad channels beachten
 	
 \end{description}
 
@@ -48,6 +51,31 @@ The algorithm receives a mesh and a subset of vertices %von den letzteren auch d
 	
 	\begin{description}
 		\item[C41] A new function must be added to the Disp3D tree model. Internally this function must create a new handler.%Lorenz fragen, weil satz im Lastenheft nicht von dieser Welt.
+	\end{description}
+	
+	\subsection{Optional criteria}
+	
+	%Einfuehrung einige Features wuenschenswert...
+	
+	\subsubsection{SCDC}
+	
+	\begin{description}
+		\item[C211] The computation time should not exceed 1 second.
+	\end{description}
+	
+	\subsubsection{Interpolation}
+	\begin{description}
+		\item[C221] One interpolation cycle should take less than 17ms.
+		\item[C222] Multiple methods for calculating the weight matrix can be implemented. The user can select one.
+	\end{description}
+	
+	
+	\subsection{Differentiating criteria}
+	\begin{description}
+		\item[C311] The program receives preprocessed data and does get in touch with hardware sensors.
+	\begin{description}
+		\item[C312] The program does not %bereitet nur daten fuer die visualisierung auf, inhaltlich wird erstmal nichts interpreitert
+	\end{description}
 	\end{description}
 
 

@@ -137,11 +137,11 @@ int main(int argc, char *argv[])
 
     //real time source localization on / off ( the visual brain activation )
     bool bAddRtSourceLoc = false;
-//    if(parser.value(sourceLocOption) == "false" || parser.value(sourceLocOption) == "0") {
-//        bAddRtSourceLoc = false;
-//    } else if(parser.value(sourceLocOption) == "true" || parser.value(sourceLocOption) == "1") {
-//        bAddRtSourceLoc = true;
-//    }
+    if(parser.value(sourceLocOption) == "false" || parser.value(sourceLocOption) == "0") {
+        bAddRtSourceLoc = false;
+    } else if(parser.value(sourceLocOption) == "true" || parser.value(sourceLocOption) == "1") {
+        bAddRtSourceLoc = true;
+    }
 
     bool bDoClustering = false;
     if(parser.value(clustOption) == "false" || parser.value(clustOption) == "0") {
@@ -151,7 +151,17 @@ int main(int argc, char *argv[])
     }
 
     //Inits
+    //surfaceSet = 2x Surface
+    // a Surface loads the vertexdata from a file and holds it in :
+     ///   MatrixX3f m_matRR;      Vertex coordinates in meters
+     /// MatrixX3i m_matTris;    The triangle descriptions
     SurfaceSet tSurfSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(surfOption), parser.value(subjectPathOption));
+
+    //contains Annotations
+    ///https://surfer.nmr.mgh.harvard.edu/fswiki/LabelsClutsAnnotationFiles
+    /// In FreeSurfer jargon, "annotation" refers to a collection of labels (ie: sets of vertices marked by label values)
+    /// vertices are grouped by giving them the same label
+    /// Annotations van contain a colortable
     AnnotationSet tAnnotSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(annotOption), parser.value(subjectPathOption));
 
     QFile t_fileFwd(parser.value(fwdOption));
@@ -172,9 +182,13 @@ int main(int argc, char *argv[])
     // Load data
     QPair<QVariant, QVariant> baseline(QVariant(), 0);
     MNESourceEstimate sourceEstimate;
+
+    ///here some kind of data is loaded  out of a "Functional Imaging File Format"
     FiffEvoked evoked(t_fileEvoked, parser.value(evokedIndexOption).toInt(), baseline);
 
+    /// real time source localization
     if(bAddRtSourceLoc) {
+        ///SNR: signal to noise ratio ??
         double snr = parser.value(snrOption).toDouble();
         double lambda2 = 1.0 / pow(snr, 2);
         QString method(parser.value(methodOption));

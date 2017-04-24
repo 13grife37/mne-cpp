@@ -29,11 +29,13 @@ int main(int argc, char *argv[])
 
     QCommandLineOption inputOption("fileIn", "The input file <in>.", "in", "./MNE-sample-data/MEG/sample/sample_audvis_raw.fif");
     QCommandLineOption fromOption("from", "Read data from <from> (in seconds).", "from", "42.956");
+    QCommandLineOption toOption("to", "Read data from <to> (in seconds).", "to", "320.670");
     QCommandLineOption inSamplesOption("inSamples", "Timing is set in samples.", "inSamples", "false");
     QCommandLineOption keepCompOption("keepComp", "Keep compensators.", "keepComp", "false");
 
     parser.addOption(inputOption);
     parser.addOption(fromOption);
+    parser.addOption(toOption);
     parser.addOption(inSamplesOption);
     parser.addOption(keepCompOption);
 
@@ -164,7 +166,6 @@ int main(int argc, char *argv[])
     plot.setYLabel("Y Axes");
     plot.setWindowTitle("Corresponding function to MATLABs plot");
     plot.show();
-
     //Rt plot example
     RtPlot rtplot(dataCol);
     rtplot.setTitle("Data Row 0 RtPlot");

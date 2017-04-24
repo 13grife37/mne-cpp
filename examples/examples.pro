@@ -56,6 +56,7 @@ SUBDIRS += \
     ex_read_write_raw \
     ex_sensor_read \
     ex_disp_3D_copy \
+    ex_swp_prototype
 
 
 !contains(MNECPP_CONFIG, minimalVersion) {
@@ -76,7 +77,8 @@ SUBDIRS += \
             ex_read_fwd_disp_3D \
             ex_roi_clustered_inverse_pwl_rap_music \
             ex_sensor_read \
-            ex_st_clustered_inverse_pwl_rap_music
+            ex_st_clustered_inverse_pwl_rap_music \
+            ex_swp_prototype
 
         !isEmpty( CNTK_INCLUDE_DIR ) {
             SUBDIRS += \

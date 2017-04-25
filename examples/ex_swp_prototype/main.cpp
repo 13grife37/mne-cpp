@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription("swp prototype");
     parser.addHelpOption();
 
+    QCommandLineOption subjectPathOption("subjectPath", "Selected subject path <subjectPath>.", "subjectPath", "./MNE-sample-data/subjects");
     QCommandLineOption surfOption("surfType", "Surface type <type>.", "type", "pial");
     QCommandLineOption annotOption("annotType", "Annotation type <type>.", "type", "aparc.a2009s");
     QCommandLineOption hemiOption("hemi", "Selected hemisphere <hemi>.", "hemi", "2");
@@ -113,6 +114,7 @@ int main(int argc, char *argv[])
     parser.addOption(annotOption);
     parser.addOption(hemiOption);
     parser.addOption(subjectOption);
+    parser.addOption(subjectPathOption);
 
     parser.process(a);
 

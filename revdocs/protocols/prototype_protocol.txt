@@ -14,3 +14,22 @@ TODOS:
 	-Wie geht 3D ?
 		- Beispiel abschauen ?
 		- Fenster mit irgendwas.
+
+
+25.04.17
+
+Entwurf:
+Klasse: GeometryInfo
+SCDC: statische Funktion, die Mesh-Daten erhält, und Distanztabelle ausspuckt.
+Überladung: Zweiter Parameter Subset.
+(Optional criteria: vektorfelder handeln)
+ 
+-Dafuer: Vorverarbeitungsklasse, die File "aufbereitet" (?)
+
+Projecting: Auch in GeometryInfo
+Überladung: Kriegt Mesh-Daten plus MEG-Sensor-Set (Klasse dafuer basteln (?)) bzw. EEG-Sensor-Set (Klasse (?)), und wendet entsprechende Algorithmen an, und spuckt ne Map aus, die jedem Sensor einen Vertex im Mesh zuordnet.
+
+Interpolation: In Klasse Interpolation
+Klasse, Interpolator, die im Konstruktor nen Mesh und nen Subset kriegt und speichert dann Gewichtsmatrix (GraKa / Hauptspeicher ?).
+Funktion: getNext(y_sub) = y_full;
+

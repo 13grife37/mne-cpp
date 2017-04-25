@@ -229,3 +229,9 @@ lib
 /bin/mne_analyze_extensions/*.ilk
 /bin/mne_analyze_extensions/*.lib
 /bin/mne_analyze_extensions/*.pdb
+
+#Tex meta-docs
+*.aux
+*.log
+*.out
+*.toc

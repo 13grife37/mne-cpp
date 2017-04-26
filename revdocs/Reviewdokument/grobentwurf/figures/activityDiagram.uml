@@ -1,0 +1,28 @@
+@startuml
+scale 5
+repeat
+:DPDK;
+-> NA pulls packet from DPDK;
+:Network Abstract (NA);
+-> push packet;
+:Dispatcher;
+if (is keyMgmPacket?) then
+    -> yes;
+    :Control Packet Hub;
+    -> send keyMgmPacket;
+    :Key Management;
+else
+    -> no;
+ endif
+-> forward packet;
+:Forwarding;
+-> sends packets to encryption;
+:Crypto;
+    -> encrypts packet;
+:Crypto;
+-> sends packet;
+:Forwarding;
+-> sends packet;
+:DPDK;
+repeat while (still active?)
+@enduml

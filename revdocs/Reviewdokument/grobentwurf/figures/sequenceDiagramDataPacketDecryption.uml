@@ -1,0 +1,24 @@
+@startuml
+entity DPDK
+actor Network_Abstraction
+entity Dispatch
+entity Forwarding
+entity AES
+entity Control_Packet_Hub
+Network_Abstraction --> DPDK: pull packet
+DPDK -> Network_Abstraction: encPacket
+Network_Abstraction -> Dispatch: encPacket
+activate Dispatch
+Dispatch -> Dispatch: EncPacket is KeyMgmPacket?
+Dispatch-> Control_Packet_Hub: KeyMgmPacket
+Dispatch-> Forwarding: encPacket
+deactivate Dispatch
+activate Control_Packet_Hub
+Control_Packet_Hub -> Control_Packet_Hub:Is Key active?
+Forwarding -> AES: encDataPacket
+Forwarding ->> AES: key
+AES -> AES: decrypt dataPacket
+AES -> Forwarding: decryptedDataPacket
+Forwarding -> Network_Abstraction: decryptedDataPacket
+Network_Abstraction -> DPDK: decryptedDataPacket
+@enduml

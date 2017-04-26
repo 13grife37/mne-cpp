@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for umlFile in *.uml; do
+	echo $umlFile
+	strippedFilename="${umlFile%.*}"
+	
+	java -jar plantuml.jar -tsvg $umlFile
+	rsvg-convert $strippedFilename.svg -f pdf > $strippedFilename.pdf	
+done
+
+

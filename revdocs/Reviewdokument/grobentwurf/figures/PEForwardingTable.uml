@@ -1,0 +1,19 @@
+@startuml
+scale 5
+:curMatchlength = -1;
+:foundMatch = 0.0.0.0;
+while(PEForwardingTable still contains entries?)
+:read next entry;
+:get matchLength between entry and searchrequest;
+if (matchLength > curMatchLength?) then (yes)
+:curMatchLength = matchLength;
+:foundMatch = MACadress of entry;
+else(no)
+endif
+if(curMatchLength== 32?) then (yes)
+:return foundMatch;
+else(no)
+endif
+endwhile
+:return foundMatch;
+@enduml

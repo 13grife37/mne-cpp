@@ -77,6 +77,10 @@
 /bin/ex_roi_clustered_inverse_pwl_rap_musicd
 /bin/ex_st_clustered_inverse_pwl_rap_music
 /bin/ex_st_clustered_inverse_pwl_rap_musicd
+/bin/ex_disp_3D_copy
+/bin/ex_swp_prototype
+/bin/ex_sensor_read
+/bin/MNE-sample-data/README.md
 
 # Binaries Tests
 /bin/test_codecov
@@ -235,3 +239,11 @@ lib
 *.log
 *.out
 *.toc
+
+/revdocs/Functional\ Specification/*.log
+/revdocs/Functional\ Specification/*.pdf
+/revdocs/Functional\ Specification/*.out
+/revdocs/Functional\ Specification/*.gz
+/revdocs/Functional\ Specification/*.toc
+/revdocs/Functional\ Specification/*.aux
+

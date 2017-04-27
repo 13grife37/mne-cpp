@@ -46,26 +46,33 @@ mehr hinschreiben
 
 \section{Integration into MNE-CPP}
 
-The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework.
+The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer
 
 
-satz zu input verlieren
+\begin{center}
+	\includegraphics[width=10cm]{mne_architecture.png}
+	\\
+	{Figure 1 - Overview of the MNE-CPP basic architectural layout, including application and library layer.}
+\end{center}
+
 uml klassendiagram insert
 
 \subsection{Subdivision of program features}
 
-einleitender satz: datne werden sequenziell verarbeitet, algorithmen spielen einander zu
-
 \begin{description}
 	
 	\item[SCDC] 
-	hier steht quark
+	The surface constrained distance calculation algorithm receives a mesh data set as its input, which is stored inside a file. It then calculates approximate distances between vertices. When no further input arguments are provided, the SCDC algorithm calculates a full distance table, that is the distance between any vertex to any other vertex.
+	When it receives a subset of the vertices as an additional argument, it only calculates the distances from said subset to every other vertex of the mesh. The SCDC algorithm stores its results inside a two-dimensional matrix.
 	
 	\item[Projecting]
-	hier steht quark
+	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not know and the need of a nearest-neighbor algorithm arises.
+	The projecting algorithm then outputs the results of the calculation as an array of indices, which point to the respective vertices of the mesh.
 	
 	\item[Interpolation]
-	hier steht quark
+	The interpolation algorithm uses the results of the SCDC algorithm and the projecting algorithm.
+	It calculates a weight matrix for the later live interpolation of 
+	The interpolation gets its input either from an ongoing MME/EEG-Scan or a prerecorded data set, i.e. a file. 
 	
 	\item[Disp3D]
 	hier steht quark

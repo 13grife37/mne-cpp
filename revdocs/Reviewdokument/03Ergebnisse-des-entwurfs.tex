@@ -1,50 +1,45 @@
-\section{Ergebnisse des Entwurfs}
+\section{Results of the design}
 
-Die Ergebnisse des Entwurfs sind zum größten Teil in der Entwurfsdokumentation nachzulesen.
-Dort sind die Zusammenhänge der verschiedenen Pakete, Komponenten und Klassen aufgezeigt und anschaulich mit Hilfe von UML-Diagrammen dargestellt.
+It is possible to find the Results of the design in design documentation.
+There will the coherences of various packets, components  and classes demonstrated and  descriptive  with help of UML-Diagrams	 represented.
 
-\subsection{Werkzeuge} 
+\subsection{Tools} 
 
-Die verwendeten Werkzeuge sind Softwarelösungen, die die einzelnen Bereiche der Organisation und Entwicklung ermöglichen bzw. erleichtern.
+The used tools are the software solutions, for the enabling and facilitating of the areas of organization and developing.
 
-\subsubsection{Organisatorische Werkzeuge}
-	\begin{description}
-		\item[Phabrikator:] Zuweisung einzelner, zu bearbeitender Tasks und deren Verwaltung, sowie die Bereitstellung des Wiki's. 
+\subsubsection{Organization tools}
+	\begin{aims}
 		
-		\item[Quellcodeverwaltung:]	Hierfür wird \textit{Subversion} benutzt um einen einheitliche Arbeitsgrundlage an den Dateien zu gewährleisten.
+		\item[Sourcecodemanagement:] Here will \textit{GitHUB} used to ensure the uniformly Basis of work and the files
 		
-		\item[Arbeitszeitenerfassung:] Hierfür wird \textit{Kimai} verwendet, dort werden alle Zeiten eingetragen und verschiedenen Themen/Bereichen zugeteilt.
+		\item[LaTeX:] Here is it about  a text edition language, which allows to create various documents. 
+		This document can be used in various formats. 
+		It will particularly be used in this project for creating the functional specifications, review document and the design document.   
 		
-		\item[LaTeX:] Hierbei handelt es sich um eine Textbeschreibungssprache, mit der verschiedenste Dokumente erstellt werden können. 
-		Diese stehen nach der Erstellung in verschiedenen Formaten zur Verfügung.
-		Im speziellen wird es in diesem Projekt für die Erstellung des Pflichtenheftes, den Reviewdokumenten und dem Entwurfsdokument verwendet.   
+		\item[Doxygen:] With this program the comments will be dragged from the already created code to produce a documentation of the implementation.
 		
-		\item[Doxygen:] Mit diesem Programm werden die Kommentare aus dem erstellten Code gezogen, um daraus eine Dokumentation der Implementierung zu erzeugen.
-		
-		\item[PlantUML:] Erzeugung von UML-Diagrammen, die Aktivitäten, Aufbau und Funktionen des Systems grafisch darstellen. 
-	\end{description}
+		\item[Visual Paradigm:] Creating of UML-Diagrams, for the graphically representation of the actions, constructions and functions of  system. 
+	\end{aims}
 
-\subsubsection{Entwicklungswerkzeuge}
-	\begin{description}
-		\item[Buildsystem:] Es wird \textit{scons} verwendet um eine einheitliche und angepasste Kompilierung von C++-Dateien zu gewährleisten. 
-		Hierbei werden sogenannte \textit{sconstruct} erstellt, mit denen verschiedene Vorbedingungen, wie das Einbinden von Bibliotheken und die Auswahl des Kompilers erfüllt werden können.
+\subsubsection{Developing tools}
+	\begin{aims}
 		
-		\item[Entwicklungsumgebung:] Ein beliebiger \textit{Texteditor}, der Syntaxhighlighting für die Programmiersprache C++ unterstützt, wird zum Verfassen des Codes verwendet.
+		\item[Development environment:] Here will be \textit{QtCreator}, for clean code used.
 		
-		\item[Programmiersprache:] Es wird die hardwarenahe Programmiersprache \textit{C++} verwendet, da diese alle, für das Projekt erforderlichen, Anforderungen erfüllt.
+		\item[Program language] Here will be program language\textit{C++} used, because C++ meets all requirements of this project.
 		
-		\item[Betriebssystem:] Für den Betrieb der Software ist \textit{Linux} unabdingbar, da das verwendete DPDK-Framework nur auf dessen Grundlage funktioniert.
+		\item[Operating systems:] The software can be used on Linux, Microsoft Windows and Mac OS.
 		
-		\item[Bibliotheken:] In diesem Projekt werden viele verschiedene Standardbibliotheken von C++ und vom Auftraggeber bereitgestellte Bibliotheken verwendet. 
-		Zusätzlich hierzu wird als spezielles Framework (Ansammlung von Bibliotheken) das DPDK genutzt. 
-		Dieses liefert mit seiner umfangreichen Klassensammlung die Grundlage (Verschlüsselung, Forwarding, ...) für das System. 
+		\item[Libraries:] In this project will C++11 STL and the from employer provided libraries used. 
+		We also use QT Libraries with OpenGL, Eingen.
+		With there enormous collection of classes  give this libraries the basis for this System. 
 		
-	\end{description}
+	\end{aims}
 
 \subsection{Ergebnisse des Entwurfs für die erste Iteration:}
 Die Ergebnisse der ersten Iteration ergeben sich aus dem aktuell zu erreichenden Meilenstein.
 
-\begin{description}
+\begin{aims}
 	\leftskip=0,8cm
 		\item[Pflichtenheft:] Das Lastenheft wurde vollständig in das Pflichtenheft überführt und um weitere Punkte, im Dialog mit dem Auftraggeber, ergänzt.
 		
@@ -54,19 +49,16 @@ Die Ergebnisse der ersten Iteration ergeben sich aus dem aktuell zu erreichenden
 		
 		\item[Planung:] Es wurden Festlegungen für die weiteren Iterationen getroffen, hierbei wurden insbesondere die Meilensteine für die nächste Iteration festgelegt und das weitere Vorgehen innerhalb des Teams besprochen.
 		
-	\end{description}
+	\end{aims}
 
-\subsection{Festlegungen für die nächste Iteration:}
-Die Festlegungen für die jeweilige nächste Iteration spiegeln sich in den Meilensteinen wieder.
+\subsection{Determinations for the next iteration}
 
-\begin{description}
+\begin{aims}
 	\leftskip=0,8cm
-		\item[Grobentwurf verfeinern:] Der Grobentwurf wird um spezifischere Diagramme und Beschreibungen zum Feinentwurf ergänzt. Dies geschieht jeweils parallel zu den Meilensteinen, da automatisch jede Änderung dort festgehalten wird.
+	\item[Refining of preliminary design :] The preliminary design is extended with special diagrams and descriptions to detailed design. This occurs each time  parallel to Milestones, because each change will automatically held.
 		
-		\item[Implementierung erweitern:] Die aktuelle Implementierung wird um einen ersten Entwurf der Verschlüsselung mit statischem Schlüssel erweitert.
+		\item[Further implementation:] Here will the 4 Features implemented and tested.		
 		
-		\item[Hardware konfigurieren:] Die zur Verfügung gestellte Hardware wird initial konfiguriert um die Voraussetzungen für das System zu gewährleisten und um die Implementierung ersten Tests unterziehen zu können.
-		
-	\end{description}
+	\end{aims}
   
-\end{document}
+\end{aims}

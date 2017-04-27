@@ -12,14 +12,11 @@
 \usepackage{listings}
 \usepackage{graphicx}
 
-
 \hypersetup{colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=black, urlcolor=darkblue, citecolor=darkblue}
 
 \pagestyle{fancy}
 
 \input{_Grobentwurf.tex}
-
-
 
 \begin{document}
 	
@@ -46,8 +43,7 @@ mehr hinschreiben
 
 \section{Integration into MNE-CPP}
 
-The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer
-
+The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1).
 
 \begin{center}
 	\includegraphics[width=10cm]{mne_architecture.png}
@@ -55,7 +51,7 @@ The realtime mesh utilities are to be integrated into the structure of the MNE-C
 	{Figure 1 - Overview of the MNE-CPP basic architectural layout, including application and library layer.}
 \end{center}
 
-uml klassendiagram insert
+{pls insert klassendiagramm}
 
 \subsection{Subdivision of program features}
 
@@ -66,27 +62,26 @@ uml klassendiagram insert
 	When it receives a subset of the vertices as an additional argument, it only calculates the distances from said subset to every other vertex of the mesh. The SCDC algorithm stores its results inside a two-dimensional matrix.
 	
 	\item[Projecting]
-	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not know and the need of a nearest-neighbor algorithm arises.
+	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not know and a nearest-neighbor algorithm is used.
 	The projecting algorithm then outputs the results of the calculation as an array of indices, which point to the respective vertices of the mesh.
 	
 	\item[Interpolation]
-	The interpolation algorithm uses the results of the SCDC algorithm and the projecting algorithm.
-	It calculates a weight matrix for the later live interpolation of 
-	The interpolation gets its input either from an ongoing MME/EEG-Scan or a prerecorded data set, i.e. a file. 
+	The interpolation algorithm uses the results of both the projecting algorithm and the SCDC algorithm.
+	Based on the distance table, it calculates a weight matrix for the later live interpolation. 
+	Thus the interpolation algorithm receives three different inputs: the distance table created by SCDC, the sensors mapping and the actual sensor input, i.e. brain activity recorded by sensors over a period of time.
+	The recorded brain activity gets passed to the interpolation algorithm either from an ongoing MME/EEG-Scan or a prerecorded data set, i.e. a file. 
 	
 	\item[Disp3D]
-	hier steht quark
-	
-
-sequenzdiagram
-	
+	In order to provide control over aspects of the interpolation within the MNE-CPP framework, a new function is added to the Disp3D tree model.
+		
 \end{description}
 
-Diese Untergliederung ermöglicht es, das System für Erweiterungen offen zu halten. ->übersetzen
+By dividing the realtime mesh utilities into the mentioned components, internal changes and extensions are easy to implement. Added to that, the single components can be reused elsewhere within the MNE-CPP framework.
+\\
 
+{pls insert sequenzdiagramm}
 
 \clearpage
-
 
 \section{Visualization}
 beschreiben wie der output dann mit der colour table visualisiert wird

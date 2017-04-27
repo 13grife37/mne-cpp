@@ -16,15 +16,19 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{caption}
+\usepackage{wrapfig}
 
 %%%PAGESTYLE%%%
 \pagestyle{fancy}
 
+%%%CAPTIOBSETUP%%%
+\captionsetup[figure]{font=small,labelfont=small,skip=3pt}
 
 %%%LINKING%%%
 \hypersetup{colorlinks=true, breaklinks=true, linkcolor=blue, menucolor=darkred, urlcolor=darkblue, citecolor=darkblue}
 
-%%%NEWLIST%%%    Itemnamen bold, Text eingerückt 
+%%%NEWLIST%%%  
 \newlist{aims}{enumerate}{1}
 \setlist[aims,1]{
   label={Aim~\arabic*},

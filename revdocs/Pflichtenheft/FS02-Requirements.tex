@@ -72,22 +72,18 @@
 		
 		\item[C141] A new function must be added to the Disp3D tree model. Internally this function must create a new 								handler. 
 		
-		%TODO in scan einfuegen nicht gleich disp3D
 	\end{aims}
 	
 \subsubsection{Non-Functional Requirements}		
 	
-	%TODO Graka-Matrizen-Shice
 	
 	\begin{aims}
 
 		\item[C151] The software has to run on the latest versions of 2 operating systems, namely Windows and Linux. 
-		%TODO vll nur Ubuntu?
-		%TODO ueberlegen, ob das vielleicht besser nur in Product environment steht
-		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while 								\ref{interpolation} is facilitated in the class \textit{Interpolation}.
+		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while \ref{interpolation} is facilitated in the class \textit{Interpolation}.
 		\item[C153] The function to integrate the product into Disp3D (\ref{integration}) is named \textit{addSensorData()}.
 		\item[C154] For introduction purposes, a product video is to be created and published on the MNE-CPP website.  
-		%TODO change name of addSensorData() like said in the meeting 26/04/2017
+		\item[C155] The software must integratable into MNE-Scan. 
 	\end{aims}
 	
 \newpage	
@@ -100,9 +96,9 @@
 	
 	\begin{aims}
 		
-		\item[C211] The computation time should not exceed 1 second.
-		%TODO change as of meeting 26/04/2017 (1 second may not be achievable, perhaps calculation using a threshold)
-			
+		\item[C211] The computation time should be as fast as possible.
+		\item[C212] A threshold is used for reduction of processing time.
+		
 	\end{aims}
 	
 \subsubsection{Interpolation (\ref{interpolation})}
@@ -111,7 +107,7 @@
 	
 		\item[C221] One interpolation cycle should take less than 17ms.
 		\item[C222] Multiple methods for calculating the weight matrix can be implemented. The user can select one.
-		\item[C223] The Computation is executed on GPU-level.
+		\item[C223] The Computation is executed on GPU-level using compute shaders.
 	
 	\end{aims}
 	

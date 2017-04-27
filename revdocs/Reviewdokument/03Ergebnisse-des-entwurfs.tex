@@ -1,0 +1,72 @@
+\section{Ergebnisse des Entwurfs}
+
+Die Ergebnisse des Entwurfs sind zum größten Teil in der Entwurfsdokumentation nachzulesen.
+Dort sind die Zusammenhänge der verschiedenen Pakete, Komponenten und Klassen aufgezeigt und anschaulich mit Hilfe von UML-Diagrammen dargestellt.
+
+\subsection{Werkzeuge} 
+
+Die verwendeten Werkzeuge sind Softwarelösungen, die die einzelnen Bereiche der Organisation und Entwicklung ermöglichen bzw. erleichtern.
+
+\subsubsection{Organisatorische Werkzeuge}
+	\begin{description}
+		\item[Phabrikator:] Zuweisung einzelner, zu bearbeitender Tasks und deren Verwaltung, sowie die Bereitstellung des Wiki's. 
+		
+		\item[Quellcodeverwaltung:]	Hierfür wird \textit{Subversion} benutzt um einen einheitliche Arbeitsgrundlage an den Dateien zu gewährleisten.
+		
+		\item[Arbeitszeitenerfassung:] Hierfür wird \textit{Kimai} verwendet, dort werden alle Zeiten eingetragen und verschiedenen Themen/Bereichen zugeteilt.
+		
+		\item[LaTeX:] Hierbei handelt es sich um eine Textbeschreibungssprache, mit der verschiedenste Dokumente erstellt werden können. 
+		Diese stehen nach der Erstellung in verschiedenen Formaten zur Verfügung.
+		Im speziellen wird es in diesem Projekt für die Erstellung des Pflichtenheftes, den Reviewdokumenten und dem Entwurfsdokument verwendet.   
+		
+		\item[Doxygen:] Mit diesem Programm werden die Kommentare aus dem erstellten Code gezogen, um daraus eine Dokumentation der Implementierung zu erzeugen.
+		
+		\item[PlantUML:] Erzeugung von UML-Diagrammen, die Aktivitäten, Aufbau und Funktionen des Systems grafisch darstellen. 
+	\end{description}
+
+\subsubsection{Entwicklungswerkzeuge}
+	\begin{description}
+		\item[Buildsystem:] Es wird \textit{scons} verwendet um eine einheitliche und angepasste Kompilierung von C++-Dateien zu gewährleisten. 
+		Hierbei werden sogenannte \textit{sconstruct} erstellt, mit denen verschiedene Vorbedingungen, wie das Einbinden von Bibliotheken und die Auswahl des Kompilers erfüllt werden können.
+		
+		\item[Entwicklungsumgebung:] Ein beliebiger \textit{Texteditor}, der Syntaxhighlighting für die Programmiersprache C++ unterstützt, wird zum Verfassen des Codes verwendet.
+		
+		\item[Programmiersprache:] Es wird die hardwarenahe Programmiersprache \textit{C++} verwendet, da diese alle, für das Projekt erforderlichen, Anforderungen erfüllt.
+		
+		\item[Betriebssystem:] Für den Betrieb der Software ist \textit{Linux} unabdingbar, da das verwendete DPDK-Framework nur auf dessen Grundlage funktioniert.
+		
+		\item[Bibliotheken:] In diesem Projekt werden viele verschiedene Standardbibliotheken von C++ und vom Auftraggeber bereitgestellte Bibliotheken verwendet. 
+		Zusätzlich hierzu wird als spezielles Framework (Ansammlung von Bibliotheken) das DPDK genutzt. 
+		Dieses liefert mit seiner umfangreichen Klassensammlung die Grundlage (Verschlüsselung, Forwarding, ...) für das System. 
+		
+	\end{description}
+
+\subsection{Ergebnisse des Entwurfs für die erste Iteration:}
+Die Ergebnisse der ersten Iteration ergeben sich aus dem aktuell zu erreichenden Meilenstein.
+
+\begin{description}
+	\leftskip=0,8cm
+		\item[Pflichtenheft:] Das Lastenheft wurde vollständig in das Pflichtenheft überführt und um weitere Punkte, im Dialog mit dem Auftraggeber, ergänzt.
+		
+		\item[Grobentwurf:] Der Grobentwurf umfasst eine erste Übersicht über die Funktions- und Arbeitsweise des Systems.
+		
+		\item[Implementierung:] Eine erste Lauffähige Implementierung wurde umgesetzt und umfasst die Funktionen eines einfachen Forwardings ohne Verschlüsselung.
+		
+		\item[Planung:] Es wurden Festlegungen für die weiteren Iterationen getroffen, hierbei wurden insbesondere die Meilensteine für die nächste Iteration festgelegt und das weitere Vorgehen innerhalb des Teams besprochen.
+		
+	\end{description}
+
+\subsection{Festlegungen für die nächste Iteration:}
+Die Festlegungen für die jeweilige nächste Iteration spiegeln sich in den Meilensteinen wieder.
+
+\begin{description}
+	\leftskip=0,8cm
+		\item[Grobentwurf verfeinern:] Der Grobentwurf wird um spezifischere Diagramme und Beschreibungen zum Feinentwurf ergänzt. Dies geschieht jeweils parallel zu den Meilensteinen, da automatisch jede Änderung dort festgehalten wird.
+		
+		\item[Implementierung erweitern:] Die aktuelle Implementierung wird um einen ersten Entwurf der Verschlüsselung mit statischem Schlüssel erweitert.
+		
+		\item[Hardware konfigurieren:] Die zur Verfügung gestellte Hardware wird initial konfiguriert um die Voraussetzungen für das System zu gewährleisten und um die Implementierung ersten Tests unterziehen zu können.
+		
+	\end{description}
+  
+\end{document}

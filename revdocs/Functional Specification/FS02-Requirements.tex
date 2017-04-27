@@ -12,7 +12,7 @@
 	\begin{aims}
 		
 		\item[\textbf{\textit{Note:}}] From this point on \textbf{S}urface \textbf{C}onstrained \textbf{D}istance 
-									   \textbf{C}alculation will be referred as \textbf{SCDC}.
+									   \textbf{C}alculation will be referred to as \textbf{SCDC}.
 	
 	\end{aims}
 	
@@ -72,16 +72,12 @@
 		
 		\item[C141] A new function must be added to the Disp3D tree model. Internally this function must create a new 								handler. 
 		
-		%todo in scan einfuegen nicht gleich disp3D
+		%TODO in scan einfuegen nicht gleich disp3D
 	\end{aims}
 	
-\subsubsection{Non-Functional Requirements}	
+\subsubsection{Non-Functional Requirements}		
 	
-	%todo Klassen-/Methodennamen, Windows/Linux Unterstützung	
-	
-	%todo Graka-Matrizen-Shice
-	
-	%todo fancy product video apple style
+	%TODO Graka-Matrizen-Shice
 	
 	\begin{aims}
 
@@ -90,7 +86,8 @@
 		%TODO ueberlegen, ob das vielleicht besser nur in Product environment steht
 		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while 								\ref{interpolation} is facilitated in the class \textit{Interpolation}.
 		\item[C153] The function to integrate the product into Disp3D (\ref{integration}) is named \textit{addSensorData()}.
-	
+		\item[C154] For introduction purposes, a product video is to be created and published on the MNE-CPP website.  
+		%TODO change name of addSensorData() like said in the meeting 26/04/2017
 	\end{aims}
 	
 \newpage	
@@ -104,6 +101,7 @@
 	\begin{aims}
 		
 		\item[C211] The computation time should not exceed 1 second.
+		%TODO change as of meeting 26/04/2017 (1 second may not be achievable, perhaps calculation using a threshold)
 			
 	\end{aims}
 	

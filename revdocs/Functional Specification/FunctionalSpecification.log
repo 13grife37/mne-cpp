@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.4.21)  26 APR 2017 00:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.4.21)  27 APR 2017 02:23
 entering extended mode
 **./FunctionalSpecification.tex
 (FunctionalSpecification.tex
@@ -772,18 +772,31 @@ LaTeX Info: Redefining \nameref on input line 3.
 \openout4 = `FunctionalSpecification.out'.
 
 \c@lstlisting=\count154
- (FS00-FrontPage.tex)
+ (FS00-FrontPage.tex
 LaTeX Font Info:    Try loading font information for U+msa on input line 7.
- (D:\Uni\LaTeX\MiKTeX\tex\latex\amsfonts\umsa.fd
+(D:\Uni\LaTeX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 7.
 
 (D:\Uni\LaTeX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+<Figures/mne-cpp.png, id=99, 429.10312pt x 263.48438pt>
+File: Figures/mne-cpp.png Graphic file (type png)
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] (FS01-Introduction.tex
+<use Figures/mne-cpp.png>
+Package pdftex.def Info: Figures/mne-cpp.png used on input line 8.
+(pdftex.def)             Requested size: 446.9055pt x 274.41931pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 8--7
+
+ []
+
+[1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./Figures/mne-cpp.png>] (
+FS01-Introduction.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
@@ -794,7 +807,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--18
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--22
+Underfull \hbox (badness 10000) in paragraph at lines 20--23
 
  []
 
@@ -820,27 +833,53 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ] (FS02-Requirements.tex [3
 
 ] [4]) [5]
-(FS04-Product-environment.tex) [6
+(FS03-Product-application.tex) [6
 
-] (FS05-ProductFunctions.tex) [7
+] (FS04-Product-environment.tex
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 16.
+
+LaTeX Font Info:    No file OMScmss.fd. on input line 16.
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead on input line 16.
+
+) [7
+
+] (FS05-ProductFunctions.tex) [8
+
+] (FS08-QualityTargetAcquisition.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/bx/n' undefined
+(Font)              using `OMS/cmss/m/n' instead
+(Font)              for symbol `textbullet' on input line 22.
+
+) [9
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 22.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 22.
-
-(FunctionalSpecification.aux)
+ (FunctionalSpecification.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 22.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 22.
 Package rerunfilecheck Info: File `FunctionalSpecification.out' has not changed
 .
-(rerunfilecheck)             Checksum: 3C81AE1A33387D8F46F18DCE11FF80A8;1211.
+(rerunfilecheck)             Checksum: FCF47230BFE810EC19B353BD1F6E32B6;1675.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 22.
  ) 
 Here is how much of TeX's memory you used:
- 9112 strings out of 493324
- 124934 string characters out of 3142480
- 229951 words of memory out of 3000000
- 12457 multiletter control sequences out of 15000+200000
+ 9152 strings out of 493324
+ 125587 string characters out of 3142480
+ 231957 words of memory out of 3000000
+ 12477 multiletter control sequences out of 15000+200000
  17627 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  31i,12n,43p,368b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -856,9 +895,9 @@ LaTeX/MiKTeX/fonts/type1/public/cm-super/sfss1200.pfb><D:/Uni/LaTeX/MiKTeX/font
 s/type1/public/cm-super/sfsx1200.pfb><D:/Uni/LaTeX/MiKTeX/fonts/type1/public/cm
 -super/sfsx1440.pfb><D:/Uni/LaTeX/MiKTeX/fonts/type1/public/cm-super/sfsx1728.p
 fb><D:/Uni/LaTeX/MiKTeX/fonts/type1/public/cm-super/sfsx2986.pfb>
-Output written on FunctionalSpecification.pdf (8 pages, 184471 bytes).
+Output written on FunctionalSpecification.pdf (10 pages, 235409 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 

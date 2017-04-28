@@ -1,0 +1,37 @@
+\section{Product Functions}
+
+\subsection{User functions}
+
+	\begin{aims}
+	
+		\item[F11] The user can access the implemented features as part of MNE-Scan, a subprogram of MNE-CPP.
+		\item[F12] Either MEG or EEG data can be used as input.
+		\item[F13] Any desired surface mesh and set of sensor data, selected by the user, can be used as input data for 							further calculations.
+		\item[F14] A preferred subset of vertices can be selected, to perform distance calculations on. 
+		\item[F15] The user is able to select a threshold for identifying all relevant vertices while interpolating. 
+		\item[F16] As part of MNE-Scan/Disp3D all graphical options are available to the user, meaning e.g. different 								coloring and rotation of the object.
+	
+	\end{aims}
+
+\subsection{Offline functions}
+	
+	These functions are performed one time and are executed prior to the interpolation process.	
+	
+	\begin{aims}
+	
+		\item[F21]	The distance between two vertices on a given mesh, is calculated following the structure of the surface. 						Therefore the euclidian distance is not used.
+		\item[F22] All floating sensor points are projected onto the nearest vertices on the input mesh. 
+		\item[F23] A weight matrix, containing values for all vertices, is generated. 
+ 	
+	\end{aims}
+	
+\subsection{Online functions}
+
+	These functions are performed continuously and in real-time.	
+	
+	\begin{aims}
+	
+		\item[F32]	Based off prior calculations, the interpolation assigns every vertex a value.
+		\item[F31] A visual output is generated.
+	
+	\end{aims}

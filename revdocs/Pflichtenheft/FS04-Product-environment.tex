@@ -1,0 +1,16 @@
+\section {Product Environment}
+\subsection{Scenario}
+As mentioned before the aim of the product is to visualize MEG and EEG data live. The signal derives from actual activity in the brain which the software should reconstruct. 
+
+%TODO Erklaerung MEG
+
+%TODO Erklaerung EEG
+\subsection{Software}
+\subsubsection{The MNE-CPP framework}The MNE-CPP framework provides several applications dividable by front-end and back-end software. MNE Scan, MNE Browse and MNE Analyze are front-end applications which perform well in terms of usability.
+Beneath the front-end is the library layer which contains the core libraries provided by the framework.\\
+The application must be integrated into the library layer.
+\subsubsection{System}
+The Software must be able to run on both, Windows and Linux to maximize the possible cases of usage. It requires OpenGL compatibility and depends on the Qt libraries (e.g. Qt3D).
+\subsection{Hardware}
+The program should run on most modern computers with enough performance to handle it. \\
+A MEG-System (e.g. Elekta Neuromag® Vector View™) is connected to the computer and sends data which is handled by the software.

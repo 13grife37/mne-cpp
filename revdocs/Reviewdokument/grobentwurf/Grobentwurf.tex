@@ -20,8 +20,8 @@
 
 \begin{document}
 	
-\lhead{\sc{Grobentwurf RMU}}	
-\title{Grobentwurf: RMU}
+\lhead{\sc{Preliminary Design: RMU}}	
+\title{Preliminary Design: RMU}
 \vspace{3 in}
 \maketitle
 \clearpage
@@ -29,38 +29,33 @@
 \tableofcontents
 
 \clearpage
-\section{Basic structure of MNE-CPP}
+\section{The MNE-CPP framework}
+
+\subsection{Basic structure of MNE-CPP}
 
 MNE-CPP is a framework of tools and programs to analyze and work with MEG/EEG data.
-mehr hinschreiben 
+It provides a cross-platform library which allows the processing of the in neuroscience well established Elekta Neuromag® FIFF file format and therefore integrates with existing toolboxes. \\
+Besides the library, the MNE-CPP framework so far includes three main applications: MNE-Analyze, which centers around visualization of preprocessed data; MNE-Browse, which allows browsing raw data, e.g. FIFF files in a convenient way and MNE-Scan, which deals with acquiring and processing data. \\
+The library itself consists of a collection of packages that provides interfaces for file handling, device connectivity, 2D- and 3D-visualization and mathematics.
 
-\begin{description}
-	\item[deine muddi]
+\subsection{Integration of the procuct into MNE-CPP}
 
-\end{description}
+The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=10cm]{figures/mne_architecture.png}
+		\caption{Figure 1 - Overview of the MNE-CPP basic architectural layout, including application and library layer.}
+	\end{center}
+\end{figure}
 
 \clearpage
-
-\section{Integration of the product into MNE-CPP}
-
-The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1).
-
-\begin{center}
-	\includegraphics[width=10cm]{mne_architecture.png}
-	\\
-	{Figure 1 - Overview of the MNE-CPP basic architectural layout, including application and library layer.}
-\end{center}
-
-{pls insert klassendiagramm}
-
-Later on, the features are to be ported to MNE-Scan (see section 1).
 
 \section{Subdivision of program features}
 
 \begin{description}
 	
 	\item[SCDC] 
-	The surface constrained distance calculation algorithm receives a mesh data set as its input, which is stored inside a file. It then calculates approximate distances between vertices. When no further input arguments are provided, the SCDC algorithm calculates a full distance table, that is the distance between any vertex to any other vertex.
+	The surface constrained distance calculation algorithm receives a mesh data set as its input, which is stored inside a file. It then calculates approximate distances between vertices. When no further input arguments are provided, the SCDC algorithm calculates a full distance table, i.e. the distance between any vertex to any other vertex.
 	When it receives a subset of the vertices as an additional argument, it only calculates the distances from said subset to every other vertex of the mesh. The SCDC algorithm stores its results inside a two-dimensional matrix.
 	
 	\item[Projecting]
@@ -79,9 +74,34 @@ Later on, the features are to be ported to MNE-Scan (see section 1).
 \end{description}
 
 By dividing the realtime mesh utilities into the mentioned components, internal changes and extensions are easy to implement. Added to that, the single components can be reused elsewhere within the MNE-CPP framework.
-\\
 
-{pls insert sequenzdiagramm}
+\clearpage
+
+\section{Basic structure and interface}
+
+\begin{description}
+	\item[GeometryInfo] To provide the highest possible level of usability and versatility, a function to calculate surface constrained distances as well as the sensor-to-mesh mapping can be found inside the class \textit{GeometryInfo}. The mentioned option to provide a subset of vertices for the SCDC can be omitted by passing an empty vector as the second argument. 
+
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=10cm]{figures/geometryinfo_classdiagram.pdf}
+%		\caption{Figure 2 - Interface of GeometryInfo}
+%	\end{center}
+%\end{figure}
+
+\item[Interpolation] In order to keep the interpolation of neurophysiological activity efficient, the mentioned weight matrix (see section 2) is stored as a member of type MatrixXd inside the class \textit{Interpolation}, or rather as a pointer to such.
+To use the precalculated weight matrix, one has to pass the current set of sensor data to the function \textit{interpolateSignals} and receives the results as a vector.
+
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=10cm]{figures/interpolation_classdiagram.pdf}
+%		\caption{Figure 3 - Interface of Interpolation}
+%	\end{center}
+%\end{figure}
+
+\item[SensorDataTreeItem] To achieve the mentioned integration into the GUI framework (?)
+
+\end{description}
 
 \clearpage
   

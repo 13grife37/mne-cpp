@@ -40,11 +40,11 @@ The library itself consists of a collection of packages that provides interfaces
 
 \subsection{Integration of the procuct into MNE-CPP}
 
-The realtime mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
+The real-time mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=10cm]{figures/mne_architecture.png}
-		\caption{Figure 1 - Overview of the MNE-CPP basic architectural layout, including application and library layer.}
+		\caption{Overview of the MNE-CPP basic architectural layout, including application and library layer.}
 	\end{center}
 \end{figure}
 
@@ -52,7 +52,7 @@ The realtime mesh utilities are to be integrated into the structure of the MNE-C
 
 \section{Subdivision of program features}
 
-\begin{description}
+\begin{aims}
 	
 	\item[SCDC] 
 	The surface constrained distance calculation algorithm receives a mesh data set as its input, which is stored inside a file. It then calculates approximate distances between vertices. When no further input arguments are provided, the SCDC algorithm calculates a full distance table, i.e. the distance between any vertex to any other vertex.
@@ -71,37 +71,60 @@ The realtime mesh utilities are to be integrated into the structure of the MNE-C
 	\item[Disp3D]
 	In order to provide control over aspects of the interpolation within the MNE-CPP framework, a new function is added to the Disp3D tree model.
 		
-\end{description}
+\end{aims}
 
-By dividing the realtime mesh utilities into the mentioned components, internal changes and extensions are easy to implement. Added to that, the single components can be reused elsewhere within the MNE-CPP framework.
+By dividing the real-time mesh utilities into the mentioned components, internal changes and extensions are easy to implement. Added to that, the single components can be reused elsewhere within the MNE-CPP framework.
 
 \clearpage
 
 \section{Basic structure and interface}
 
-\begin{description}
+\begin{aims}
 	\item[GeometryInfo] To provide the highest possible level of usability and versatility, a function to calculate surface constrained distances as well as the sensor-to-mesh mapping can be found inside the class \textit{GeometryInfo}. The mentioned option to provide a subset of vertices for the SCDC can be omitted by passing an empty vector as the second argument. 
 
-%\begin{figure}[h]
-%	\begin{center}
-%		\includegraphics[width=10cm]{figures/geometryinfo_classdiagram.pdf}
-%		\caption{Figure 2 - Interface of GeometryInfo}
-%	\end{center}
-%\end{figure}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=12cm]{figures/geometryinfoclassdiagram.png}
+		\caption{Interface of GeometryInfo}
+	\end{center}
+\end{figure}
 
 \item[Interpolation] In order to keep the interpolation of neurophysiological activity efficient, the mentioned weight matrix (see section 2) is stored as a member of type MatrixXd inside the class \textit{Interpolation}, or rather as a pointer to such.
 To use the precalculated weight matrix, one has to pass the current set of sensor data to the function \textit{interpolateSignals} and receives the results as a vector.
 
-%\begin{figure}[h]
-%	\begin{center}
-%		\includegraphics[width=10cm]{figures/interpolation_classdiagram.pdf}
-%		\caption{Figure 3 - Interface of Interpolation}
-%	\end{center}
-%\end{figure}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=12cm]{figures/interpolationclassdiagram.png}
+		\caption{Interface of Interpolation}
+	\end{center}
+\end{figure}
 
-\item[SensorDataTreeItem] To achieve the mentioned integration into the GUI framework (?)
+\clearpage
 
-\end{description}
+\item[SensorDataTreeItem] To achieve the mentioned integration into the GUI framework, the program must integrate the SensorDataTreeItem.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=12cm]{figures/sensordatatreeitemclassdiagram.png}
+		\caption{SensorDataTreeItem}
+	\end{center}
+\end{figure}
+
+\end{aims}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=12cm]{figures/geometryinfo_calling_sequence.png}
+		\caption{Geometry calling sequence}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=12cm]{figures/interpolation_calling_sequence.png}
+		\caption{Interpolation calling sequence}
+	\end{center}
+\end{figure}
 
 \clearpage
   

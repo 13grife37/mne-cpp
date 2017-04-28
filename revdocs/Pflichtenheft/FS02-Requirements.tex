@@ -3,11 +3,11 @@
 	The product receives EEG/MEG sensor data and constructs a real-time 3D visualization of the brains current activity.
 	Users can choose between further options, changing the output immediately to their personal preferences. 
 
-\subsection{Mandatory criteria}
+\subsection{Mandatory Criteria}
 
 	The following functions have to be implemented correctly and must fulfill given requirements.
 		
-\subsubsection{Surface Constrained Distance Calculation (Geodesic problem on meshes)} \label{scdc}
+\subsubsection{Surface Constrained Distance Calculation} \label{scdc}
 	
 	\begin{aims}
 		
@@ -16,26 +16,26 @@
 	
 	\end{aims}
 	
-	Because the brain has an uneven surface, a function for calculating the distance between two separate points is needed.
+	Because the brain has a folded surface, a function for calculating the distance between two separate points is needed.
 	
 	As the euclidian distance would not respect the structure of the surface, a different approach for determining the exact 	distances has to be implemented.  
 	The function receives input data in form of a preprocessed triangulated surface mesh and calculates the distance between 	the vertices.			
 
 	\begin{aims}
 	
-		\item[C111] Based on that data, the function calculates a matrix that holds values describing the distances between 						all vertices using double precision. 
+		\item[C111] Based on a given mesh, the function calculates a matrix that holds values describing the distances between 						all vertices using double precision. 
 		\item[C112] The function must be able to process up to 200,000 vertices.
 		\item[C113] The user can limit the calculation to a subset of vertices. 
 	
 	\end{aims}
 
-\subsubsection{Point to plane mapping} \label{projection}
+\subsubsection{Sensor-to-Mesh Mapping} \label{projection}
 
-	Since the sensors do not directly touch the head, therefore float slightly above it, an accurate projection is needed to 
-	exactly localize their positions regarding the brain. 
+	Since the sensors do not directly touch the head and therefore float slightly above it, an accurate projection is needed to 
+	exactly localize their positions on the surface of the brain. 
 	
 	Hence a function must be implemented to solve this problem. 
-	The function receives a set of sensor locations in 3D-Space and maps them onto the underlying surface mesh. Thus every 			sensor gets assigned to a vertex of the mesh. 
+	The function receives a set of sensor locations in 3D-Space and maps them onto the underlying mesh. Thus every 			sensor gets assigned to a vertex of the mesh. 
 
 	\begin{aims}
 	
@@ -44,23 +44,23 @@
 	
 	\end{aims}
 
-\subsubsection{Interpolation algorithm} \label{interpolation} 
+\subsubsection{Interpolation Algorithm} \label{interpolation} 
 
-	The core feature is the ongoing interpolation, visualizing a particular set of sensor data, representing the brains 			activity.
+	The main task is the ongoing interpolation, processing a particular set of sensor data, representing the brains 			activity.
 	
 	Because the number of vertices is bigger than the quantity of sensor points, most vertex-values must be interpolated.
 	Thus the algorithm receives a mesh and a subset of vertices with their respective sensor data.  
 	
 	\begin{aims}
 	
-		\item[C131] Based on the said subset the algorithm must calculate the values for every vertex of the mesh.
+		\item[C131] Based on the said subset the algorithm must calculate the values of the neurophysiological activity for every vertex of the mesh.
 		\item[C132] For this, the algorithm creates a matrix storing weights for the later interpolation.
 					The interpolation process can be summarized by the following equation: 
 					
 					$y_{full} = W \cdot y_{sub}$
 					, where $W$ is the mentioned matrix and $y_{sub}$ is the current dataset for the known sensors, i.e. 							vertices.
 		\item[C133] The calculation of the weight matrix must be based on the result of the SCDC (\ref{scdc}).
-		\item[C134] Bad channels, a part of the given sensor data, must be considered during processing. 
+		\item[C134] Bad channels, a part of the given sensor meta data, must be considered during processing. 
 	
 	\end{aims}
 
@@ -88,7 +88,7 @@
 	
 \newpage	
 	
-\subsection{Optional criteria}
+\subsection{Optional Criteria}
 	
 	As long as the mandatory requirements are fulfilled, it is desirable to further match the following criteria. 	
 	
@@ -96,8 +96,8 @@
 	
 	\begin{aims}
 		
-		\item[C211] The computation time should be as fast as possible.
-		\item[C212] A threshold is used for reduction of processing time.
+		\item[C211] The computation time should be as low as possible.
+		\item[C212] A threshold for the maximum distance between two vertices is used for reduction of processing time.
 		
 	\end{aims}
 	
@@ -107,12 +107,12 @@
 	
 		\item[C221] One interpolation cycle should take less than 17ms.
 		\item[C222] Multiple methods for calculating the weight matrix can be implemented. The user can select one.
-		\item[C223] The Computation is executed on GPU-level using compute shaders.
+		\item[C223] The computation is executed on GPU-level using compute shaders.
 	
 	\end{aims}
 	
 	
-\subsection{Delimiting criteria} %TODO besserer Titel wünschenswert
+\subsection{Delimiting Criteria} %TODO besserer Titel wünschenswert
 	
 	The following criteria limit the functionality of the system.
 	

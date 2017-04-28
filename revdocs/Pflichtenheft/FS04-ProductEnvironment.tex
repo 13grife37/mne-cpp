@@ -1,10 +1,14 @@
 \section {Product Environment}
 \subsection{Scenario}
 As mentioned before, the aim of the product is to visualize MEG and EEG data live. The software should reconstruct actual brain activity based on given sensor signals.
+The two possible sources of data are:
+\begin{list}{$\cdot$}{}
 
-%TODO Erklaerung MEG
+\item The MEG, short for Magnetoencephalography, is a measurement of the neurophysiological activities of the brain. The changes of the magnetic field are recorded by sensors which are non-invasive (on the outside of the head). Besides research, the MEG is used for planning complex brain-surgeries.
 
-%TODO Erklaerung EEG
+\item The EEG, short for Electroencephalography, is a measurement method for recording the electrical activities on the surface of the head. Electrodes that directly touch the skin measure potential fluctuations (brain waves) and amplify them. It is a standard method in neurology.
+\end{list}
+
 \subsection{Software}
 \subsubsection{The MNE-CPP Framework}The MNE-CPP framework provides several applications, dividable into front-end and back-end software. MNE Scan, MNE Browse and MNE Analyze are front-end applications which are designed for high usability.
 Beneath the front-end is the library layer which contains the core libraries provided by the framework.\\

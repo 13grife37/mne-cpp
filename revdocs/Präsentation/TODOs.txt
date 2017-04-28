@@ -1,0 +1,13 @@
+Deckblatt mit MNE-CPP Logo
+
+Project objectives: 
+	-fehlt komplett
+
+Layer Architecture of MNE-CPP:
+	-Bild aus Lastenheft importieren!
+
+Agile development model: SCRUM
+	- Sprintlänge auf Folie? oder reicht es aus das nur zu 	sagen
+
+Milestones:
+	-Grobentwurf,Feinentwurf auf Englisch?

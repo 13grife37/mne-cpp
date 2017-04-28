@@ -1,3 +1,5 @@
+\usepackage{enumitem}
+
 \renewcommand{\familydefault}{cmss}
 
 \definecolor{fgcgray}{rgb}{0.4, 0.4, 0.4}
@@ -7,7 +9,14 @@
 
 \newcommand{\gloss}[1]{\textcolor{glossb}{\fontsize{11}{0pt}\selectfont #1}}
 
-
+\newlist{aims}{enumerate}{1}
+\setlist[aims,1]{
+	label={Aim~\arabic*},
+	leftmargin=*,
+	align=left,
+	%labelsep=1mm,
+	font=\bfseries
+}
 
 \addtolength{\oddsidemargin}{-1.0cm}
 \addtolength{\evensidemargin}{-1.0cm}
@@ -33,17 +42,22 @@
   %\begin{titlepage}
    
   \begin{center}
-      \titlepagef{Softwareproject 2017}
+      \titlepagef{Software-Project 2017}
       \spaceline
   \end{center}
   
   \begin{center}
       \parbox{\textwidth}{
         \spaceline
-        \centering{\titlefont{Preliminary Design:\\ Realtime Mesh Utilities}}
+        \centering{\titlefont{Preliminary Design}}
         \par
         \spaceline
       }
+  \end{center}
+  
+  \begin{center}
+  	\titlepagef{Real-Time Mesh Utilities}
+  	\spaceline[2em]
   \end{center}
   
   \begin{center}

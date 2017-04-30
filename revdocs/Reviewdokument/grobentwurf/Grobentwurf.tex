@@ -29,18 +29,18 @@
 \tableofcontents
 
 \clearpage
-\section{The MNE-CPP framework}
+\section{The MNE-CPP Framework}
 
-\subsection{Basic structure of MNE-CPP}
+\subsection{Basic Structure of MNE-CPP}
 
 MNE-CPP is a framework of tools and programs to analyze and work with MEG/EEG data.
 It provides a cross-platform library which allows the processing of the in neuroscience well established Elekta Neuromag® FIFF file format and therefore integrates with existing toolboxes. \\
 Besides the library, the MNE-CPP framework so far includes three main applications: MNE-Analyze, which centers around visualization of preprocessed data; MNE-Browse, which allows browsing raw data, e.g. FIFF files in a convenient way and MNE-Scan, which deals with acquiring and processing data. \\
-The library itself consists of a collection of packages that provides interfaces for file handling, device connectivity, 2D- and 3D-visualization and mathematics.
+The library itself consists of a collection of packages that provide interfaces for file handling, device connectivity, 2D- and 3D-visualization and mathematics.
 
-\subsection{Integration of the procuct into MNE-CPP}
+\subsection{Integration of the Product into MNE-CPP}
 
-The real-time mesh utilities are to be integrated into the structure of the MNE-CPP framework. Too provide a versatile interface, the utilities are organized inside a package within the library layer (see Figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
+The real-time mesh utilities are to be integrated into the structure of the MNE-CPP framework. To provide a versatile interface, the utilities are organized inside a package within the library layer (see figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=10cm]{figures/mne_architecture.png}
@@ -50,7 +50,7 @@ The real-time mesh utilities are to be integrated into the structure of the MNE-
 
 \clearpage
 
-\section{Subdivision of program features}
+\section{Subdivision of Program Features}
 
 \begin{aims}
 	
@@ -59,7 +59,7 @@ The real-time mesh utilities are to be integrated into the structure of the MNE-
 	When it receives a subset of the vertices as an additional argument, it only calculates the distances from said subset to every other vertex of the mesh. The SCDC algorithm stores its results inside a two-dimensional matrix.
 	
 	\item[Projecting]
-	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not know and a nearest-neighbor algorithm is used.
+	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not known and a nearest-neighbor algorithm is used.
 	The projecting algorithm then outputs the results of the calculation as an array of indices, which point to the respective vertices of the mesh.
 	
 	\item[Interpolation]
@@ -77,7 +77,7 @@ By dividing the real-time mesh utilities into the mentioned components, internal
 
 \clearpage
 
-\section{Basic structure and interface}
+\section{Basic Structure and Interface}
 
 \begin{aims}
 	\item[GeometryInfo] To provide the highest possible level of usability and versatility, a function to calculate surface constrained distances as well as the sensor-to-mesh mapping can be found inside the class \textit{GeometryInfo}. The mentioned option to provide a subset of vertices for the SCDC can be omitted by passing an empty vector as the second argument. 

@@ -7,20 +7,15 @@
 
 	The following functions have to be implemented correctly and must fulfill given requirements.
 		
-\subsubsection{Surface Constrained Distance Calculation} \label{scdc}
+\subsubsection{Surface Constrained Distance Calculation (SCDC)} \label{scdc}
 	
-	\begin{aims}
-		
-		\item[\textbf{\textit{Note:}}] From this point on \textbf{S}urface \textbf{C}onstrained \textbf{D}istance 
-									   \textbf{C}alculation will be referred to as \textbf{SCDC}.
-	
-	\end{aims}
-	
-	Because the brain has a folded surface, a function for calculating the distance between two points is needed.
+	Because, i.e., the brain has a folded surface, a function for calculating the distance between two points is needed.
 	
 	As the euclidian distance would not respect the structure of the surface, a different approach for determining the exact 	distances has to be implemented.  
 	The function receives input data in form of a preprocessed triangulated surface mesh and calculates the distance between 	the vertices.			
-
+	
+	%TODO siehe Feedback (screenshot)	
+	
 	\begin{aims}
 	
 		\item[C111] Based on a given mesh, the function calculates a matrix that holds values describing the distances between 						all vertices using double precision. 
@@ -32,7 +27,7 @@
 \subsubsection{Sensor-to-Mesh Mapping} \label{projection}
 
 	Since the sensors do not directly touch the head and therefore float slightly above it, an accurate projection is needed to 
-	exactly localize their positions on the surface of the brain. 
+	exactly localize their positions on the surface of the brain. %TODO siehe Feedback
 	
 	Hence a function must be implemented to solve this problem. 
 	The function receives a set of sensor locations in 3D-Space and maps them onto the underlying mesh. Thus every 			sensor gets assigned to a vertex of the mesh. 
@@ -46,7 +41,7 @@
 
 \subsubsection{Interpolation Algorithm} \label{interpolation} 
 
-	The main task is the ongoing interpolation, processing a particular set of sensor data, representing the brains 			activity.
+	The main task is the ongoing interpolation, processing a particular set of sensor data, representing the brain's 			activity.
 	
 	Because the number of vertices is bigger than the quantity of sensor points, most vertex-values must be interpolated.
 	Thus the algorithm receives a mesh and a subset of vertices with their respective sensor data.  
@@ -66,7 +61,7 @@
 
 \subsubsection{Integration in Disp3D} \label{integration}
 	
-	In order to ensure usability within the given framework MNE-CPP, the final visualization must be integrated into the 			preexisting GUI, namely Disp3D.
+	In order to ensure usability within the given framework MNE-CPP, the final visualization must be integrated into the 			preexisting 3D visualization library, namely Disp3D.
 	
 	\begin{aims}
 		
@@ -80,10 +75,11 @@
 	\begin{aims}
 
 		\item[C151] The software has to run on the latest versions of 2 operating systems, namely Windows and Linux. 
+		%TODO so lassen ? (Feedback cross platform compatability)						
 		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while \ref{interpolation} is facilitated in the class \textit{Interpolation}.
 		\item[C153] The function to integrate the product into Disp3D (\ref{integration}) is named \textit{addSensorData()}.
 		\item[C154] For introduction purposes, a product video is to be created and published on the MNE-CPP website.  
-		\item[C155] The software must integratable into MNE-Scan. 
+		\item[C155] The software must be integratable into MNE Scan. 
 	\end{aims}
 	
 \newpage	
@@ -112,7 +108,7 @@
 	\end{aims}
 	
 	
-\subsection{Delimiting Criteria} %TODO besserer Titel wünschenswert
+\subsection{Delimiting Criteria} 
 	
 	The following criteria limit the functionality of the system.
 	

@@ -27,8 +27,7 @@
 
 \subsubsection{Sensor-to-Mesh Mapping} \label{projection}
 
-	Since the sensors do not directly touch the head and therefore float slightly above it, an accurate projection is needed to 
-	exactly localize their positions on the surface of the brain. %TODO siehe Feedback
+	Since the sensors do not directly touch the head and therefore float slightly above it, an accurate projection is needed 	to exactly localize their positions on the surface beneath (e.g. head/brain/MEG helmet). 
 	
 	Hence a function must be implemented to solve this problem. 
 	The function receives a set of sensor locations in 3D-Space and maps them onto the underlying mesh. Thus every 			sensor gets assigned to a vertex of the mesh. 
@@ -81,6 +80,7 @@
 		\item[C153] The function to integrate the product into Disp3D (\ref{integration}) is named \textit{addSensorData()}.
 		\item[C154] For introduction purposes, a product video is to be created and published on the MNE-CPP website.  
 		\item[C155] The software must be integratable into MNE Scan. 
+		\item[C156] Only Qt libraries and the Eigen framework are used during development.
 	\end{aims}
 	
 \newpage	

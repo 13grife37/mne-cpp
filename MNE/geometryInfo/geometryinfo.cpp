@@ -91,6 +91,7 @@ GeometryInfo::GeometryInfo()
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, const QVector<qint32> &vertSubSet)
 {
     qint32 n = inSurface.neighbor_vert.length();
+    std::cout << "||" << n << "||" << std::endl;
     QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>(new MatrixXd(n, n));
     QList<QPair<int, QVector<int> > > neighborMap = inSurface.neighbor_vert;
 

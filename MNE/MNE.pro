@@ -50,6 +50,7 @@ SUBDIRS += \
     rtCommand \
     rtClient \
     rtProcessing \
+    geometryInfo \
 
 
 !contains(MNECPP_CONFIG, minimalVersion) {

@@ -47,12 +47,15 @@
 // INCLUDES
 //=============================================================================================================
 
+#include <cmath>
+#include <fstream>
 
 //*************************************************************************************************************
 //=============================================================================================================
 // QT INCLUDES
 //=============================================================================================================
 
+#include <QFile>
 
 //*************************************************************************************************************
 //=============================================================================================================
@@ -87,8 +90,34 @@ GeometryInfo::GeometryInfo()
 
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, const QVector<qint32> &vertSubSet)
 {
-    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>(new MatrixXd);
-    return QSharedPointer<MatrixXd>(new MatrixXd);
+    qint32 n = inSurface.neighbor_vert.length();
+    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>(new MatrixXd(n, n));
+    QList<QPair<int, QVector<int> > > neighborMap = inSurface.neighbor_vert;
+
+    // convention: first dimension in distance table is "from", second dimension "to"
+
+    QPair<int, QVector<int> > tempPair;
+    int tempID;
+    QVector<int> tempVector;
+    for (size_t i = 0; i < n; i++) {
+        tempPair = neighborMap.at(i);
+        tempID = tempPair.first;
+        tempVector = tempPair.second;
+        for (size_t j = 0; j < tempVector.length(); j++) {
+            float xFrom, yFrom, zFrom, xTo, yTo, zTo;
+            xFrom = inSurface.rr(tempID, 0);
+            yFrom = inSurface.rr(tempID, 1);
+            zFrom = inSurface.rr(tempID, 2);
+            xTo = inSurface.rr(tempVector.at(j), 0);
+            yTo = inSurface.rr(tempVector.at(j), 1);
+            zTo = inSurface.rr(tempVector.at(j), 2);
+            (*ptr)(tempID, tempVector.at(j)) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
+        }
+    }
+    std::ofstream file;
+    file.open("./matrixDump.txt");
+    file << (*ptr);
+    return ptr;
 }
 //*************************************************************************************************************
 

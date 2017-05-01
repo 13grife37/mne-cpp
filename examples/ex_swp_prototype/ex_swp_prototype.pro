@@ -75,7 +75,8 @@ else {
             -lMNE$${MNE_LIB_VERSION}Connectivity \
             -lMNE$${MNE_LIB_VERSION}Disp \
             -lMNE$${MNE_LIB_VERSION}DispCharts \
-            -lMNE$${MNE_LIB_VERSION}Disp3D
+            -lMNE$${MNE_LIB_VERSION}Disp3D \
+            -lMNE$${MNE_LIB_VERSION}GeometryInfo
 }
 
 DESTDIR =  $${MNE_BINARY_DIR}

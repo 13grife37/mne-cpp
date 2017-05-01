@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
     //Add fressurfer surface set including both hemispheres
     p3DDataModel->addSurfaceSet(parser.value(subjectOption), "MRI", tSurfSet, tAnnotSet);
 
-    QFile t_filesensorSurfaceVV("./MNE-sample-data/subjects/sample/bem/sample-5120-5120-5120-bem-sol.fif");
+    QFile t_filesensorSurfaceVV("./resources/sensorSurfaces/306m_rt.fif");
     MNEBem t_sensorSurfaceVV(t_filesensorSurfaceVV);
     std::cout << ">>>>>" << t_sensorSurfaceVV.size() << "<<<<<<" << std::endl;
     MNEBemSurface testSurface = t_sensorSurfaceVV[0];

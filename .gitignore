@@ -241,7 +241,7 @@ lib
 *.toc
 
 /revdocs/Functional\ Specification/*.log
-/revdocs/Functional\ Specification/*.pdf
+
 /revdocs/Functional\ Specification/*.out
 /revdocs/Functional\ Specification/*.gz
 /revdocs/Functional\ Specification/*.toc

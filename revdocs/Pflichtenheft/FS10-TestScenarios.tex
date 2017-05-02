@@ -1,1 +1,31 @@
 \section{Test Scenarios}
+
+\subsection{Functional Testing}
+
+\subsubsection{Projection Testing}
+
+To verify the sensor-mesh-mapping algorithm in case of EEG-sensors, the closest vertex to a
+sensor can be determined by calculating the euclidean distance between said sensor and each
+vertex of the mesh and comparing the minimal result of this calculation with the outcome of
+the projecting algorithm. In case of MEG-sensors, the algorithm can be tested by comparing
+both euclidean distance and solid angle between each vertex and the sensor, i.e. the sensors
+location combined with its orientation.
+
+\subsection{Nonfunctional Testing}
+
+\subsubsection{Computation Time Testing}
+
+In order to identify time consuming sections of code, the passed time is recorded for every
+major step within the respective features of the program. This helps to ensure a high level of
+efficiency.
+
+\subsubsection{Memory Allocation Testing}
+
+Since the program is to be run alongside an ongoing MEG/EEG-scan, it must not take up
+too much memory. To assure this, the program should be profiled with suitable tools during
+runtime.
+
+\subsubsection{Pattern Testing}
+
+As there already are more or less accurate implementations of the interpolation, the general
+pattern of brain activity during one example can be recorded using these preexisting tools. Later, this can be compared to the output of the real-time mesh utilities.

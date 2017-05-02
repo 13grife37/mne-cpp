@@ -62,7 +62,8 @@ CONFIG(debug, debug|release) {
             -lMNE$${MNE_LIB_VERSION}Connectivityd \
             -lMNE$${MNE_LIB_VERSION}Dispd \
             -lMNE$${MNE_LIB_VERSION}DispChartsd \
-            -lMNE$${MNE_LIB_VERSION}Disp3Dd
+            -lMNE$${MNE_LIB_VERSION}Disp3Dd \
+            -lMNE$${MNE_LIB_VERSION}GeometryInfo
 }
 else {
     LIBS += -lMNE$${MNE_LIB_VERSION}Generics \

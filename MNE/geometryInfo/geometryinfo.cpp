@@ -93,7 +93,7 @@ QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, cons
     qint32 n = inSurface.neighbor_vert.length();
     std::cout << "||" << n << "||" << std::endl;
     QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>(new MatrixXd(n, n));
-    QList<QPair<int, QVector<int> > > neighborMap = inSurface.neighbor_vert;
+    const QList<QPair<int, QVector<int> > > &neighborMap = inSurface.neighbor_vert;
 
     // convention: first dimension in distance table is "from", second dimension "to"
 
@@ -124,13 +124,13 @@ QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, cons
 
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface  &inSurface, double cancelDistance, const QVector<qint32> &vertSubSet)
 {
-    return QSharedPointer<MatrixXd>(new MatrixXd);
+    return QSharedPointer<MatrixXd>(new MatrixXd());
 }
 //*************************************************************************************************************
 
 QSharedPointer<QVector<qint32>> GeometryInfo::projectSensor(const MNEBemSurface &inSurface, const QVector<Vector3d> &sensorPositions)
 {
-return QSharedPointer<QVector<qint32>>(new QVector<qint32>);
+return QSharedPointer<QVector<qint32>>(new QVector<qint32>());
 }
 //*************************************************************************************************************
 

@@ -1,9 +1,7 @@
 \section{Requirements} 
 
-	The product receives EEG/MEG sensor data and constructs a real-time 3D visualization of the brains current activity.
+	The product receives EEG/MEG sensor data and constructs a real-time 3D visualization of the brain's current activity.
 	Users can choose between further options, changing the output immediately to their personal preferences.
-	\\\\wut
-	In this document the different items will get a tag consisting of a letter (C for criteria, F for function, D for data, S for service) and a number for easier referencing. The digits relate to the subsections. For example C123 is the 3rd item(3) in the second section(2) of the mandatory criteria(C1).
 
 \subsection{Mandatory Criteria}
 
@@ -11,7 +9,7 @@
 		
 \subsubsection{Surface Constrained Distance Calculation (SCDC)} \label{scdc}
 	
-	Because, i.e., the brain has a folded surface, a function for calculating the distance between two points is needed.
+	Because the algorithm is supposed to work on folded surfaces, e.g. the brain, a function for calculating the distance between two points is needed.
 	
 	As the euclidian distance would not respect the structure of the surface, a different approach for determining the exact 	distances has to be implemented.  
 	The function receives input data in form of a preprocessed triangulated surface mesh and calculates the distance between 	the vertices.			

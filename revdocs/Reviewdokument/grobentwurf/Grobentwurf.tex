@@ -3,12 +3,16 @@
 \input{_Grobentwurf.tex}
 
 \begin{document}
+
+\pagenumbering{gobble}
 	
 \lhead{\sc{Preliminary Design: RTMU}}	
 \title{Preliminary Design: RTMU}
 \vspace{3 in}
 \maketitle
 \clearpage
+
+\pagenumbering{arabic}
 
 \tableofcontents
 
@@ -19,12 +23,12 @@
 
 MNE-CPP is a framework of tools and programs to analyze and work with MEG/EEG data.
 It provides a cross-platform library which allows the processing of the in neuroscience well established Elekta Neuromag® FIFF file format and therefore integrates with existing toolboxes. \\
-Besides the library, the MNE-CPP framework so far includes three main applications: MNE-Analyze, which centers around visualization of preprocessed data; MNE-Browse, which allows browsing raw data, e.g. FIFF files in a convenient way and MNE-Scan, which deals with acquiring and processing data. \\
+Besides the library, the MNE-CPP framework so far includes three main applications: MNE Analyze, which centers around visualization of preprocessed data; MNE Browse, which allows browsing raw data, e.g. FIFF files in a convenient way and MNE Scan, which deals with acquiring and processing data. \\
 The library itself consists of a collection of packages that provide interfaces for file handling, device connectivity, 2D- and 3D-visualization and mathematics.
 
 \subsection{Integration of the Product into MNE-CPP}
 
-The real-time mesh utilities are to be integrated into the structure of the MNE-CPP framework. To provide a versatile interface, the utilities are organized inside a package within the library layer (see figure 1). Later on, the features are to be ported to MNE-Scan, so they can be used within the application.
+The real-time mesh utilities are to be integrated into the structure of the MNE-CPP framework. To provide a versatile interface, the utilities are organized inside a package within the library layer (see figure 1). Later on, the features are to be ported to MNE Scan, so they can be used within the application.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=10cm]{figures/mne_architecture.png}

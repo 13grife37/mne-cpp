@@ -3,6 +3,18 @@
 	The product receives EEG/MEG sensor data and constructs a real-time 3D visualization of the brain's current activity.
 	Users can choose between further options, changing the output immediately to their personal preferences.
 
+\begin{figure}[h]
+
+	\begin{center}
+	
+		\includegraphics[scale=0.35]{Figures/disp3DScreenShot.png}
+		\caption{Interpolated brain activity}
+	
+	\end{center}
+	
+
+\end{figure}
+
 \subsection{Mandatory Criteria}
 
 	The following functions have to be implemented correctly and must fulfill given requirements.
@@ -72,13 +84,13 @@
 	
 	\begin{aims}
 
-		\item[C151] The software has to run on the latest versions of 2 operating systems, namely Windows and Linux. 
-		%TODO so lassen ? (Feedback cross platform compatability)						
-		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while \ref{interpolation} is facilitated in the class \textit{Interpolation}.
+		\item[C151] The software is cross-platform compatible. 						
+		\item[C152] Features \ref{scdc} and \ref{projection} are implemented in the class \textit{GeometryInfo}, while 								\ref{interpolation} is facilitated in the class \textit{Interpolation}.
 		\item[C153] The function to integrate the product into Disp3D (\ref{integration}) is named \textit{addSensorData()}.
 		\item[C154] For introduction purposes, a product video is to be created and published on the MNE-CPP website.  
 		\item[C155] The software must be integratable into MNE Scan. 
 		\item[C156] Only Qt libraries and the Eigen framework are used during development.
+	
 	\end{aims}
 	
 \newpage	

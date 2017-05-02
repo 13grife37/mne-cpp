@@ -36,7 +36,6 @@
 #ifndef SWP_GEOMETRYINFO_H
 #define SWP_GEOMETRYINFO_H
 
-
 //*************************************************************************************************************
 //=============================================================================================================
 // INCLUDES
@@ -44,7 +43,9 @@
 
 #include<vector>
 #include<mne/mne_bem_surface.h>
-#include<mne/mne_global.h>
+#include"geometryinfo_global.h"
+
+
 
 //*************************************************************************************************************
 //=============================================================================================================
@@ -96,7 +97,7 @@ using namespace MNELIB;
 * @brief Brief description of this class.
 */
 
-class GeometryInfo
+class GEOMETRYINFOSHARED_EXPORT GeometryInfo
 {
 
 public:

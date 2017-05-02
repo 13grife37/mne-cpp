@@ -44,13 +44,14 @@ SUBDIRS += \
     fs \
     fiff \
     mne \
+    geometryInfo \
     fwd \
     inverse \
     connectivity \
     rtCommand \
     rtClient \
     rtProcessing \
-    geometryInfo \
+
 
 
 !contains(MNECPP_CONFIG, minimalVersion) {

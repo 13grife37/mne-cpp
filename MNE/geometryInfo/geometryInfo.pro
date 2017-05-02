@@ -94,7 +94,8 @@ SOURCES += \
 
 
 HEADERS += \
-    geometryinfo.h
+    geometryinfo.h \
+    geometryinfo_global.h
 
 
 INCLUDEPATH += $${EIGEN_INCLUDE_DIR}

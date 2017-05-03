@@ -85,47 +85,54 @@ using namespace SWP;
 
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, const QVector<qint32> &vertSubSet)
 {
-    qint32 n = inSurface.neighbor_vert.length();
-    std::cout << "||" << n << "||" << std::endl;
-    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>(new MatrixXd(n, n));
-    const QList<QPair<int, QVector<int> > > &neighborMap = inSurface.neighbor_vert;
+
+
+    ////////////////////////////////////
+    //qint32 n = inSurface.n.length();
+    std::cout << "||" << " lol "<< "||" << std::endl;
+    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>::create(inSurface.rr.rows(), inSurface.rr.rows());
+    //const QList<QPair<int, QVector<int> > > &neighborMap = inSurface.neighbor_vert;
 
     // convention: first dimension in distance table is "from", second dimension "to"
 
-    QPair<int, QVector<int> > tempPair;
-    int tempID;
-    QVector<int> tempVector;
-    for (size_t i = 0; i < n; i++) {
-        tempPair = neighborMap.at(i);
-        tempID = tempPair.first;
-        tempVector = tempPair.second;
-        for (size_t j = 0; j < tempVector.length(); j++) {
-            float xFrom, yFrom, zFrom, xTo, yTo, zTo;
-            xFrom = inSurface.rr(tempID, 0);
-            yFrom = inSurface.rr(tempID, 1);
-            zFrom = inSurface.rr(tempID, 2);
-            xTo = inSurface.rr(tempVector.at(j), 0);
-            yTo = inSurface.rr(tempVector.at(j), 1);
-            zTo = inSurface.rr(tempVector.at(j), 2);
-            (*ptr)(tempID, tempVector.at(j)) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
+    //QPair<int, QVector<int> > tempPair;
+    //int tempID;
+    std::cout << inSurface.rr.rows() <<std::endl;
+    std::cout << inSurface.rr.cols() <<std::endl;
+    for (size_t i = 0; i < inSurface.rr.rows(); ++i) {
+        //std::cout << inSurface.rr.rows() <<std::endl;
+        float xFrom = inSurface.rr(i, 0);
+        float yFrom = inSurface.rr(i, 1);
+        float zFrom = inSurface.rr(i, 2);
+        //Vector3f currentVertex = inSurface.rr(i)
+        for (size_t j = 0; j < inSurface.rr.rows(); ++j) {
+
+
+            float xTo = inSurface.rr(j, 0);
+            float yTo = inSurface.rr(j, 1);
+            float zTo = inSurface.rr(j, 2);
+            (*ptr)(i, j) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
         }
     }
+    std::cout << *ptr <<endl;
     std::ofstream file;
     file.open("./matrixDump.txt");
-    file << (*ptr);
+    file << *ptr;
     return ptr;
 }
 //*************************************************************************************************************
 
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface  &inSurface, double cancelDistance, const QVector<qint32> &vertSubSet)
 {
-    return QSharedPointer<MatrixXd>(new MatrixXd());
+    QSharedPointer<MatrixXd> outputMat = QSharedPointer<MatrixXd>::create();
+    return outputMat;
 }
 //*************************************************************************************************************
 
 QSharedPointer<QVector<qint32>> GeometryInfo::projectSensor(const MNEBemSurface &inSurface, const QVector<Vector3d> &sensorPositions)
 {
-return QSharedPointer<QVector<qint32>>(new QVector<qint32>());
+    QSharedPointer<QVector<qint32>> outputArray = QSharedPointer<QVector<qint32>>::create();
+    return outputArray;
 }
 //*************************************************************************************************************
 

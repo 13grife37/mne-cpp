@@ -143,20 +143,21 @@ int main(int argc, char *argv[])
     //########################################################################################
 
     //Create 3D data model
-    Data3DTreeModel::SPtr p3DDataModel = Data3DTreeModel::SPtr(new Data3DTreeModel());
+//    Data3DTreeModel::SPtr p3DDataModel = Data3DTreeModel::SPtr(new Data3DTreeModel());
 
-    //Add fressurfer surface set including both hemispheres
-    p3DDataModel->addSurfaceSet(parser.value(subjectOption), "MRI", tSurfSet, tAnnotSet);
+//    //Add fressurfer surface set including both hemispheres
+//    p3DDataModel->addSurfaceSet(parser.value(subjectOption), "MRI", tSurfSet, tAnnotSet);
 
     ///von lorenz für MNEBemSurface
-    QFile t_fileBem("./MNE-sample-data/subjects/sample/bem/sample-head.fif");
-    MNEBem t_Bem(t_fileBem);
-    p3DDataModel->addBemData("testData", "BEM", t_Bem);
+//    QFile t_fileBem("./MNE-sample-data/subjects/sample/bem/sample-head.fif");
+//    MNEBem t_Bem(t_fileBem);
+//    p3DDataModel->addBemData("testData", "BEM", t_Bem);
 
     QFile t_filesensorSurfaceVV("./resources/sensorSurfaces/306m_rt.fif");
     MNEBem t_sensorSurfaceVV(t_filesensorSurfaceVV);
     std::cout << ">>>>>" << t_sensorSurfaceVV.size() << "<<<<<<" << std::endl;
-    MNEBemSurface testSurface = t_sensorSurfaceVV[0];
+    MNEBemSurface &testSurface = t_sensorSurfaceVV[0];
+    std::cout << testSurface.rr.rows() << std::endl;
 
     QSharedPointer<MatrixXd> ptr = GeometryInfo::scdc(testSurface);
 
@@ -173,13 +174,13 @@ int main(int argc, char *argv[])
 
 
     //Create the 3D view
-    View3D::SPtr testWindow = View3D::SPtr(new View3D());
-    testWindow->setModel(p3DDataModel);
-    testWindow->show();
+//    View3D::SPtr testWindow = View3D::SPtr(new View3D());
+//    testWindow->setModel(p3DDataModel);
+//    testWindow->show();
 
-    Control3DWidget::SPtr control3DWidget = Control3DWidget::SPtr(new Control3DWidget());
-    control3DWidget->init(p3DDataModel, testWindow);
-    control3DWidget->show();
+//    Control3DWidget::SPtr control3DWidget = Control3DWidget::SPtr(new Control3DWidget());
+//    control3DWidget->init(p3DDataModel, testWindow);
+//    control3DWidget->show();
 
     return a.exec();
 }

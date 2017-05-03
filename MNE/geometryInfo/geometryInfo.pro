@@ -1,14 +1,14 @@
 #--------------------------------------------------------------------------------------------------------------
 #
-# @file     connectivity.pro
-# @author   Lorenz Esch <Lorenz.Esch@tu-ilmenau.de>;
+# @file     geometryInfo.pro
+# @author   Lars Debor <lars.debor@tu-ilmenau.de>;
 #           Matti Hamalainen <msh@nmr.mgh.harvard.edu>
 # @version  1.0
-# @date     July, 2016
+# @date     Mai, 2017
 #
 # @section  LICENSE
 #
-# Copyright (C) 2016, Lorenz Esch and Matti Hamalainen. All rights reserved.
+# Copyright (C) 2017, Lars Debor and Matti Hamalainen. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted provided that
 # the following conditions are met:
@@ -29,7 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #
-# @brief    This project file builds the connectivity library.
+# @brief    This project file builds the geometryInfo library.
 #
 #--------------------------------------------------------------------------------------------------------------
 

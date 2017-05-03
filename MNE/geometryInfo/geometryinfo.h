@@ -4,11 +4,11 @@
 * @author   Lars Debor <lars.debor@tu-ilmenau.de>;
 *           Matti Hamalainen <msh@nmr.mgh.harvard.edu>
 * @version  1.0
-* @date     Month, Year
+* @date     Mai, 2017
 *
 * @section  LICENSE
 *
-* Copyright (C) Year, Lars Debor and Matti Hamalainen. All rights reserved.
+* Copyright (C) 2017, Lars Debor and Matti Hamalainen. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that
 * the following conditions are met:
@@ -41,7 +41,6 @@
 // INCLUDES
 //=============================================================================================================
 
-#include<vector>
 #include<mne/mne_bem_surface.h>
 #include"geometryinfo_global.h"
 
@@ -106,6 +105,12 @@ public:
 
     //=========================================================================================================
     /**
+    * deleted default constructor (static class).
+    */
+    GeometryInfo() = delete;
+
+    //=========================================================================================================
+    /**
      * @brief scdc
      * @param inSurface
      * @param vertSubSet
@@ -136,11 +141,6 @@ public:
 protected:
 
 private:
-    //=========================================================================================================
-    /**
-    * Private default constructor for static class.
-    */
-    GeometryInfo();
 
 };
 

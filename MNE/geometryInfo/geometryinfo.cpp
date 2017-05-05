@@ -57,6 +57,7 @@
 
 #include <QFile>
 #include <QVector>
+#include <QDateTime>
 
 //*************************************************************************************************************
 //=============================================================================================================
@@ -86,7 +87,9 @@ using namespace SWP;
 
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, const QVector<qint32> &vertSubSet)
 {
-
+    //start timer
+    qint64 startTimeSecs = QDateTime::currentSecsSinceEpoch();
+    qint64 startTimeMsecs = QDateTime::currentMSecsSinceEpoch();
     size_t matColumns;
     if(!vertSubSet.empty())
     {
@@ -96,6 +99,7 @@ QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, cons
     {
         matColumns = inSurface.rr.rows();
     }
+
     QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>::create(inSurface.rr.rows(), matColumns);
 
     // convention: first dimension in distance table is "to", second dimension "from"
@@ -128,11 +132,13 @@ QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, cons
             (*ptr)(  j, i) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
         }
     }
-    std::cout << "start writing to file" <<endl;
+    std::cout << QDateTime::currentMSecsSinceEpoch()- startTimeMsecs <<" ms " << std::endl;
+    std::cout << "start writing to file" << std::endl;
     std::ofstream file;
     file.open("./matrixDump.txt");
     file << *ptr;
     std::cout << "writing to file ended!\n";
+    std::cout << QDateTime::currentSecsSinceEpoch()- startTimeSecs <<" s " << std::endl;
     return ptr;
 }
 //*************************************************************************************************************

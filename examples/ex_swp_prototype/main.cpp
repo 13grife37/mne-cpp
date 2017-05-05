@@ -67,6 +67,7 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QCommandLineParser>
+#include<QDateTime>
 
 
 //*************************************************************************************************************
@@ -126,14 +127,14 @@ int main(int argc, char *argv[])
     // a Surface loads the vertexdata from a file and holds it in :
      ///   MatrixX3f m_matRR;      Vertex coordinates in meters
      /// MatrixX3i m_matTris;    The triangle descriptions
-    SurfaceSet tSurfSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(surfOption), parser.value(subjectPathOption));
+    //SurfaceSet tSurfSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(surfOption), parser.value(subjectPathOption));
 
     //contains Annotations
     ///https://surfer.nmr.mgh.harvard.edu/fswiki/LabelsClutsAnnotationFiles
     /// In FreeSurfer jargon, "annotation" refers to a collection of labels (ie: sets of vertices marked by label values)
     /// vertices are grouped by giving them the same label
     /// Annotations van contain a colortable
-    AnnotationSet tAnnotSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(annotOption), parser.value(subjectPathOption));
+    //AnnotationSet tAnnotSet (parser.value(subjectOption), parser.value(hemiOption).toInt(), parser.value(annotOption), parser.value(subjectPathOption));
 
 
     //########################################################################################
@@ -153,13 +154,23 @@ int main(int argc, char *argv[])
 //    MNEBem t_Bem(t_fileBem);
 //    p3DDataModel->addBemData("testData", "BEM", t_Bem);
 
-    QFile t_filesensorSurfaceVV("./resources/sensorSurfaces/306m_rt.fif");
+    QFile t_filesensorSurfaceVV("./MNE-sample-data/subjects/sample/bem/sample-head.fif");
     MNEBem t_sensorSurfaceVV(t_filesensorSurfaceVV);
-    std::cout << ">>>>>" << t_sensorSurfaceVV.size() << "<<<<<<" << std::endl;
+
+
     MNEBemSurface &testSurface = t_sensorSurfaceVV[0];
     std::cout << testSurface.rr.rows() << std::endl;
 
-    QSharedPointer<MatrixXd> ptr = GeometryInfo::scdc(testSurface);
+    QVector<qint32> subSet;
+    subSet.reserve(300);
+    for(int i = 0; i < 300; ++i)
+    {
+        subSet.push_back(i);
+    }
+
+    qint64 startTime = QDateTime::currentSecsSinceEpoch();
+    QSharedPointer<MatrixXd> ptr = GeometryInfo::scdc(testSurface, subSet);
+    std::cout << startTime - QDateTime::currentSecsSinceEpoch() <<" s " << std::endl;
 
     //Read and show sensor helmets
 //    QFile t_filesensorSurfaceVV("./resources/sensorSurfaces/306m_rt.fif");

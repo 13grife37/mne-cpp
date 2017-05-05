@@ -56,6 +56,7 @@
 //=============================================================================================================
 
 #include <QFile>
+#include <QVector>
 
 //*************************************************************************************************************
 //=============================================================================================================
@@ -86,38 +87,52 @@ using namespace SWP;
 QSharedPointer<MatrixXd> GeometryInfo::scdc(const MNEBemSurface &inSurface, const QVector<qint32> &vertSubSet)
 {
 
+    size_t matColumns;
+    if(!vertSubSet.empty())
+    {
+        matColumns = vertSubSet.size();
+    }
+    else
+    {
+        matColumns = inSurface.rr.rows();
+    }
+    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>::create(inSurface.rr.rows(), matColumns);
 
-    ////////////////////////////////////
-    //qint32 n = inSurface.n.length();
-    std::cout << "||" << " lol "<< "||" << std::endl;
-    QSharedPointer<MatrixXd> ptr = QSharedPointer<MatrixXd>::create(inSurface.rr.rows(), inSurface.rr.rows());
-    //const QList<QPair<int, QVector<int> > > &neighborMap = inSurface.neighbor_vert;
-
-    // convention: first dimension in distance table is "from", second dimension "to"
+    // convention: first dimension in distance table is "to", second dimension "from"
 
     //QPair<int, QVector<int> > tempPair;
     //int tempID;
     std::cout << inSurface.rr.rows() <<std::endl;
     std::cout << inSurface.rr.cols() <<std::endl;
-    for (size_t i = 0; i < inSurface.rr.rows(); ++i) {
+    for (size_t i = 0; i < matColumns; ++i)
+    {
+        //ToDo bessere Lösung mit und ohne subset
+        size_t index = i;
+        if(!vertSubSet.empty())
+        {
+            index = vertSubSet[i];
+        }
+
         //std::cout << inSurface.rr.rows() <<std::endl;
-        float xFrom = inSurface.rr(i, 0);
-        float yFrom = inSurface.rr(i, 1);
-        float zFrom = inSurface.rr(i, 2);
+        float xFrom = inSurface.rr(index, 0);
+        float yFrom = inSurface.rr(index, 1);
+        float zFrom = inSurface.rr(index, 2);
         //Vector3f currentVertex = inSurface.rr(i)
-        for (size_t j = 0; j < inSurface.rr.rows(); ++j) {
+        for (size_t j = 0; j < inSurface.rr.rows(); ++j)
+        {
 
 
             float xTo = inSurface.rr(j, 0);
             float yTo = inSurface.rr(j, 1);
             float zTo = inSurface.rr(j, 2);
-            (*ptr)(i, j) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
+            (*ptr)(  j, i) = sqrt(pow(xTo - xFrom, 2) + pow(yTo - yFrom, 2) + pow(zTo - zFrom, 2));
         }
     }
-    std::cout << *ptr <<endl;
+    std::cout << "start writing to file" <<endl;
     std::ofstream file;
     file.open("./matrixDump.txt");
     file << *ptr;
+    std::cout << "writing to file ended!\n";
     return ptr;
 }
 //*************************************************************************************************************

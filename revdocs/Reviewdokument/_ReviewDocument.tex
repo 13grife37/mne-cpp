@@ -16,10 +16,11 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{enumitem}
-\usepackage[paper=a4paper,left=35mm,right=35mm,top=35mm,bottom=30mm]{geometry}
-
+\usepackage[paper=a4paper,left=40mm,right=40mm,top=35mm,bottom=30mm]{geometry}
+\usepackage{titlesec}
 \usepackage{tikz}
 \usetikzlibrary{snakes}
+
 
 %%%PAGESTYLE%%%
 \pagestyle{fancy}
@@ -37,6 +38,19 @@
 	%labelsep=1mm,
 	font=\bfseries
 }
+
+
+%%%PARAGRAPHS%%%
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+            
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
 
 %%%NEWCOMMAND%%%
 \newcommand{\titlefont}[1]{\textcolor{black}{\fontseries{bx}\fontshape{n}\fontsize{30}{0pt} \selectfont #1}}

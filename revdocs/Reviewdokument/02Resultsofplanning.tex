@@ -1,7 +1,7 @@
-\section{Result of Planning}
+\subsection{Result of Planning}
 A large part of the first phase of the project (i.e. scheduling and draft) is reflected on the functional specification document. The requirement analysis is registered, the objectives are declared, whereas the decisions and the product information is written down.
 
-\subsection{Software Development Model}
+\subsubsection{Software Development Model}
 
 This section contains information about the software model chosen, based on the requirements of the project.
 The principals of the group, client requirement and knowledge about the project play an important role in choosing the development model. Based on the latter, the development team decides its work flow. 
@@ -15,12 +15,12 @@ The principals of the group, client requirement and knowledge about the project 
 	\item[Projects specific adaptation to the model:] Every person in the team has multiple roles. All group members work on both the document and the code.
 \end{aims} 
 
-\subsubsection{Software Development Specific Content}
+\paragraph{Software Development Specific Content}
 Since the group decided for the agile development project, the milestones need to be stated and agreed upon by the team. Milestones are the aim or the expected output of each development phase. They help the team to specify what features should be completed by which deadline.
 
 \newpage
 
-\subsection{Effort Estimate}
+\subsubsection{Effort Estimate}
 The main purpose in the effort estimation section is the categorization of the different parts of the project regarding their complexity and effort criteria.  
  (see figure 1)
 
@@ -33,7 +33,7 @@ The main purpose in the effort estimation section is the categorization of the d
 
 \clearpage
 
-\subsection{Risk Estimate}
+\subsubsection{Risk Estimate}
 In this section, the probabilities of the different risks involved in the project are listed. This will help the team to determine what aspects of the implementation should get a higher priority.
 
 \begin{description}
@@ -53,7 +53,7 @@ In this section, the probabilities of the different risks involved in the projec
 	\end{center}
 \end{figure}
 
-\subsubsection{Handling Risks}
+\paragraph{Handling Risks}
 
 In case one of the risks occurs, certain strategies for solving the issue are provided. Only the ones having a crucial impact on the project are dealt with in the following section. 
 
@@ -66,24 +66,111 @@ In case one of the risks occurs, certain strategies for solving the issue are pr
 \end{aims}
 
 \clearpage
-\input{02.1Milestones}
+%%\input{02.1Milestones}
 
-%\begin{aims}
-%	\leftskip=0,8cm
-%	\item[First Phase Milestones:] functional specification, preliminary design, review document, first %prototype, presentation 
-%	
-%	\item[Second Phase Milestone:] SCDC, projecting, interpolation, integration Disp3D, review document, %presentation, detailed design
-%	
-%	\item[Third Phase Milenstone:] Portation to MNE Scan, SCDC (tested and operating), projecting (tested and %operating), interpolation (tested and operating), review document, presentation
-%\end{aims}
+\subsubsection{Milestones}
+
+\begin{tabular}{lll}
+	First Phase & 03.05.2017 & First Phase Finished\\
+	Second Phase & 04.06.2017 & Detailed Design and Features Implemented\\
+				& 06.06.2017 & Second Phase Finished\\
+	Third Phase & 21.06.2017 & Features Tested and Optimized\\          
+				& 02.07.2017 & Portation to MNE Scan\\
+				& 04.07.2017 & End of Project\\
+\end{tabular}
+
+~\\
+
+\begin{tikzpicture}[snake=zigzag, line before snake = 7mm, line after snake = 7mm]
+
+	 % draw horizontal line   
+     \draw[snake] (0,0) -- (3,0);
+     \draw (3,0) -- (3.5,0);
+     \draw [snake] (3.5,0) -- (6.5,0);
+     \draw (6.5,0) -- (7.5,0);
+     \draw (7.5,0) -- (8,0);
+     \draw [snake] (8,0) -- (11,0);
+     \draw [snake](11,0) -- (14,0);
+     \draw (14,0) -- (15,0);
+    
+     % draw vertical lines
+    \foreach \x in {0,3.5,8}
+      \draw (\x cm,5pt) -- (\x cm,-5pt);
+    \foreach \x in {3,7.5,15}
+      \draw (\x cm,20pt)--(\x cm,-20pt);
+    \foreach \x in {6.5,11,14}
+      \draw (\x cm,35pt)--(\x cm,-45pt);
+
+    % draw nodes
+    \draw (0,0) node[below=5pt] {$ 1.Phase $} node[above=5pt] {$   $};
+    \draw (3,0) node[below=20pt] {$ End $ $of$}node[above=20pt] {$ 03.05.17 $};;
+    \draw(3,0)node [below=30pt]{ $ first$ $phase $}  node[above=15pt] {$  $};
+    \draw (3.8,0) node[below=5pt] {$ 2.Phase $} node[above=5pt] {$ 04.05.17 $};
+    \draw (6.5,0) node[below=45pt] {$Detailed$ $design $} node[above=35pt] {$ 04.06.17 $};
+    \draw (6.5,0) node[below=55pt] {$Features$ $implemented $}node [above=45pt] {$$} ;
+    \draw (7.7,0) node[below=20pt] {$ End $ $of$} node[above=20pt] {$ 06.06.17 $};
+    \draw (7.7,0) node[below=30pt] { $second$ $phase$} node[above=15pt] {$  $};
+    \draw (8.4,0) node[below=5pt] {$ 3.Phase $} node[above=5pt] {$07.06.17  $};
+    \draw (11,0) node[below=45pt] {$ Features $ $ tested  $} node[above=35pt] {$21.06.17  $};
+    \draw (11,0) node[below=55pt] {$  and $ $ optimized $} node[above=45pt] {$  $};
+    \draw (14,0) node[below=45pt] {$ Portation $ $to$ } node[above=35pt] {$ 02.07.17 $};
+    \draw (14,0) node[below=55pt] {  $MNE$ $Scan$} node[above=15pt] {$  $};
+    \draw (15,0) node [below=20pt]{$End$ $of$} node [above=20pt]{$04.07.17$};
+    \draw (15,0) node [below=30pt]{ $project$} node [above=20pt]{$ $};
+     
+\end{tikzpicture}
+
+\paragraph{Checklist}
+\begin{aims}
+	\item[03.05.2017]First Phase Finished
+	\begin{enumerate}\itemsep0pt 
+		\item Functional Specification
+		\item Preliminary Design
+		\item Review Document
+		\item First Prototype
+		\item Presentation
+	\end{enumerate}
+	
+	\item[04.06.2017]Detailed Design and Features Implemented
+	\begin{enumerate}\itemsep0pt
+		\item Detailed Design
+		\item SCDC (operational)
+		\item Projecting Algorithm (operational)
+		\item Interpolation Algorithm (operational)
+	\end{enumerate}
+	
+	\item[06.06.2017]Second Phase Finished
+	\begin{enumerate}\itemsep0pt
+		\item Presentation
+		\item Review Doccument
+		\item Integration into Disp3D
+	\end{enumerate}
+
+	\item[21.06.2017]Features Tested and Optimized
+	\begin{enumerate}\itemsep0pt
+		\item SCDC (tested)
+		\item Projecting Algorithm (tested)
+	\end{enumerate}
+	
+	\item[02.07.2017]Portation to MNE Scan
+	
+	\item[04.07.2017]End of Project
+	\begin{enumerate}\itemsep0pt
+		\item Review Document
+		\item Presentation
+		\item Interpolation Optimized
+	\end{enumerate}
 
 
+\end{aims}
 
-\subsection{Organization}
+\newpage
+
+\subsubsection{Organization}
 
 This section concerns to the rules, agreements and the partitioning regarding the teamwork in the project, so the work itself will be efficient and organized. 
 
-\subsubsection{Ways of Communication}
+\paragraph{Ways of Communication}
 \begin{aims}
 	\item[Telegram:] Used for quick and direct team communication so that possible misunderstandings will be solved in no time.
 	
@@ -98,7 +185,7 @@ This section concerns to the rules, agreements and the partitioning regarding th
 	\item[Dropbox:] Used for exchanging documents and file sharing.  
 \end{aims}
 
-\subsubsection{Additional Agreements}
+\paragraph{Additional Agreements}
 \begin{itemize}
 	\item Internal team meetings (without product owners): Tuesdays and Thursdays at 19:00
 	
@@ -107,7 +194,7 @@ This section concerns to the rules, agreements and the partitioning regarding th
 	\item Meeting of subgroups : upon consultation and demand 
 \end{itemize}
 
-\subsubsection{Role Assignment in SCRUM}
+\paragraph{Role Assignment in SCRUM}
 
 \begin{aims}
 	\leftskip=0,8cm
@@ -121,7 +208,7 @@ This section concerns to the rules, agreements and the partitioning regarding th
 	
 \end{aims}
 
-\subsubsection{Role Assignment Organization}
+\paragraph{Role Assignment Organization}
 \begin{aims}
 	\leftskip=0,8cm
 	\item[Advisor:] Thomas Jochmann, Lorenz Esch

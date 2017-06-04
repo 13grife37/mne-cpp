@@ -21,10 +21,13 @@
 
 \clearpage
 \section{General Architecture}
+The features of the mesh utilities are divided into two classes...
 
-\subsection{GeometryInfo}
+\clearpage
 
-The class \textit{GeometryInfo} holds all needed functions for the Surface Constrained Distance Calculation (from now on abbreviated with SCDC) and the Sensor Projecting (see Functional Specification for further details). Since all functions are static, the class itself does not have to be instantiated, thus the class is declared static and the default constructor is forbidden.
+\section{GeometryInfo}
+
+The class \textit{GeometryInfo} holds all needed functions for the Surface Constrained Distance Calculation (from now on abbreviated with SCDC) and the Sensor Projecting (see Functional Specification for further details). Since all functions are static, the class itself does not have to be instantiated, thus the class also is declared static and the default constructor is forbidden. The class \textit{GeometryInfo} does not have any class members.
 
 \begin{figure}[h]
 	\begin{center}
@@ -33,61 +36,37 @@ The class \textit{GeometryInfo} holds all needed functions for the Surface Const
 	\end{center}
 \end{figure}
 
-\subsubsection{Method: \textit{scdc}}
-The method @todo(oder function ?) receives bla bla bla
+\subsection{Member Functions}
 
-\subsubsection{Method: \textit{iterativeDijkstra}}
+\subsubsection{scdc}
+The method \textit{scdc} originally was thought to receive only one input argument, i.e. the MNEBemSurface (object that holds the needed adjacency information). Based on this, it was supposed to calculate the full distance table. Since the latter would have needed around 160 gigabyte of memory for some meshes, it was decided that the method also receives a subset of vertices. It then only calculates all distances for each vertex of said subset. The subset argument is defaulted with an empty vector, in case a subset could not be provided or is not wanted.\\
+After first tests revealed that an unrestricted distance calculation would take far too long, a third argument was introduced: A double value that acts as a distance threshold and thus restricts the distance calculation to vertices which lie within the said radius. This seems a bit imprecise or careless at first glance, but it actually is reasonable for this specific application: Bilateral stimulation of cells inside the brain only occurs up to a certain distance. The third argument is defaulted with the maximum double-value, in case a distance threshold could not be provided or is not wanted.\\
+After these restrictions and adaptions were agreed upon, the question which algorithm to choose arose.
+While P.a.R's algorithm had the best asymptotic run-time, further research revealed that an implementation would go far beyond the scope of this project, since the algorithm uses several other algorithms as subroutines (such as Jarnik and Prim). Another possible candidate for solving the problem was Thorups algorithm. Testing of a publicly available implementation showed that it actually did worse than another algorithm, when the above mentioned restrictions to the problem were applied. The one algorithm that resulted in a lower computation time was an iterative version of Dijkstras algorithm (see below for more details).\\
+Since two instances of iterative Dijkstra would not interfere with each other (because they work on different columns of the distance table), it was decided for the \textit{scdc} method to start several threads. Before any threads are started, the distance table is allocated. According to the number of available threads (or cores, depending on hyperthreading etc.), the passed subset of vertices gets split into equally sized subvectors, whose limiting indices are then passed to an instance of iterative Dijkstra. 
+
+\subsubsection{iterativeDijkstra}
+The method \textit{iterativeDijkstra} receives six input arguments: Firstly a pointer to the distance table which the results are to be written to. Secondly, a reference to an MNEBemSurface which holds the necessary adjacency information. As described above, the \textit{iterativeDijkstra} method receives a vector of indices which point to vertices inside the MNEBemSurface. Added to that, it gets passed two indices which limit the section of said vector that the respective instance of \textit{iterativeDijkstra} is responsible for.
+Since the external requirements (i.e. low computation time and overall high efficiency) induce some restrictions (see description of \textit{scdc} for more details), a distance threshold gets passed as the sixth argument. Because Dijkstras algorithm is so well known, its general implementation is not described in this document. Apart from a standard version of Dijkstras algorithm, \textit{iterativeDijkstra} ignores vertices that have a higher distance than said threshold, that means it does not check their neighbors for possibly better paths.\\
+This method is private, since begründung
+
+\subsubsection{projectSensors}
 asdf
 
-\subsubsection{Method: \textit{projectSensor}}
-asdf
+\subsubsection{nearestNeighbor}
+asödlkfj
 
-\subsubsection{Method: \textit{matrixDump}}
-asdf
+\subsubsection{matrixDump}
+This method is implemented for testing and verifying purposes only. It receives a MatrixXd and a string. It then writes the content of the matrix into a file that is named with said string.
+
+\subsubsection{squared}
+This method is implemented for better readability only, thus it is declared private. It receives a double-value and returns it squared. In order to avoid efficiency losses through stack frames, it is declared inline.
 
 \clearpage
 
-\section{Subdivision of Program Features}
 
-\begin{aims}
-	
-	\item[SCDC] 
-	The surface constrained distance calculation algorithm receives a mesh data set as its input, which is stored inside a file. It then calculates approximate distances between vertices. When no further input arguments are provided, the SCDC algorithm calculates a full distance table, i.e. the distance between any vertex to any other vertex.
-	When it receives a subset of the vertices as an additional argument, it only calculates the distances from said subset to every other vertex of the mesh. The SCDC algorithm stores its results inside a two-dimensional matrix.
-	
-	\item[Projecting]
-	The projecting algorithm maps MEG/EEG-sensors to vertices of the mesh. In case of MEG-sensors, the orientation is known and thus a radial projection is applied in order to assign each sensor to a vertex. In case of EEG-sensors, the orientation is not known and a nearest-neighbor algorithm is used.
-	The projecting algorithm then outputs the results of the calculation as an array of indices, which point to the respective vertices of the mesh.
-	
-	\item[Interpolation]
-	The interpolation algorithm uses the results of both the projecting algorithm and the SCDC algorithm.
-	Based on the distance table, it calculates a weight matrix for the later live interpolation. 
-	Thus the interpolation algorithm receives three different inputs: the distance table created by SCDC, the sensors mapping and the actual sensor input, i.e. brain activity recorded by sensors over a period of time.
-	The recorded brain activity gets passed to the interpolation algorithm either from an ongoing MEG/EEG scan or a prerecorded data set, i.e. a file. 
-	
-	\item[Disp3D]
-	In order to provide control over aspects of the interpolation within the MNE-CPP framework, a new function is added to the Disp3D tree model.
-		
-\end{aims}
-
-By dividing the real-time mesh utilities into the mentioned components, internal changes and extensions are easy to implement. Added to that, the single components can be reused elsewhere within the MNE-CPP framework.
-
-\clearpage
-
-\section{Basic Structure and Interface}
-
-\begin{aims}
-	\item[GeometryInfo] To provide the highest possible level of usability and versatility, a function to calculate surface constrained distances as well as the sensor-to-mesh mapping can be found inside the class \textit{GeometryInfo}. The mentioned option to provide a subset of vertices for the SCDC can be omitted by passing an empty vector as the second argument. 
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=16cm]{figures/geometryinfoclassdiagram.png}
-		\caption{Interface of GeometryInfo}
-	\end{center}
-\end{figure}
-
-\item[Interpolation] In order to keep the interpolation of neurophysiological activity efficient, the mentioned weight matrix (see section 2) is stored as a member of type MatrixXd inside the class \textit{Interpolation}, or rather as a pointer to such.
-To use the precalculated weight matrix, one has to pass the current set of sensor data to the function \textit{interpolateSignals} and receives the results as a vector.
+\section{Interpolation}
+The class \textit{Interpolation} holds all ...
 
 \begin{figure}[h]
 	\begin{center}
@@ -96,33 +75,33 @@ To use the precalculated weight matrix, one has to pass the current set of senso
 	\end{center}
 \end{figure}
 
-\clearpage
+\subsection{Member Objects}
 
-\item[SensorDataTreeItem] To achieve the mentioned integration into the GUI framework, the program must integrate the SensorDataTreeItem.
+\subsubsection{Weight Matrix}
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=16cm]{figures/sensordatatreeitemclassdiagram.png}
-		\caption{SensorDataTreeItem}
-	\end{center}
-\end{figure}
+\subsection{Member Functions}
 
-\end{aims}
+\subsubsection{createInterpolationMatrix}
+asdf
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=16cm]{figures/geometryinfo_calling_sequence.png}
-		\caption{Geometry calling sequence}
-	\end{center}
-\end{figure}
+\subsubsection{interpolateSignal}
+The method \textit{interpolateSignal} calculates the full
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=16cm]{figures/interpolation_calling_sequence.png}
-		\caption{Interpolation calling sequence}
-	\end{center}
-\end{figure}
+\subsubsection{clearInterpolationMatrix}
+The method \textit{clearInterpolationMatrix} resets the weight matrix, i.e. frees all memory allocated for the respective member object.
+
+\subsubsection{getResult}
+This method is implemented in case the calculated weight matrix is needed as an object itself. It returns a smart pointer to the weight matrix (see member objects for more details).
+
+\subsubsection{linear, gaussian, square}
+These methods are implemented to provide a minimal preset of functions to use during the calculation of the interpolation weight matrix (see method \textit{createInterpolationMatrix} for more details).
 
 \clearpage
+
+\section{Glossary}
+mesh
+MatrixXd
+dijkstra verweis,
+jarnik und prim
   
 \end{document}

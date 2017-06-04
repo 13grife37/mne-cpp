@@ -66,7 +66,6 @@ In case one of the risks occurs, certain strategies for solving the issue are pr
 \end{aims}
 
 \clearpage
-%%\input{02.1Milestones}
 
 \subsubsection{Milestones}
 
@@ -81,44 +80,12 @@ In case one of the risks occurs, certain strategies for solving the issue are pr
 
 ~\\
 
-\begin{tikzpicture}[snake=zigzag, line before snake = 7mm, line after snake = 7mm]
-
-	 % draw horizontal line   
-     \draw[snake] (0,0) -- (3,0);
-     \draw (3,0) -- (3.5,0);
-     \draw [snake] (3.5,0) -- (6.5,0);
-     \draw (6.5,0) -- (7.5,0);
-     \draw (7.5,0) -- (8,0);
-     \draw [snake] (8,0) -- (11,0);
-     \draw [snake](11,0) -- (14,0);
-     \draw (14,0) -- (15,0);
-    
-     % draw vertical lines
-    \foreach \x in {0,3.5,8}
-      \draw (\x cm,5pt) -- (\x cm,-5pt);
-    \foreach \x in {3,7.5,15}
-      \draw (\x cm,20pt)--(\x cm,-20pt);
-    \foreach \x in {6.5,11,14}
-      \draw (\x cm,35pt)--(\x cm,-45pt);
-
-    % draw nodes
-    \draw (0,0) node[below=5pt] {$ 1.Phase $} node[above=5pt] {$   $};
-    \draw (3,0) node[below=20pt] {$ End $ $of$}node[above=20pt] {$ 03.05.17 $};;
-    \draw(3,0)node [below=30pt]{ $ first$ $phase $}  node[above=15pt] {$  $};
-    \draw (3.8,0) node[below=5pt] {$ 2.Phase $} node[above=5pt] {$ 04.05.17 $};
-    \draw (6.5,0) node[below=45pt] {$Detailed$ $design $} node[above=35pt] {$ 04.06.17 $};
-    \draw (6.5,0) node[below=55pt] {$Features$ $implemented $}node [above=45pt] {$$} ;
-    \draw (7.7,0) node[below=20pt] {$ End $ $of$} node[above=20pt] {$ 06.06.17 $};
-    \draw (7.7,0) node[below=30pt] { $second$ $phase$} node[above=15pt] {$  $};
-    \draw (8.4,0) node[below=5pt] {$ 3.Phase $} node[above=5pt] {$07.06.17  $};
-    \draw (11,0) node[below=45pt] {$ Features $ $ tested  $} node[above=35pt] {$21.06.17  $};
-    \draw (11,0) node[below=55pt] {$  and $ $ optimized $} node[above=45pt] {$  $};
-    \draw (14,0) node[below=45pt] {$ Portation $ $to$ } node[above=35pt] {$ 02.07.17 $};
-    \draw (14,0) node[below=55pt] {  $MNE$ $Scan$} node[above=15pt] {$  $};
-    \draw (15,0) node [below=20pt]{$End$ $of$} node [above=20pt]{$04.07.17$};
-    \draw (15,0) node [below=30pt]{ $project$} node [above=20pt]{$ $};
-     
-\end{tikzpicture}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width= 15cm]{figures/milestones_timeline.png}
+		\caption{Timeline}
+	\end{center}
+\end{figure}
 
 \paragraph{Checklist}
 \begin{aims}

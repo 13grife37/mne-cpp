@@ -7,23 +7,30 @@ The following aspects and features need further processing in phase three.
 Until the end of the project this feature has to be implemented and tested.
 
 \begin{aims}
-	\item[Integration into Disp3D]
+	\item[\hspace*{11mm} Integration into Disp3D:] After successfully implementing all algorithmic features into the MNE-CPP library a further integration is needed to make the newly created functions usable. Disp3D provides the GUI for visualizing the interpolated data, while enabling the user to change settings like the color table.
+	
+	A new \textit{sensorDataTreeItem} is needed to integrate functions from the library. Due to high complexity and needed time investment to fully understand the existing code more time is needed to finish implementation.
+	
+	To fix this problem the task will have the highest priority at the beginning of the third phase, to quickly finish its implementation and start with further testing and optimization. 
+	
+	
 \end{aims}
 
-\subsubsection{Missing Mandatory Functions}
-These functions are mandatory and thus have to be completed in the third phase.
+\subsubsection{Missing Mandatory Function}
+This function is mandatory and thus has to be completed during the third phase.
 
 \begin{aims}
-	\item[Bad Channels]Sometimes sensors do not deliver correct data and are marked as bad channels. These sensors should not have                          					   any impact on the weight matrix and the following interpolation. 
+	\item[\hspace*{11mm} Bad Channels:]Sometimes sensors do not deliver correct data and are marked as bad channels. These sensors should not have                          					   any impact on the weight matrix and the following interpolation. 
 	
-					   Currently this information is not utilized during computation. Therefore misleading data is used and the 							   results are not completely correct.   
+					   Currently this information is not utilized during computation. Therefore misleading data is used and the 							   results are not completely correct.  
+					  
+					   Bad channels are to be detected and considered during calculations. 
 \end{aims}
 
 \subsubsection{Missing Optional Functions}
-After finishing the implementation of all mandatory functions these extensions are to be considered.
+After finishing the implementation of all mandatory functions these extensions are to be considered. Furthermore methods for further improvements are mentioned.  
 
 \begin{aims}
-	\item[Computation on GPU]To further increase the efficiency of the interpolation, calculations should be done using compute                							 shaders, utilizing the GPU. This would allow faster interpolation cycles.
-	\item[Reconsider KD-Tree for Mapping]
-	\item[Portation to MNE Scan]
+	\item[\hspace*{11mm} Computation on GPU:]To further increase the efficiency of the interpolation, calculations are done using compute                							 shaders, utilizing the GPU. 
+	\item[\hspace*{11mm} Portation to MNE Scan:]All new features are accessible through the front-end application MNE Scan.
 \end{aims}

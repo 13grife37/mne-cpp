@@ -87,14 +87,14 @@ To further improve performance, this procedure was slightly changed: one instanc
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=16cm]{figures/projectsensors_seq.png}
-		\caption{Sequence diagram of method \textbf{scdc}. Arguments to calls are not included to ensure readability}
+		\caption{Sequence diagram of method \textbf{projectSensors}. Arguments to calls are not included to ensure readability}
 	\end{center}
 \end{figure}
 
 \clearpage
 
 \subsubsection{nearestNeighbor}
-The method \textbf{nearesNeighbor} receives three input arguments: An MNEBemSurface, and two iterators which point to elements of a vector of sensor positions.
+The method \textbf{nearestNeighbor} receives three input arguments: An MNEBemSurface, and two iterators. The first iterator points to the start and the second one to the end of a section of vector.
 It then iterates over every sensor position between the two iterators and searches for the vertex with the closest distance to the respective sensor. In order to achieve this, it compares the distances of all vertices stored inside the MNEBemSurface. After a shortest distance is found for a specific sensor, the ID of the corresponding vertex is pushed back into a result vector. After the limiting iterator has been reached, this result vector is then returned to the caller.\\
 This method is private, since it only gets called by \textbf{projectSensors} as a subroutine and is not part of the external interface of class \textbf{GeometryInfo}.
 
@@ -127,7 +127,7 @@ Originally, this member was supposed to be of type \textbf{Eigen::MatrixXd} whic
 
 \subsubsection{createInterpolationMat}
 The method \textbf{createInterpolationMatrix} receives four input arguments: Firstly a vector of vertex IDs which represent the vertices which have been assigned to a sensor during the Sensor Projecting (see section 2.1.3 for more details). Secondly a shared pointer to a distance table, i.e. a matrix of double-values.\\
-Since the weight matrix can be calculated using a variety of mathematical interpolation functions (e.g. a linear function, a quadratic function, etc.), the method \textbf{createInterpolationMat} was thought to receive some kind of value to represent the chosen function. That could for example be achieved by defining global constants and encoding the functions with them. For a higher level of versatility it was decided that \textbf{createInterpolationMat} should receive a pointer to a function, which in turn receives a double-value and returns a double-value and thus fulfills the internal requirements of the weight matrix calculation. A minimal preset of usable functions was provided (see section 3.2.5 for more details).\\
+Since the weight matrix can be calculated using a variety of mathematical interpolation functions (e.g. a linear function, a quadratic function, etc.), the method \textbf{createInterpolationMat} was thought to receive some kind of value to represent the chosen function. That could for example be achieved by defining global constants and encoding the functions with them. For a higher level of versatility it was decided that \textbf{createInterpolationMat} should receive a pointer to a function, which in turn receives a double-value and returns a double-value and thus fulfills the internal requirements of the weight matrix calculation. A minimal preset of usable functions was provided as public members of the class (see section 3.2.5 for more details).\\
 Since bilateral stimulation of cells in the brain only occurs up to certain distances, a double-value is received as a fourth argument. It acts as a distance threshold, that means that the interpolation weight of vertices with a higher distance than said threshold is set to zero. 
 
 \subsubsection{interpolateSignal}
@@ -140,7 +140,7 @@ The method \textbf{clearInterpolationMatrix} resets the weight matrix, i.e. free
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=16cm]{figures/interpolation_seq.png}
-		\caption{Sequence diagram of method \textbf{scdc}. Arguments to calls are not included to ensure readability}
+		\caption{Sequence diagram for class \textbf{Interpolation}. Arguments to calls are not included to ensure readability}
 	\end{center}
 \end{figure}
 
@@ -161,7 +161,7 @@ These methods are implemented to provide a minimal preset of functions to use du
 	\item[MatrixXd] Is a specialized class from the Eigen framework. It represents a matrix of double-values (MatrixX\textbf{d}) that has variable dimensions (Matrix\textbf{X}d)
 	\item[SparseMatrix<T>] Is an optimized version of standard Eigen matrices that is designated for sparse matrices.
 	\item[Pettie and Ramachandran] Seth Pettie and Vijaya Ramachandran published their paper "A Shortest Path Algorithm for Real-Weighted Undirected Graphs" in 2005.
-	\item[Prim] Robert C. Prim had republished a previously known algorithm for finding minimal spanning trees in 1957,
+	\item[Prim] Robert C. Prim had republished a previously known algorithm for finding minimal spanning trees in 1957.
 	\item[Dijkstra] Edsger W. Dijkstra was a computer scientist that published his algorithm for solving the single source shortest path problem in 1959.
 	\item[MNEBemSurface] Is a class from the MNE-CPP framework that holds information about the represented surface and its geometry.
 	

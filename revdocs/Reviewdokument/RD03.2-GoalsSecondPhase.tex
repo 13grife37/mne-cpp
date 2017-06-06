@@ -1,15 +1,15 @@
 \subsection{Goals for Third Phase}
-In this section the goals for the following phase are outlined. All the features have to be operational and optimized afterwards and the project has to be finished.
+In this section the goals for the following phase are outlined. All features mentioned in the Functional Specification are intended to be operational and optimized afterwards as the project ends with this phase.
 
 \subsubsection{Testing of SCDC}
-The correctness of the SCDC-feature has to be tested in order to guarantee realistic results. This could be done by testing some small inputs by hand.
+The correctness of the SCDC-feature has to be tested in order to guarantee realistic results when using its outputs during the later interpolation of signals. This could be done by manually verifying smaller sets of input data or by creating an alternative implementation that compares all possible paths and finds the shortest one.
 \subsubsection{Testing of Projecting}
-If any other data-structure will be used (e.g. some tree-structure), the results can be checked via comparing them to the ones gained by the linear search.
+In case that the implementation of the sensor-to-mesh mapping will feature advanced data structures, the results can be verified by comparing them to the outputs produced by linear search.
 \subsubsection{Portation to MNE Scan}
-The MNE Scan application is the front-end in which the features ultimately should be integrated. In this phase we aim to achieve this concomitant with the completion of the features.
+The features should ultimately be integrated into the front-end application MNE Scan, which requires for some extensions and adaption of the class interfaces. In the third phase we aim to achieve this concomitant with the completion of the features.
 \subsubsection{Optimization of the Interpolation}
-Interpolating the sensor data is already advanced at this point of time. In the upcoming phase we try to further improve its performance via using compute shaders. This could speed up the calculation as well as it has the advantage of having the data already on the graphics card for further output.
+Interpolating the sensor data already provides a satisfactory level of efficiency at this point of time. In the upcoming phase we try to further improve its performance by utilizing compute shaders on the graphics card. This could speed up the calculation as well as it offers the advantage of having the output data already on the graphics card for further rendering of graphical images.
 \subsubsection{Bad Channels}
-As the devices used to measure the brain activity are not perfect and not every channel is working  (not connected properly, broken, etc.). For this problem a function has to be created, which filters out the so called Bad Channels.
+As the hardware sensors used to measure the brain activity are known to sometimes fail and thus to produce corrupt input data, these so called Bad Channels must be filtered out before any sensor signals are interpolated.
 \subsubsection{Fibonacci Heap}
-For different cases there are multiple possibilities how to internally implement a heap. A so called Fibonacci Heap could possibly result in better runtimes for the SCDC.
+Since the method for the SCDC uses Dijkstras algorithm, a so called Fibonacci Heap could speed up the calculation of distance tables and in this way allow for greater subsets of vertices (see Detailed Design for more details).

@@ -1,15 +1,37 @@
 \subsection{Goals for Third Phase}
-In this section the goals for the following phase are outlined. All features mentioned in the Functional Specification are intended to be operational and optimized afterwards as the project ends with this phase.
+In this section the goals for the following phase are outlined. All features mentioned in the Functional Specification are intended to be operational and optimized as the project ends after this phase.
 
-\subsubsection{Testing of SCDC}
-The correctness of the SCDC-feature has to be tested in order to guarantee realistic results when using its outputs during the later interpolation of signals. This could be done by manually verifying smaller sets of input data or by creating an alternative implementation that compares all possible paths and finds the shortest one.
-\subsubsection{Testing of Projecting}
-In case that the implementation of the sensor-to-mesh mapping will feature advanced data structures, the results can be verified by comparing them to the outputs produced by linear search.
-\subsubsection{Portation to MNE Scan}
-The features should ultimately be integrated into the front-end application MNE Scan, which requires for some extensions and adaption of the class interfaces. In the third phase we aim to achieve this concomitant with the completion of the features.
-\subsubsection{Optimization of the Interpolation}
-Interpolating the sensor data already provides a satisfactory level of efficiency at this point of time. In the upcoming phase we try to further improve its performance by utilizing compute shaders on the graphics card. This could speed up the calculation as well as it offers the advantage of having the output data already on the graphics card for further rendering of graphical images.
-\subsubsection{Bad Channels}
+
+\begin{aims}
+	\item[\hspace*{11mm}Testing of SCDC] The correctness of the SCDC-feature has to be tested in order to guarantee realistic results when using its outputs during the later interpolation of signals. This could be done by manually verifying smaller sets of input data or by creating an alternative implementation that compares all possible paths and finds the shortest one.
+\end{aims}
+
+\begin{aims}
+\item[\hspace*{11mm}Testing of Projecting] In case that the implementation of the sensor-to-mesh mapping will feature advanced data structures, the results can be verified by comparing them to the outputs produced by linear search.
+\end{aims}
+
+
+\begin{aims}
+\item[\hspace*{11mm}Portation to MNE Scan] 
+The features should ultimately be integrated into the front-end application MNE Scan, which requires for some extensions and adaption of the class interfaces. In the third phase we aim to achieve this concomitantly with the completion of the features.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm}Optimization of Interpolation] 
+	Interpolating the sensor data already provides a satisfactory level of efficiency at this point of time. In the upcoming phase we try to further improve its performance by utilizing compute shaders on the graphics card. This could speed up the calculation as well as offering the advantage of having the output data already on the graphics card for further rendering of graphical images.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm}Bad Channels] 
 As the hardware sensors used to measure the brain activity are known to sometimes fail and thus to produce corrupt input data, these so called Bad Channels must be filtered out before any sensor signals are interpolated.
-\subsubsection{Fibonacci Heap}
-Since the method for the SCDC uses Dijkstras algorithm, a so called Fibonacci Heap could speed up the calculation of distance tables and in this way allow for greater subsets of vertices (see Detailed Design for more details).
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm}Fibonacci Heap] 
+Since the method for the SCDC uses Dijkstra's algorithm, a so called Fibonacci Heap could speed up the calculation of distance tables and in this way allow for greater subsets of vertices (see Detailed Design for more details).
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm}K-D Tree] 
+An implementation of a balanced k-D tree could speed up the projecting algorithm, as it provides logarithmic run-time for lookups.
+\end{aims}

@@ -56,7 +56,7 @@ The class \textbf{GeometryInfo} does not have any class members.
 The method \textbf{scdc} originally was thought to receive only one input argument, i.e. the MNEBemSurface (object that holds the needed adjacency information). Based on this, it was supposed to calculate the full distance table of all contained vertices. Since the latter would have needed around 160 gigabyte of memory for some meshes, it was decided that the method also receives a subset of vertices. It then only calculates all distances for each vertex of said subset. The subset argument is defaulted with an empty vector, in case a subset could not be provided or is not wanted.\\
 After first tests revealed that an unrestricted distance calculation would take far too long, a third argument was introduced: a double-value that acts as a distance threshold and thus restricts the distance calculation to vertices which lie within the said radius. This seems a bit imprecise or careless at first glance, but it actually is reasonable for this specific application: Bilateral stimulation of cells inside the brain only occurs up to a certain distance. The third argument is defaulted with the maximum double-value, in case a distance threshold could not be provided or is not wanted.\\
 After these restrictions and adaptions were agreed upon, the question which algorithm to choose arose.
-While Pettie and Ramachandrans algorithm had the best asymptotic run-time, further research revealed that an implementation would go far beyond the scope of this project, since the algorithm uses several other subroutines (such as Jarnik and Prims method for minimal spanning trees). Another possible candidate for solving the problem was Thorups algorithm. Testing of a publicly available implementation showed that it actually did worse than another algorithm, when the above mentioned restrictions to the problem were applied. The only algorithm that resulted in a lower computation time was an iterative version of Dijkstras algorithm (see below for more details).\\
+While Pettie and Ramachandrans algorithm had the best asymptotic run-time, further research revealed that an implementation would go far beyond the scope of this project, since the algorithm uses several other subroutines (such as Prims method for minimal spanning trees). Another possible candidate for solving the problem was Thorups algorithm. Testing of a publicly available implementation showed that it actually did worse than another algorithm, when the above mentioned restrictions to the problem were applied. The only algorithm that resulted in a lower computation time was an iterative version of Dijkstras algorithm (see below for more details).\\
 The \textbf{scdc} method allocates the necessary memory and initializes the distance table.
 Since two instances of \textbf{iterativeDijkstra} would not interfere with each other (because they work on different columns of the distance table), it was decided for \textbf{scdc} to start several threads. According to the number of available threads (or cores, depending on hyperthreading etc.), the passed subset of vertices gets split into equally sized parts, whose limiting indices are then passed to an instance of iterative Dijkstra. The \textbf{scdc} method then was supposed to wait for all threads to finish by using a periodic check, so it could return the filled distance table to the caller.\\
 To further improve performance, this procedure was slightly changed: one instance of \textbf{iterativeDijkstra} gets executed on the main thread, i.e. the thread that called \textbf{scdc}. This avoids unnecessary thread changes for the periodic check and thus decreases computation time.
@@ -153,13 +153,19 @@ These methods are implemented to provide a minimal preset of functions to use du
 \clearpage
 
 \section{Glossary}
-mesh
-MatrixXd
-dijkstra verweis,
-jarnik und prim
-bne bem surface
-eigen matrix Xd
-sparse Matirx
+
+\begin{aims}
+	
+	\item[Mesh] Describes the representation of a planar graph in 3D space.
+	\item[Eigen] Eigen is a C++ template library for linear algebra that includes matrices, vectors, numerical solvers, and related algorithms
+	\item[MatrixXd] Is a specialized class from the Eigen framework. It represents a matrix of double-values (MatrixX\textbf{d}) that has variable dimensions (Matrix\textbf{X}d)
+	\item[SparseMatrix<T>] Is an optimized version of standard Eigen matrices that is designated for sparse matrices.
+	\item[Pettie and Ramachandran] Seth Pettie and Vijaya Ramachandran published their paper "A Shortest Path Algorithm for Real-Weighted Undirected Graphs" in 2005.
+	\item[Prim] Robert C. Prim had republished a previously known algorithm for finding minimal spanning trees in 1957,
+	\item[Dijkstra] Edsger W. Dijkstra was a computer scientist that published his algorithm for solving the single source shortest path problem in 1959.
+	\item[MNEBemSurface] Is a class from the MNE-CPP framework that holds information about the represented surface and its geometry.
+	
+\end{aims}
 
   
 \end{document}

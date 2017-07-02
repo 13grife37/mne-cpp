@@ -1,0 +1,51 @@
+
+
+\input{_UserGuide.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+	
+\lhead{\sc{User Guide: RTMU}}	
+\title{User Guide: RTMU}
+\vspace{3 in}
+\maketitle
+
+\includegraphics[width = \linewidth]{figures/mne-cpp.png}
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\tableofcontents
+
+\clearpage
+
+\section{Installation}
+
+Since the project integrates into MNE-CPP and thus is directed at developers, there are no precompiled binaries or programs to install. The following tutorial explains all necessary steps to download and work with the results of this software project.
+
+\begin{aims}
+	\item[\hspace*{11mm} Qt Framework] Because MNE-CPP depends on the Qt framework, it must be installed. Therefore, you must download and install it.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} MNE-CPP Source Code] We recommend using Git to get the MNE-CPP source code, as you can simply clone / fork one of MNE-CPP's repositories.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} Compiling the Source Code] Since Qt creator is automatically installed when you install the Qt framework, it is easiest to use its build-in compiler. You must first run the \textit{mne-cpp.pro} file, then run \textit{qmake} and finally start a build of the project. After this, all binaries can be found inside the \textit{bin} folder.
+\end{aims}
+
+For more details, see \url{http://wiki.mne-cpp.org/index.php/Portal:Getting_Started}.
+
+\clearpage
+
+\section{Code Usage}
+
+\clearpage
+
+\input{disp3dNavigation.tex}
+
+  
+\end{document}

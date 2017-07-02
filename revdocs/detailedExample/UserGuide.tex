@@ -183,7 +183,7 @@ Since the third argument, i.e. the distance threshold is defaulted with infinity
 
 \begin{figure}[h]
 	\centering
-	\begin{minipage}[b]{0.56\textwidth}
+	\begin{minipage}[b]{0.29\textwidth}
 		\includegraphics[width=\textwidth]{figures/distanceTableWithoutCanceldist.png}
 		\caption{All distances are calculated}
 	\end{minipage}
@@ -196,7 +196,7 @@ Since the third argument, i.e. the distance threshold is defaulted with infinity
 
 \begin{figure}[h]
 	\centering
-	\begin{minipage}[b]{0.56\textwidth}
+	\begin{minipage}[b]{0.29\textwidth}
 		\includegraphics[width=\textwidth]{figures/distanceTableWithCanceldist.png}
 		\caption{Result of \textit{scdc} with a distance threshold of 1.5 cm}
 	\end{minipage}
@@ -228,7 +228,14 @@ erasedColumns = GeometryInfo::filterBadChannels(distanceTable,
 
 A simplified result of such a filtering could look like this (assume that A, B, C are sensors and B is bad).
 
-%@todo include grapic
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=6cm]{figures/filteredBads.png}
+		\caption{Influence of two sensors}
+	\end{center}
+\end{figure}
+
+\clearpage 
 
 \subsection{Interpolation}
 
@@ -254,7 +261,7 @@ Assume that we have 49 vertice but only 2 sensors. The following figure illustra
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=8.5cm]{figures/coefficients.png}
+		\includegraphics[width=4.9cm]{figures/coefficients.png}
 		\caption{Influence of two sensors}
 	\end{center}
 \end{figure}
@@ -271,6 +278,8 @@ VectorXd testSignal = VectorXd::Random(pVecMappedSubset->size());
 QSharedPointer<VectorXf> interpolatedSignal;
 interpolatedSignal = Interpolation::interpolateSignal(weights, testSignal);
 \end{lstlisting}
+
+\clearpage
 
 Assume that we have the following weight matrix
 \begin{figure}[h]

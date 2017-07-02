@@ -152,6 +152,116 @@ These methods are implemented to provide a minimal preset of functions to use du
 
 \clearpage
 
+\section{SensorDataTreeItem}
+
+The class SensorDataTreeItem is used for the communication between our previously described classes and the Disp3D environment within the MNE-CPP framework. The most important member is a pointer to an RtSensorDataWorker, which is described in chapter five. Most of the functions in this class are used to control said RtSensorDataWorker. Only the relevant member functions are mentioned below, since the full description of this class and how it interacts with the Disp3D environment would go beyond the scope of this project.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=16cm]{figures/sensordatatreeitemclassdiagram.png}
+		\caption{Interface of the SensorDataTreeItem}
+	\end{center}
+\end{figure}
+
+\subsection{Member Objects}
+
+\subsubsection{m\_bIsDataInit}
+This member of type bool is used as a flag. It is used to verify if the Item is initialized.
+
+\subsubsection{m\_iUsedSensors}
+This member of type QVector<int> stores all indices of the used sensors out of given FiffEvoked object. For example, for a measurement with EEG signals the vector stores all indices of EEG sensors.
+
+\subsubsection{m\_ISensorsBad}
+This member of type QVector<int> stores all indices of bad channels. Bad channels can be marked during a measurement and the member will be updated accordingly.
+
+\subsubsection{m\_pSensorRtDataWorker}
+This member is a pointer to the items worker. The worker itself is described in section 5.
+
+\subsection{Member Functions}
+
+\subsubsection{Constructor}
+
+The constructor of the SensorDataTreeItem initializes its member m\_bIsDataInit with the value \textit{false} and then calls the private method \textit{initItem}.
+
+\subsubsection{initItem}
+
+This method is private since it only gets called by the constructor.\\
+It sets the items textual description that is visible to the user and initializes all MetaTreeItems. The latter are needed to give the user control options when controlling the program through the Disp3D menu:
+
+\begin{aims}
+	\item[\hspace*{11mm} StreamStatus] The start/stop option for the interpolation and visualization process.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} ColorMapType] The active color map that is used to visualize the data is chosen in a drop-down menu.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} VisualizationTresholds] These thresholds are used to control maximum and minimum values in the visualization.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} StreamingTimeInterval] Allows to set the minimal time that one frame should be displayed.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} LoopedStreaming] If this option is set, the worker will stream the same block of measurement repeatedly. Otherwise it will wait for new real-time and display it once.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} DistanceThreshold] This meta item allows on-the-fly change of the distance threshold used in the surface constrained distance calculation and the creation of the interpolation matrix. Changing this value triggers a recalculation of the latter by calling \textit{calculateSurfaceData}.
+\end{aims}
+
+\begin{aims}
+	\item[\hspace*{11mm} InterpolationFunction] This meta item allows on-the-fly change of the function used in the creation of the interpolation matrix. It provides a drop-down menu for the user.
+\end{aims}
+
+\subsubsection{init}
+
+This method must be called before any data can be streamed.\\
+It instantiates the worker member (described in section 5), extracts sensor coordinates, registers bad channels and instructs the worker to calculate all data that is needed for the later live interpolation (i.e. the surface constrained distance calculation and the weight matrix).\\
+This method sets the \textit{m\_bIsDataInit} flag to \textit{true}.
+
+\subsubsection{addData}
+
+\subsubsection{updateBadChannels}
+
+\clearpage
+
+\section{RtSensorDataWorker}
+
+This class manages real-time interpolation of sensor signals and streaming of visual output.
+
+\subsection{Member Objects}
+
+\subsubsection{m\_qMutex}
+
+\subsubsection{m\_lData}
+
+\subsubsection{m\_bIsRunning}
+
+\subsubsection{m\_bSurfaceDataIsInit}
+
+\subsubsection{m\_lInterpolationData}
+
+\subsection{Member Functions}
+
+\subsubsection{Constructor}
+
+\subsubsection{addData}
+
+\subsubsection{calculateSurfaceData}
+
+\subsubsection{updateBadChannels}
+
+\subsubsection{run}
+
+\subsubsection{normalizeAndTransformToColor}
+
+\subsubsection{generateColorsFromSensorValues}
+
+\clearpage
+
 \section{Glossary}
 
 \begin{aims}
@@ -169,6 +279,5 @@ These methods are implemented to provide a minimal preset of functions to use du
 	\item[Dijkstra] Edsger W. Dijkstra was a computer scientist who published his algorithm for solving the single source shortest path problem in 1959.
 	\item [Linear search] or sequential search is a method for finding a target value within a list.
 \end{aims}
-
   
 \end{document}

@@ -230,6 +230,76 @@ A simplified result of such a filtering could look like this (assume that A, B, 
 
 %@todo include grapic
 
+\subsection{Interpolation}
+
+This class provides two features: creation of weight matrices / interpolation matrices and interpolation of sensor signals.
+
+\subsubsection{Weight Matrix Creation}
+
+The method \text{GeometryInfo::createInterpolationMat} receives six arguments: a vector of vertex IDs, a distance table, a pointer to a function, a distance threshold, a FiffInfo object and a sensor type. The first argument must be the result of Sensor Projecting in order to get correct results. The pointer to the function determines what function is used for evaluating influence of sensor vertices. The distance threshold has the same function as in the SCDC method: coefficients for vertices with higher distances than this are set to zero. Since bad channels must be considered during the calculation of the weight matrix, a FiffInfo object must be passed. Lastly the used sensor type must be passed. 
+
+\begin{lstlisting}
+// weight matrix creation
+QSharedPointer<SparseMatrix<double> > weights;
+weights = Interpolation::createInterpolationMat(pVecMappedSubset,
+						distanceTable,
+						Interpolation::linear,
+						0.20,
+						evoked.info,
+						FIFFV_MEG_CH);
+\end{lstlisting}
+
+The method outputs a pointer to a matrix that holds the interpolation coefficients for all vertices.\\
+Assume that we have 49 vertice but only 2 sensors. The following figure illustrates how each vertex is influenced by the two sensors.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=8.5cm]{figures/coefficients.png}
+		\caption{Influence of two sensors}
+	\end{center}
+\end{figure}
+
+\subsubsection{Signal Interpolation}
+
+The method \textit{Interpolation::interpolateSignal} receives two arguments: a weight matrix and a vector that represents the respective sensor signal. It outputs a vector with interpolated values for each vertex of the used mesh.
+
+\begin{lstlisting}
+// random data set
+VectorXd testSignal = VectorXd::Random(pVecMappedSubset->size());
+
+// interpolate with random data set
+QSharedPointer<VectorXf> interpolatedSignal;
+interpolatedSignal = Interpolation::interpolateSignal(weights, testSignal);
+\end{lstlisting}
+
+Assume that we have the following weight matrix
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=5cm]{figures/weights.png}
+		\caption{Influence of two sensors}
+	\end{center}
+\end{figure}
+
+and the following sensor signal:
+\begin{figure}[ht]
+	\centering
+	$\begin{pmatrix}
+	100 \\ 0
+	\end{pmatrix}$
+\end{figure}
+
+
+The output then would be this vector:
+\begin{figure}[ht]
+	\centering
+	$
+	\begin{pmatrix} 100 \\ 50 \\ 0 \\ 50 \end{pmatrix}
+	$
+\end{figure}
+
+\clearpage
+
+
 \clearpage
 \input{disp3dNavigation.tex}
 

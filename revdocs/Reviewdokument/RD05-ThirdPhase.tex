@@ -6,13 +6,14 @@ In addition test cases and their results are described, to validate the correctn
 
 At the end the whole project and its success is critically evaluated.
 
+\clearpage
 \subsection{Testing}
 
 In order to validate the implemented algorithms, following tests were written.
 
 \subsubsection{Bad Channel Filtering}
 
-To eliminate the influence of bad channels (see section sowieso for more details), they are assumed to have an infinite distance to every other vertex. The test checks if all entries of columns that were identified as bad channels were set to infinity.\\
+To eliminate the influence of bad channels (\ref{badChannel}), they are assumed to have an infinite distance to every other vertex. The test checks if all entries of columns that were identified as bad channels were set to infinity.\\
 This success of this test showed that the function \textit{GeometryInfo::filterBadChannels} indeed overwrites all relevant entries.
 
 \subsubsection{Empty Inputs}

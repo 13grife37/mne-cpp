@@ -1,0 +1,23 @@
+\subsection{Bugreview}
+At the end of the second phase not all features were implemented and certain criteria was unfulfilled.(\ref{bugreview})
+
+This section provides a description of used solutions to handle the mentioned issues during the third phase.
+
+\subsubsection{Integration into Disp3D} The implementation of the \textit{SensorDataTreeItem} took more time than expected, due to hidden complexity. 
+
+Because this feature represented the integration into the existing project MNE-CPP, understanding the given structure and code was necessary.
+\\
+As it was the last unfinished feature of the project, more resources were shifted towards solving the issue and completing the task. Hence the amount of persons actively working on the feature was increased from originally three, to five team members.  
+
+Moreover these team members collaborated with the product owners to fulfill the task. 
+
+The mentioned actions resulted in a successful implementation.
+
+\subsubsection{Bad Channel Filtering}The problem was to find an appropriate method of when and how to filter bad channels during calculation. 
+
+Setting the bad channels to zero within the weight matrix of the interpolation would have resulted in assuming to not have any activity at the sensor location and thus weakening the activity of the area around it after the interpolation. This would not have been biologically correct. 
+\\
+
+The solution was to do the filtering directly after the distance calculation of the \textit{SCDC}. It is assumed that the flawed sensors are far away away from all other vertices and  are given an infinite distance within the resulting distance table. 
+
+Therefore they automatically receive the value zero inside the weight matrix, while not damaging the resulting row sum of 1, which is important for testing purposes.

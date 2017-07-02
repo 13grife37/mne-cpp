@@ -156,9 +156,81 @@ In order to interpolate signals, distances between vertices are of significant i
 	\end{minipage}
 \end{figure}
 
-
+%this is just to fix the umbrueche
 \clearpage
 
+Since precise calculation of surface constrained distances takes far too much computation time, we decided to approximatively calculate distances by using the edges of the mesh:
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=8cm]{figures/scdcEdges.png}
+		\caption{Approximating SCDs via shortest path on edges}
+	\end{center}
+\end{figure}
+
+To further reduce computation time, we introduced a distance threshold: Vertices with a higher distance than said threshold are assumed to be infinitely far away from one another.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=8cm]{figures/cancelDist.png}
+		\caption{Distances are only calculated inside the radius of the distance threshold(black)}
+	\end{center}
+\end{figure}
+
+The method \textit{GeometryInfo::scdc} receives three arguments: a MNEBemSurface that holds the mesh, a vector of indices (see Sensor Projecting for more details) and the distance treshold. The second argument represents the indices that distances should be calculated to (in most cases this is the result of the sensor mapping). An empty vector can be passed to indicate that all distances (all pairs) should be calculated. Duly note that this can consume a significantly large amount of memory. The method outputs a pointer to a matrix that holds all calculated distance values.\\
+\\
+Since the third argument, i.e. the distance threshold is defaulted with infinity, it can be left out in case the full distance table is wanted. Duly note that this may take a considerable amount of time.
+
+\begin{figure}[h]
+	\centering
+	\begin{minipage}[b]{0.56\textwidth}
+		\includegraphics[width=\textwidth]{figures/distanceTableWithoutCanceldist.png}
+		\caption{All distances are calculated}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.36\textwidth}
+		\includegraphics[width=\textwidth]{figures/meshSCDC.png}
+		\caption{A and C are of interest here}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{minipage}[b]{0.56\textwidth}
+		\includegraphics[width=\textwidth]{figures/distanceTableWithCanceldist.png}
+		\caption{Result of \textit{scdc} with a distance threshold of 1.5 cm}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.36\textwidth}
+		\includegraphics[width=\textwidth]{figures/meshSCDC.png}
+		\caption{A and C are of interest here}
+	\end{minipage}
+\end{figure}
+
+\begin{lstlisting}
+// scdc with distance threshold of 3cm
+QSharedPointer<MatrixXd> distanceTable;
+distanceTable = GeometryInfo::scdc(surface, pVecMappedSubset, 0.03);
+\end{lstlisting}
+
+\subsubsection{Bad Channel Filtering}
+
+Since some sensors produce corrupted or distorted signals, they are marked as bad. These bad channels must be excluded from further computations, because they would distort the interpolation otherwise. The method \textit{GeometryInfo::filterBadChannels} achieves this by setting the distance values for bad sensors to infinity. This way, the bad sensors are assumed to have an infinite distance to every other vertex of the mesh and thus to have no influence on them when interpolating.\\
+The method receives three arguments: the distance table, a FiffInfo object that holds the bad channel information and the type of the used sensors.
+
+\begin{lstlisting}
+// filter for bad MEG channels:
+QVector<qint32> erasedColums;
+erasedColumns = GeometryInfo::filterBadChannels(distanceTable,
+						evoked.info,
+						FIFFV_MEG_CH);
+\end{lstlisting}
+
+A simplified result of such a filtering could look like this (assume that A, B, C are sensors and B is bad).
+
+%@todo include grapic
+
+\clearpage
 \input{disp3dNavigation.tex}
 
   

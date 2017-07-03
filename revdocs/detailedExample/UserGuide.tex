@@ -30,15 +30,15 @@
 Since the project integrates into MNE-CPP and thus is directed at developers, there are no precompiled binaries or programs to install. The following tutorial explains all necessary steps to download and work with the results of this software project.
 
 \begin{aims}
-	\item[\hspace*{10mm} Qt Framework] Because MNE-CPP depends on the Qt framework, it must be installed. Therefore, you must download and install it.
+	\item[\hspace*{11mm} Qt Framework] Because MNE-CPP depends on the Qt framework, it must be installed. Therefore, it must be downloaded and installed.
 \end{aims}
 
 \begin{aims}
-	\item[\hspace*{10mm} MNE-CPP Source Code] We recommend using Git to get the MNE-CPP source code, as you can simply clone / fork one of MNE-CPP's repositories.
+	\item[\hspace*{11mm} MNE-CPP Source Code] We recommend using Git to get the MNE-CPP source code, as one can simply clone / fork one of MNE-CPP's repositories.
 \end{aims}
 
 \begin{aims}
-	\item[\hspace*{10mm} Compiling the Source Code] Since Qt creator is automatically installed when you install the Qt framework, it is easiest to use its build-in compiler. You must first run the \textit{mne-cpp.pro} file, then run \textit{qmake} and finally start a build of the project. After this, all binaries can be found inside the \textit{bin} folder.
+	\item[\hspace*{11mm} Compiling the Source Code] Since Qt creator is automatically installed, when the Qt framework is also installed, it is easiest to use its build-in compiler. One must first run the \textit{mne-cpp.pro} file, then run \textit{qmake} and finally start a build of the project. After this, all binaries can be found inside the \textit{bin} folder.
 \end{aims}
 
 For more details, see \url{http://wiki.mne-cpp.org/index.php/Portal:Getting_Started}.
@@ -64,7 +64,7 @@ The method \textit{GeometryInfo::projectSensors} allows sensor-to-mesh mapping. 
 \end{figure}
 \\
 The method receives two arguments: one MNEBemSurface and a QVector of Vector3f objects (Eigen representation of 3D coordinates). Said vector must contain the absolute positions of the sensors in 3D space.\\
-Thus, an MNEBemSurface must be obtained first: 
+Thus, a MNEBemSurface must be obtained first: 
 \begin{lstlisting}
 // extract MNEBemSurface from file
 QFile t_filesensorSurfaceVV(QDir::currentPath()
@@ -107,7 +107,7 @@ for( const FiffChInfo &info : evoked.info.chs) {
 \textit{Note: EEG sensors may need co-registration.}
 \end{center}
 
-The method \textit{GeometryInfo::projectSensors} returns a pointer to a vector of indices pointing to the best matching vertices of the passed mesh:
+The method \textit{GeometryInfo::projectSensors} returns a pointer to a vector of indices that points to the best matching vertices of the passed mesh:
 \begin{lstlisting}
  QSharedPointer<QVector<qint32>> pVecMappedSubset;
  pVecMappedSubset = GeometryInfo::projectSensors(surface, megSensors);
@@ -134,8 +134,7 @@ The algorithm would map the sensors as follows:
 	\end{center}
 \end{figure}
 
-The output vector would be:
-
+The output vector thus would be:
 \[
 \begin{pmatrix} A & C \end{pmatrix}
 \]
@@ -178,9 +177,9 @@ To further reduce computation time, we introduced a distance threshold: Vertices
 	\end{center}
 \end{figure}
 
-The method \textit{GeometryInfo::scdc} receives three arguments: an MNEBemSurface that holds the mesh, a vector of indices (see Sensor Projecting for more details) and the distance threshold. The second argument represents the indices that distances should be calculated to (in most cases this is the result of the sensor mapping). An empty vector can be passed to indicate that all distances (all pairs) should be calculated. Duly note that this can consume a significantly larger amount of memory. The method outputs a pointer to a matrix that holds all calculated distance values.\\
+The method \textit{GeometryInfo::scdc} receives three arguments: an MNEBemSurface that holds the mesh, a vector of indices (see Sensor Projecting for more details) and the distance treshold. The second argument represents the indices that distances should be calculated to (in most cases this is the result of the sensor mapping). An empty vector can be passed to indicate that all distances (all pairs) should be calculated. Duly note that this can consume a significantly large amount of memory. The method outputs a pointer to a matrix that holds all calculated distance values.\\
 \\
-Since the third argument, i.e. the distance threshold is defaulted with infinity, it can be left out in case all distance values are wanted. Duly note that this may take a considerable amount of time.
+Since the third argument, i.e. the distance threshold is defaulted with infinity, it can be left out in case the full distance table is wanted. Duly note that this may take a considerable amount of time.
 
 \begin{figure}[h]
 	\centering
@@ -209,9 +208,9 @@ Since the third argument, i.e. the distance threshold is defaulted with infinity
 \end{figure}
 
 \begin{lstlisting}
-// scdc with distance threshold of 1.5 cm
+// scdc with distance threshold of 3cm
 QSharedPointer<MatrixXd> distanceTable;
-distanceTable = GeometryInfo::scdc(surface, pVecMappedSubset, 0.015);
+distanceTable = GeometryInfo::scdc(surface, pVecMappedSubset, 0.03);
 \end{lstlisting}
 
 \subsubsection{Bad Channel Filtering}
@@ -244,7 +243,7 @@ This class provides two features: creation of weight matrices / interpolation ma
 
 \subsubsection{Weight Matrix Creation}
 
-The method \textit{GeometryInfo::createInterpolationMat} receives six arguments: a vector of vertex IDs, a distance table, a pointer to a function, a distance threshold, a FiffInfo object and a sensor type. The first argument must be the result of Sensor Projecting in order to get correct results. The pointer to the function determines what function is used for evaluating influence of sensor vertices. The distance threshold has the same function as in the SCDC method: coefficients for vertices with higher distances than this are set to zero. Since bad channels must be considered during the calculation of the weight matrix, a FiffInfo object must be passed. Lastly the used sensor type must also be passed. 
+The method \textit{GeometryInfo::createInterpolationMat} receives six arguments: a vector of vertex IDs, a distance table, a pointer to a function, a distance threshold, a FiffInfo object and a sensor type. The first argument must be the result of Sensor Projecting in order to get correct results. The pointer to the function determines what function is used for evaluating influence of sensor vertices. The distance threshold has the same function as in the SCDC method: coefficients for vertices with higher distances than this are set to zero. Since bad channels must be considered during the calculation of the weight matrix, a FiffInfo object must be passed. Lastly the used sensor type must be passed. 
 
 \begin{lstlisting}
 // weight matrix creation
@@ -258,7 +257,7 @@ weights = Interpolation::createInterpolationMat(pVecMappedSubset,
 \end{lstlisting}
 
 The method outputs a pointer to a matrix that holds the interpolation coefficients for all vertices.\\
-Assume that we have 49 vertices but only 2 sensors. The following figure illustrates how each vertex is influenced by the two sensors.
+Assume that we have 49 vertice but only 2 sensors. The following figure illustrates how each vertex is influenced by the two sensors.
 
 \begin{figure}[h]
 	\begin{center}

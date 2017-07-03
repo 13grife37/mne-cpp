@@ -33,7 +33,7 @@ Both classes lie within the library layer of MNE-CPP:
 
 The classes are to be used by the application layer which includes all front end applications (i.e. MNE Scan, MNE Analyze and MNE Browse).
 The added functionality thus extends the preexisting framework.\\
-For a seamless integration into mentioned front-end applications, the new features will be added to the hierarchical GUI structure of MNE-CPP. This requires for a so called DataTreeItem to be created. The latter will allow easy modification of parameters of the two classes (see detailed class descriptions for more details). By the time this document was written the DataTreeItem was not functional yet, thus it is not included in this document.
+For a seamless integration into mentioned front-end applications, the new features were added to the hierarchical GUI structure of MNE-CPP. This required for a so called DataTreeItem to be created. The latter allows easy modification of parameters of the two classes (see detailed class descriptions for more details).
 
 
 \clearpage
@@ -166,7 +166,7 @@ The class SensorDataTreeItem is used for the communication between our previousl
 \subsection{Member Objects}
 
 \subsubsection{m\_bIsDataInit}
-This member of type bool is used as a flag. It is used to verify if the Item is initialized.
+This member of type bool is used as a flag. It should verify that the Item is initialized.
 
 \subsubsection{m\_iUsedSensors}
 This member of type QVector<int> stores all indices of the used sensors out of given FiffEvoked object. For example, for a measurement with EEG signals the vector stores all indices of EEG sensors.
@@ -224,41 +224,93 @@ This method sets the \textit{m\_bIsDataInit} flag to \textit{true}.
 
 \subsubsection{addData}
 
+This method adds a new block of real-time data to the list of sensor data that is to be visualized. The data is filtered so that only the values of the used sensors (see member m\_iUsedSensors) are passed to the worker.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=16cm]{figures/AddDataSeq.png}
+		\caption{Sensor data is added from hierarchically higher items}
+	\end{center}
+\end{figure}
+
 \subsubsection{updateBadChannels}
+
+This method allows on-the-fly marking of bad channels. It receives a FiffInfo objects and extracts all bad channels. It then passes their indices to the worker.
 
 \clearpage
 
 \section{RtSensorDataWorker}
 
 This class manages real-time interpolation of sensor signals and streaming of visual output.
+It derives from the class QThread and therefore provides possibilities to manage threading and periodic output of visual frames.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=16cm]{figures/sensordatatreeitemclassdiagram.png}
+		\caption{Interface of the SensorDataTreeItem}
+	\end{center}
+\end{figure}
 
 \subsection{Member Objects}
 
 \subsubsection{m\_qMutex}
 
+This member manages semaphore functionality: Since the user often interacts with the item, respectively the worker, members and methods are often accessed by several threads. To avoid data races or even crashes, all critical functions use this mutex.
+
 \subsubsection{m\_lData}
+
+This list holds all currently available sensor activity as vectors of double values.
 
 \subsubsection{m\_bIsRunning}
 
+This flag allows to stop the main loop of the worker. It is set to \textit{true} when the worker is started and is set to \textit{false} when the worker is stopped.
+
 \subsubsection{m\_bSurfaceDataIsInit}
 
+This flag displays if the worker has received the necessary information for the surface constrained distance calculation and the computation of the interpolation matrix. It is used for rejecting calls to methods that need this information and would produce critical behaviour if the data is not calculated yet.
+
 \subsubsection{m\_lInterpolationData}
+
+This struct holds all necessary information for the live interpolation: the used sensor type, the distance threshold, the mesh, the sensor information and all results of the necessary computations: the mapped sensor subset, the distance table and the weight matrix.\\
+It acts as a container for said data objects.
 
 \subsection{Member Functions}
 
 \subsubsection{Constructor}
 
+The constructor initializes all members with default values. The \textit{m\_lInterpolationData} struct is instantiated and filled with default values as well.
+
 \subsubsection{addData}
+
+This method receives a block of sensor activity represented as a matrix of double values. It splits up the matrix into several columns and appends each column to the list of sensor signals (member \textit{m\_lInterpolationData}).
 
 \subsubsection{calculateSurfaceData}
 
+This method is overloaded: there is a public method \textit{calculateSurfaceData} that receives an MNEBemSurface, a vector of sensor positions, a FiffInfo objects and a sensor type. It stores all passed input arguments inside the member \textit{m\_lInterpolationData} and then calls the private method \textit{calculateSurfaceData}. The latter calculates the surface constrained distances and the weight matrix based on the data that is stored inside the \textit{m\_lInterpolationData} member. 
+
 \subsubsection{updateBadChannels}
+
+This method receives a FiffInfo object that holds the bad channel information. It stores the passed reference inside the \textit{m\_lInterpolationData} member and then recalculates surface data.
 
 \subsubsection{run}
 
-\subsubsection{normalizeAndTransformToColor}
+This is the workers main loop.\\
+According to the users settings, it averages the next sensor signals by removing them from the member \textit{m\_lInterpolationData}. It then generates vertex colors based on this averaged signal by calling \textit{generateColorsFromSensorValues} and publishes the result to all relevant items (i.e. the items that manage visualization). After all computations are done, the \textit{run} method calls \textit{QThread::msleep} to sleep for a certain (depending on the time needed for the previous computations).
 
 \subsubsection{generateColorsFromSensorValues}
+
+The method \textit{generateColorFromSensorValues} performs several checks on the workers members to ensure that the following critical computations will succeed. It then interpolates vertex activity by passing the signal it received from the workers main loop to \textit{Interpolation::interpolateSignal}. The interpolated result then gets passed to \textit{normalizeAndTransformToColor}.
+
+\subsubsection{normalizeAndTransformToColor}
+
+The method \textit{normalizeAndTransformToColor} normalizes the passed signal according to the passed thresholds. It then used the passed function pointer to generate RGB values for each vertex.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=16cm]{figures/PublishColorsSeq.png}
+		\caption{Interpolated visual data is passed through the Disp3D environment}
+	\end{center}
+\end{figure}
 
 \clearpage
 

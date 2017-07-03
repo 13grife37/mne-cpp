@@ -7,36 +7,38 @@ This part critically evaluates the success of the project.
 Although all functional requirements were fulfilled, there are some restrictions concerning scale and efficiency.
 
 \paragraph{Constrained Distance Calculation}
-Because a surface constrained distance calculation would result in unreasonably large outputs for some surfaces, the input is reduced in most cases (see detailed design for more information). Since the interface still allows a full distance calculation and the latter hardly ever is needed, this restriction does not influence the fulfillment of the respective functional requirements.\\
-Certain configurations of the distance calculation lead to extensive run-time, e.g. the usage of a high-resolution surface (i.e. a surface with immense amount of vertices). Since this is a rather common tradeoff between precision and low computation time and because the surface constrained distances must only be calculated once, this restriction does not interfere with the functional requirements.
+Because a surface constrained distance calculation would result in unreasonably large outputs for some surfaces, the input is reduced in most cases (see detailed design for more information). Since the interface still allows a full distance calculation and the latter is hardly ever needed, this restriction does not influence the fulfillment of the respective functional requirements.\\
+Certain configurations of the distance calculation lead to extensive run-time, e.g. the usage of a high-resolution surface (i.e. a surface with a large amount of vertices). Since this is a rather common tradeoff between precision and low computation time and because the surface constrained distances must only be calculated once, this restriction does not affect the functional requirements.
 
 \paragraph{Interpolation Matrix}
-Depending on the passed parameters, the live interpolation of sensor signals takes up a significantly high run-time. When the amount of relevant sensors nodes is increased (see detailed design for more information), the interpolation matrix gets denser and thus produces higher computation time. Again, this is a compromise between precision and run-time and thus does not interfere with the respective functional requirement.
+Depending on the passed parameters, the live interpolation of sensor signals takes a significantly higher run-time. When the amount of relevant sensors nodes is increased (see detailed design for more information), the interpolation matrix gets denser and thus leads to a higher computation time. Once again, this is a compromise between precision and run-time and therefore does not affect the respective functional requirement.
 
 \subsubsection{Evaluation of Project Organization}
 
 \paragraph{Internal Communication}
 
-Due to weekly meetings and intensive communication via messengers, the internal communication of the team was overall good (formulierung verbessern).\\
-To keep responsibilities clear, each task or subtask was assigned to a team member or a group of members. These members then were answerable for said task and were supposed to update the team about process made. While tasks were fulfilled correctly and in most cases promptly, status updates were sparsely made.
+Due to weekly meetings and intensive communication via messengers, the internal communication of the team mostly worked well.\\
+To keep responsibilities clear, each task or subtask was assigned to a team member or a group of members. These members then were answerable for the respective task and updated the team about the progress made. While tasks were fulfilled correctly and in most cases promptly, status updates were sparsely made.
+
+%todo klare deadlines ?
 
 \paragraph{Communication with Product Owners}
 
-With MNE-CPP being a rather large framework, communication with the product owners was crucial. While differences concerning the requirements or necessary changes of interfaces were mostly resolved swiftly, details about the frameworks architecture were sometimes not communicated. (vllt noch mehr schreiben)
+With MNE-CPP being a rather large framework, communication with the product owners was crucial. While differences concerning the requirements or necessary changes of interfaces were mostly resolved swiftly, details about the frameworks architecture were sometimes not communicated. 
 
 \paragraph{Tools and Software}
 
-The version management (i.e. Git) worked well throughout the course of the project. Because of inattentive use of the program, some unnecessary operation such as branch merging and reverting was necessary.\\
-The issue tracking was used rather ineffective. Because some members misunderstood the concepts of issues, unnecessary or irrelevant issues were created and deleted without use. Functionality such as work logging and status updates was not used for the first phase of the project. Status updates of issues were only sparsely used for the rest of the project.
+The version management (i.e. Git) worked well throughout the course of the project. Because of inattentive use of the program, some unnecessary operations such as branch merging and reverting were necessary.\\
+The issue tracking software was not used very effectively. Because some members misunderstood the concepts of issues, unnecessary or irrelevant issues were created and deleted without use. Functionalities such as work logging and status updates were not used for the first phase of the project. This was partly caused by delayed access to the respective server system. Status updates of issues were seldom used for the rest of the project.
 
 \paragraph{Milestones and Sprints}
 
-The division of the project into several sprints was rather useless since left over issues had to be finished during the next sprint. This might be a result of the sprints being too short (two weeks) or wrong zusammenstellung der aufgaben.
+The division of the project into several sprints was rather useless since left over issues had to be finished during the next sprint. This might be a result of the sprints being too short (two weeks) or inadequate distribution of tasks.
 
 \paragraph{Effort Estimate}
 
 While the estimated working time was roughly correct for the first three features, the integration into Disp3D needed far more work than expected (\ref{riskEstimate}).\\
-The needed amount of man days for Testing and Debugging turned out to be far below the estimate made during first phase. Because a lot of time was invested into extensive code review and documentation, there only were some minor bugs which could be easily fixed.
+The needed amount of man days for Testing and Debugging turned out to be far below the estimate made during first phase. Since a lot of time was invested into extensive code review and documentation, there only were some minor bugs which could easily be fixed.
 
 
 \paragraph{Risk Estimate}

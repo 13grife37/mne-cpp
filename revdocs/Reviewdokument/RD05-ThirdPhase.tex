@@ -14,14 +14,14 @@ In order to validate the implemented algorithms, following tests were written.
 \subsubsection{Bad Channel Filtering}
 
 To eliminate the influence of bad channels (\ref{badChannel}), they are assumed to have an infinite distance to every other vertex. The test checks if all entries of columns that were identified as bad channels were set to infinity.\\
-This success of this test showed that the function \textit{GeometryInfo::filterBadChannels} indeed overwrites all relevant entries.
+The success of this test showed that the function \textit{GeometryInfo::filterBadChannels} indeed overwrites all relevant entries.
 
 \subsubsection{Empty Inputs}
 
-Because sturdiness is an important criterion for the program, empty inputs must not lead to a crash.
+Because sturdiness is an important criterion for the program, empty inputs must not lead to a crash of the software.
 
 \begin{aims}
-	\item[\hspace*{11mm} Sensor Projecting] If the function for sensor projecting gets passed an empty vector of sensor coordinates it should return an empty vector of vertex IDs. \\
+	\item[\hspace*{11mm} Sensor Projecting] If the function for sensor projecting gets passed an empty vector of sensor coordinates, it should return an empty vector of vertex IDs. \\
 	The success of this test showed that the function \textit{GeometryInfo::projectSensors} indeed does not crash upon empty inputs.
 \end{aims}
 
@@ -31,8 +31,8 @@ Because sturdiness is an important criterion for the program, empty inputs must 
 \end{aims}
 
 \begin{aims}
-	\item[\hspace*{11mm} Weight Matrix Creation] If the function for creating a weight matrix is passed an empty vector of sensor indices, it should return an empty matrix. This is verified by testing the size of the matrix object.\\
-	If the function is passed an empty distance table, it should give out a warning and return a null pointer.
+	\item[\hspace*{11mm} Weight Matrix Creation] If the function for creating a weight matrix gets passed an empty vector of sensor indices, it should return an empty matrix. This is verified by testing the size of the output object.\\
+	If the function gets passed an empty distance table, it should give out a warning and return a null pointer.
 	This is verified by testing if the output really is a null pointer.\\
 	The success of this test showed that the function \textit{GeometryInfo::createInterpolationMat} indeed does not crash upon empty inputs and returns empty outputs.
 \end{aims}
@@ -41,7 +41,7 @@ Because sturdiness is an important criterion for the program, empty inputs must 
 \subsubsection{Matrix Dimensions}
 
 Because the later live interpolation is achieved by multiplying a vector of sensor signals with the precalculated interpolation matrix, matching dimensions are crucial.\\
-The output matrix of the SCDC must have as many rows as the number of vertices inside the used mesh and as many columns as the number of projected sensors. \\
+The amount of rows inside the output matrix of the SCDC must be equal to the number of vertices inside the used mesh and the amount of columns must be equal to the number of projected sensors. \\
 The output matrix of the weight matrix creation must have the same dimensions as the passed distance table.\\
 The result of a multiplication of sensor signals and the interpolation matrix must be a column vector that contains as many values as the number of rows inside the interpolation matrix.\\
 The success of these tests showed that the program only produces matching dimensions and thus does not create arithmetic exceptions.

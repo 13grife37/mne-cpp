@@ -108,7 +108,8 @@ This method is implemented for better readability only, thus it is declared priv
 
 
 \section{Interpolation}
-The class \textbf{Interpolation} holds all needed functionality to create a weight matrix based on a distance table and to interpolate sensor signals. Since all included methods are static, the class itself does not have to be instantiated, therefore it also is declared static and the default constructor is forbidden.
+The class \textbf{Interpolation} holds all needed functionality to create a weight matrix based on a distance table and to interpolate sensor signals. Since all included methods are static, the class itself does not have to be instantiated, therefore it also is declared static and the default constructor is forbidden.\\
+The class \textbf{Interpolation} does not have any class members.
 
 \begin{figure}[h]
 	\begin{center}
@@ -117,25 +118,17 @@ The class \textbf{Interpolation} holds all needed functionality to create a weig
 	\end{center}
 \end{figure}
 
-\subsection{Member Objects}
-
-\subsubsection{Weight Matrix}
-The class \textbf{Interpolation} holds one static class member: \textbf{m\_interpolationMatrix} which is a shared pointer to a sparse matrix (i.e. the weight matrix). Since a user of the \textbf{Interpolation} class does not care about internal representation of the weight matrix and is only interested in fast interpolation of signals, it was decided that the weight matrix should be stored as a member of the class. In case access to the matrix itself should be needed, a designated \textbf{getter}-function was included (see method \textbf{getResult} for more details).\\
-Originally, this member was supposed to be of type \textbf{Eigen::MatrixXd} which is a standard matrix of double-values with variable dimensions. After first tests revealed that depending on the distance threshold chosen during the calculation of distances on the mesh (see section 2.1.1) the weight matrix contained around 97\% of null-entries, the weight matrix was changed to type\\ \textbf{Eigen::SparseMatrix<double>} which is optimized for sparse matrices. This implied some changes to the calculation of the weight matrix within the method \textbf{createInterpolationMat} because \textbf{Eigen::\ SparseMatrix<double>} do not provide the same interface as \textbf{Eigen::MatrixXd}.
-
 \subsection{Member Functions}
 
 \subsubsection{createInterpolationMat}
-The method \textbf{createInterpolationMatrix} receives four input arguments: Firstly a vector of IDs which represent the vertices which have been assigned to a sensor during the Sensor Projecting (see section 2.1.3 for more details). Secondly a shared pointer to a distance table, i.e. a matrix of double-values.\\
+The method \textbf{createInterpolationMatrix} receives sic input arguments: Firstly a vector of IDs which represent the vertices which have been assigned to a sensor during the Sensor Projecting (see section 2.1.3 for more details). Secondly a shared pointer to a distance table, i.e. a matrix of double-values.\\
 Since the weight matrix can be calculated using a variety of mathematical interpolation functions (e.g. a linear function, a quadratic function, etc.), the method \textbf{createInterpolationMat} was thought to receive some kind of value to represent the chosen function. That could for example be achieved by defining global constants and encoding the functions with them. For a higher level of versatility it was decided that \textbf{createInterpolationMat} should receive a pointer to a function, which in turn receives a double-value and returns a double-value and thus fulfills the internal requirements of the weight matrix calculation. A minimal preset of usable functions was provided as public members of the class (see section 3.2.5 for more details).\\
-Since bilateral stimulation of cells in the brain only occurs up to certain distances, a double-value is received as a fourth argument. It acts as a distance threshold, that means that the interpolation weight of vertices with a higher distance than said threshold is set to zero. 
+Since bilateral stimulation of cells in the brain only occurs up to certain distances, a double-value is received as a fourth argument. It acts as a distance threshold, that means that the interpolation weight of vertices with a higher distance than said threshold is set to zero.\\
+When first producing visual output, it became apparent that further filtering of bad channels is necessary in this method. Because of that, \textbf{createInterpolationMat} now receives a FiffInfo object that holds bad channel information and a sensor type as a fifth and sixth argument.\\
+Originally, the output of this method was supposed to be of type \textbf{Eigen::MatrixXd} which is a standard matrix of double-values with variable dimensions. After first tests revealed that depending on the distance threshold chosen during the calculation of distances on the mesh (see section 2.1.1) the weight matrix contained around 97\% of null-entries, the weight matrix was changed to type\\ \textbf{Eigen::SparseMatrix<double>} which is optimized for sparse matrices. This implied some changes to the calculation of the weight matrix within \textbf{createInterpolationMat} because \textbf{Eigen::\ SparseMatrix<double>} do not provide the same interface as \textbf{Eigen::MatrixXd}.
 
 \subsubsection{interpolateSignal}
 The method \textbf{interpolateSignal} receives a vector of double values which represents a specific moment of brain activity, i.e. the values that were recorded by sensors. The weight matrix gets multiplied with the input vector and thus produces a vector that contains the brain activity for all vertices of the distance table that was used to create the weight matrix.
-
-\subsubsection{clearInterpolationMatrix}
-The method \textbf{clearInterpolationMatrix} resets the weight matrix, i.e. frees all memory allocated for the respective member object.
-\\\\
 
 \begin{figure}[h]
 	\begin{center}
@@ -144,17 +137,15 @@ The method \textbf{clearInterpolationMatrix} resets the weight matrix, i.e. free
 	\end{center}
 \end{figure}
 
-\subsubsection{getResult}
-This method is implemented in case the calculated weight matrix is needed as an object itself. It returns a smart pointer to the weight matrix.
-
-\subsubsection{linear, gaussian, square}
+\subsubsection{linear, gaussian, square, cubic}
 These methods are implemented to provide a minimal preset of functions to use during the calculation of the interpolation weight matrix (see method \textbf{createInterpolationMatrix} for more details).
 
 \clearpage
 
 \section{SensorDataTreeItem}
 
-The class SensorDataTreeItem is used for the communication between our previously described classes and the Disp3D environment within the MNE-CPP framework. The most important member is a pointer to an RtSensorDataWorker, which is described in chapter five. Most of the functions in this class are used to control said RtSensorDataWorker. Only the relevant member functions are mentioned below, since the full description of this class and how it interacts with the Disp3D environment would go beyond the scope of this project.
+The class SensorDataTreeItem is used for the communication between our previously described classes and the Disp3D environment within the MNE-CPP framework. The most important member is a pointer to an RtSensorDataWorker, which is described in chapter five. Most of the functions in this class are used to control said RtSensorDataWorker. Only the relevant member functions are mentioned below, since the full description of this class and how it interacts with the Disp3D environment would go beyond the scope of this project.\\
+This class derives from the class AbstractTreeItem.
 
 \begin{figure}[h]
 	\begin{center}
@@ -164,6 +155,8 @@ The class SensorDataTreeItem is used for the communication between our previousl
 \end{figure}
 
 \subsection{Member Objects}
+
+Since most members of this class are only necessary for handling technical details, we only included the most important members in this document. See developer documentation for more details.
 
 \subsubsection{m\_bIsDataInit}
 This member of type bool is used as a flag. It should verify that the Item is initialized.
@@ -179,9 +172,11 @@ This member is a pointer to the items worker. The worker itself is described in 
 
 \subsection{Member Functions}
 
+Since most member functions of this class are just passing data on to other tree items or dealing with user input, we only included the most important member functions in this document. See developer documentation for more details.
+
 \subsubsection{Constructor}
 
-The constructor of the SensorDataTreeItem initializes its member m\_bIsDataInit with the value \textit{false} and then calls the private method \textit{initItem}.
+The constructor of the SensorDataTreeItem initializes its member \textbf{m\_bIsDataInit} with the value \textbf{false} and then calls the private method \textbf{initItem}.
 
 \subsubsection{initItem}
 
@@ -209,7 +204,7 @@ It sets the items textual description that is visible to the user and initialize
 \end{aims}
 
 \begin{aims}
-	\item[\hspace*{11mm} DistanceThreshold] This meta item allows on-the-fly change of the distance threshold used in the surface constrained distance calculation and the creation of the interpolation matrix. Changing this value triggers a recalculation of the latter by calling \textit{calculateSurfaceData}.
+	\item[\hspace*{11mm} DistanceThreshold] This meta item allows on-the-fly change of the distance threshold used in the surface constrained distance calculation and the creation of the interpolation matrix. Changing this value triggers a recalculation of the latter by calling \textbf{calculateSurfaceData}.
 \end{aims}
 
 \begin{aims}
@@ -220,16 +215,19 @@ It sets the items textual description that is visible to the user and initialize
 
 This method must be called before any data can be streamed.\\
 It instantiates the worker member (described in section 5), extracts sensor coordinates, registers bad channels and instructs the worker to calculate all data that is needed for the later live interpolation (i.e. the surface constrained distance calculation and the weight matrix).\\
-This method sets the \textit{m\_bIsDataInit} flag to \textit{true}.
+This method sets the \textbf{m\_bIsDataInit} flag to \textbf{true}.
 
 \subsubsection{addData}
 
-This method adds a new block of real-time data to the list of sensor data that is to be visualized. The data is filtered so that only the values of the used sensors (see member m\_iUsedSensors) are passed to the worker.
+This method adds a new block of real-time data to the list of sensor data that is to be visualized. The data is filtered so that only the values of the used sensors (see member m\_iUsedSensors) are passed to the worker.\\
+The sensor data is passed to the SensorDataTreeItem by other actors within the Disp3D environment: Once a block of data has entered the tree structure, it is distributed hierarchically. The following diagram illustrates how sensor data is passed down the this item.
+
+\clearpage
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=16cm]{figures/AddDataSeq.png}
-		\caption{Sensor data is added from hierarchically higher items}
+		\caption{Sensor data is added from hierarchically higher items. Arguments to calls are not included to ensure readability}
 	\end{center}
 \end{figure}
 
@@ -246,12 +244,14 @@ It derives from the class QThread and therefore provides possibilities to manage
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=16cm]{figures/sensordatatreeitemclassdiagram.png}
-		\caption{Interface of the SensorDataTreeItem}
+		\includegraphics[width=16cm]{figures/rtsensorworkerclass.png}
+		\caption{Interface of the worker}
 	\end{center}
 \end{figure}
 
 \subsection{Member Objects}
+
+Since most members of this class are only necessary for handling technical details, we only included the most important members in this document. See developer documentation for more details.
 
 \subsubsection{m\_qMutex}
 
@@ -263,7 +263,7 @@ This list holds all currently available sensor activity as vectors of double val
 
 \subsubsection{m\_bIsRunning}
 
-This flag allows to stop the main loop of the worker. It is set to \textit{true} when the worker is started and is set to \textit{false} when the worker is stopped.
+This flag allows to stop the main loop of the worker. It is set to \textbf{true} when the worker is started and is set to \textbf{false} when the worker is stopped.
 
 \subsubsection{m\_bSurfaceDataIsInit}
 
@@ -276,41 +276,44 @@ It acts as a container for said data objects.
 
 \subsection{Member Functions}
 
+Since most function of this class are only necessary for handling user input, we included only the most important functions in this document. See developer documentation for more details.
+
 \subsubsection{Constructor}
 
-The constructor initializes all members with default values. The \textit{m\_lInterpolationData} struct is instantiated and filled with default values as well.
+The constructor initializes all members with default values. The \textbf{m\_lInterpolationData} struct is instantiated and filled with default values as well.
 
 \subsubsection{addData}
 
-This method receives a block of sensor activity represented as a matrix of double values. It splits up the matrix into several columns and appends each column to the list of sensor signals (member \textit{m\_lInterpolationData}).
+This method receives a block of sensor activity represented as a matrix of double values. It splits up the matrix into several columns and appends each column to the list of sensor signals (member \textbf{m\_lInterpolationData}).
 
 \subsubsection{calculateSurfaceData}
 
-This method is overloaded: there is a public method \textit{calculateSurfaceData} that receives an MNEBemSurface, a vector of sensor positions, a FiffInfo objects and a sensor type. It stores all passed input arguments inside the member \textit{m\_lInterpolationData} and then calls the private method \textit{calculateSurfaceData}. The latter calculates the surface constrained distances and the weight matrix based on the data that is stored inside the \textit{m\_lInterpolationData} member. 
+This method is overloaded: there is a public method \textbf{calculateSurfaceData} that receives an MNEBemSurface, a vector of sensor positions, a FiffInfo objects and a sensor type. It stores all passed input arguments inside the member \textbf{m\_lInterpolationData} and then calls the private method \textbf{calculateSurfaceData}. The latter calculates the surface constrained distances and the weight matrix based on the data that is stored inside the \textbf{m\_lInterpolationData} member. 
 
 \subsubsection{updateBadChannels}
 
-This method receives a FiffInfo object that holds the bad channel information. It stores the passed reference inside the \textit{m\_lInterpolationData} member and then recalculates surface data.
+This method receives a FiffInfo object that holds the bad channel information. It stores the passed reference inside the \textbf{m\_lInterpolationData} member and then recalculates surface data.
 
 \subsubsection{run}
 
 This is the workers main loop.\\
-According to the users settings, it averages the next sensor signals by removing them from the member \textit{m\_lInterpolationData}. It then generates vertex colors based on this averaged signal by calling \textit{generateColorsFromSensorValues} and publishes the result to all relevant items (i.e. the items that manage visualization). After all computations are done, the \textit{run} method calls \textit{QThread::msleep} to sleep for a certain (depending on the time needed for the previous computations).
-
-\subsubsection{generateColorsFromSensorValues}
-
-The method \textit{generateColorFromSensorValues} performs several checks on the workers members to ensure that the following critical computations will succeed. It then interpolates vertex activity by passing the signal it received from the workers main loop to \textit{Interpolation::interpolateSignal}. The interpolated result then gets passed to \textit{normalizeAndTransformToColor}.
-
-\subsubsection{normalizeAndTransformToColor}
-
-The method \textit{normalizeAndTransformToColor} normalizes the passed signal according to the passed thresholds. It then used the passed function pointer to generate RGB values for each vertex.
+According to the users settings, it averages the next sensor signals and removes them from the member \textbf{m\_lInterpolationData}. It then generates vertex colors based on this averaged signal by calling \textbf{generateColorsFromSensorValues} and publishes the result to all relevant items (i.e. the items that manage visualization). After all computations are done, the \textbf{run} method calls \textbf{QThread::msleep} to sleep for a certain (depending on the time needed for the previous computations).\\
+The following diagram illustrates how calculated final vertex color are passed to other actors within the Disp3D environment which are responsible for rendering frames etc.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=16cm]{figures/PublishColorsSeq.png}
-		\caption{Interpolated visual data is passed through the Disp3D environment}
+		\caption{Interpolated visual data is passed through the Disp3D environment. Arguments to calls are not included to ensure readability}
 	\end{center}
 \end{figure}
+
+\subsubsection{generateColorsFromSensorValues}
+
+The method \textbf{generateColorFromSensorValues} performs several checks on the workers members to ensure that the following critical computations will succeed. It then interpolates vertex activity by passing the signal it received from the workers main loop to \textbf{Interpolation::interpolateSignal}. The interpolated result then gets passed to \textbf{normalizeAndTransformToColor}.
+
+\subsubsection{normalizeAndTransformToColor}
+
+The method \textbf{normalizeAndTransformToColor} normalizes the passed signal according to the passed thresholds. It then used the passed function pointer to generate RGB values for each vertex.
 
 \clearpage
 
